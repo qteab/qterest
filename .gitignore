@@ -1,0 +1,9 @@
+# Created by https://www.gitignore.io/api/prepros
+# Edit at https://www.gitignore.io/?templates=prepros
+
+### Prepros ###
+# Config Prepros files to ignore
+prepros.cfg
+prepros-6.config
+
+# End of https://www.gitignore.io/api/prepros

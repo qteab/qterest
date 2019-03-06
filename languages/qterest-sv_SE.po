@@ -1,0 +1,222 @@
+# Copyright (C) 2019 QTE Development AB
+# This file is distributed under the same license as the QTEREST plugin.
+msgid ""
+msgstr ""
+"Project-Id-Version: QTEREST 1.0.0\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/qterest\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"POT-Creation-Date: 2019-03-05T12:29:14+01:00\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"X-Generator: WP-CLI 2.1.0\n"
+"X-Domain: qterest\n"
+
+#. Plugin Name of the plugin
+msgid "QTEREST"
+msgstr ""
+
+#. Description of the plugin
+msgid "QTEREST adds new endpoints for the Wordpress API"
+msgstr "QTEREST lägger till nya ändpunkter till Wordpress API"
+
+#. Author of the plugin
+msgid "QTE Development AB"
+msgstr ""
+
+#. Author URI of the plugin
+msgid "https://getqte.se/"
+msgstr ""
+
+#: includes/class.rest-controller.php:75
+msgid "Search is not enabled for this site"
+msgstr "Sök är inte aktiverat på denna webbplatsen"
+
+#: includes/class.rest-controller.php:124
+msgid "Contact is not enabled for this site"
+msgstr "Kontakt är inte aktiverat på denna webbplatsen"
+
+#: includes/class.rest-controller.php:128
+msgid "Name cannot be empty!"
+msgstr "Namn får inte vara tomt!"
+
+#: includes/class.rest-controller.php:129
+#: includes/class.rest-controller.php:233
+msgid "Email cannot be empty!"
+msgstr "E-post får inte vara tomt!"
+
+#: includes/class.rest-controller.php:130
+#: includes/class.rest-controller.php:234
+msgid "Email is not valid!"
+msgstr "E-post är ogiltig!"
+
+#: includes/class.rest-controller.php:131
+#: includes/class.rest-controller.php:235
+msgid "Something went wrong. Please try again later!"
+msgstr "Något gick fel. Försök igen!"
+
+#: includes/class.rest-controller.php:132
+msgid "Thank you! We will contact you as fast as we can!"
+msgstr "Tack! Vi kommer att svara dig så fort vi kan!"
+
+#: includes/class.rest-controller.php:133
+msgid "New contact request!"
+msgstr "Ny kontaktförfrågan!"
+
+#: includes/class.rest-controller.php:134
+msgid "<p>New contact request is available. Click the link below to acces it</p><br>{LINK}"
+msgstr "<p>Ny kontaktförfågan finns tillgänglig. Klicka på länken nedan för att komma till den</p><br>{LINK}"
+
+#: includes/class.rest-controller.php:228
+msgid "MailChimp is not enabled for this site"
+msgstr "MailChimp är inte aktiverat på denna webbplatsen"
+
+#: includes/class.rest-controller.php:232
+msgid "Invalid MailChimp API key!"
+msgstr "Ogiltig API nyckel till MailChimp!"
+
+#: includes/class.rest-controller.php:236
+msgid "Thank you for subscribing to our newsletter!"
+msgstr "Tack för att du har prenumererat på vårt nyhetsbrev!"
+
+#: includes/cpts.php:20
+msgctxt "Post Type General Name"
+msgid "Contact Requests"
+msgstr "Kontaktförfrågningar"
+
+#: includes/cpts.php:21
+msgctxt "Post Type Singular Name"
+msgid "Contact Request"
+msgstr "Kontaktförfrågan"
+
+#: includes/cpts.php:22
+msgid "Contact Requests"
+msgstr "Kontaktförfrågningar"
+
+#: includes/cpts.php:23
+#: includes/cpts.php:49
+msgid "Contact Request"
+msgstr "Kontaktförfrågningar"
+
+#: includes/cpts.php:24
+msgid "Request Archives"
+msgstr "Arkiv"
+
+#: includes/cpts.php:25
+msgid "Request Attributes"
+msgstr "Attribut"
+
+#: includes/cpts.php:26
+msgid "Parent Request:"
+msgstr ""
+
+#: includes/cpts.php:27
+msgid "All Request"
+msgstr ""
+
+#: includes/cpts.php:28
+msgid "Add New Request"
+msgstr ""
+
+#: includes/cpts.php:29
+msgid "Add New"
+msgstr ""
+
+#: includes/cpts.php:30
+msgid "New Request"
+msgstr "Ny förfrågan"
+
+#: includes/cpts.php:31
+msgid "Edit Request"
+msgstr "Ändra förfrågan"
+
+#: includes/cpts.php:32
+msgid "Update Request"
+msgstr "Uppdatera förfrågan"
+
+#: includes/cpts.php:33
+#: includes/cpts.php:34
+msgid "View Request"
+msgstr "Visa förfrågan"
+
+#: includes/cpts.php:35
+msgid "Search Requests"
+msgstr "Sök bland förfrågningar"
+
+#: includes/cpts.php:36
+msgid "Not found"
+msgstr "Hittades inte"
+
+#: includes/cpts.php:37
+msgid "Not found in Trash"
+msgstr "Hittades inte i papperskorgen"
+
+#: includes/cpts.php:38
+msgid "Featured Image"
+msgstr ""
+
+#: includes/cpts.php:39
+msgid "Set featured image"
+msgstr ""
+
+#: includes/cpts.php:40
+msgid "Remove featured image"
+msgstr ""
+
+#: includes/cpts.php:41
+msgid "Use as featured image"
+msgstr ""
+
+#: includes/cpts.php:42
+msgid "Insert into request"
+msgstr ""
+
+#: includes/cpts.php:43
+msgid "Uploaded to this request"
+msgstr ""
+
+#: includes/cpts.php:44
+msgid "Requests list"
+msgstr ""
+
+#: includes/cpts.php:45
+msgid "Requests list navigation"
+msgstr ""
+
+#: includes/cpts.php:46
+msgid "Filter requests list"
+msgstr ""
+
+#: includes/cpts.php:50
+msgid "Contact requests"
+msgstr "Kontaktförfrågningar"
+
+#: includes/settings-page.php:30
+msgid "MailChimp"
+msgstr "MailChimp"
+
+#: includes/settings-page.php:40
+msgid "MailChimp API Key"
+msgstr "MailChimp API nyckel"
+
+#: includes/settings-page.php:58
+msgid "MailChimp Lista"
+msgstr "MailChimp Lista"
+
+#: includes/settings-page.php:82
+msgid "Settings for MailChimp"
+msgstr ""
+
+#: includes/settings-page.php:96
+msgid "Enter your Mailchimp API key "
+msgstr "Ange din MailChimp API nyckel"
+
+#: includes/settings-page.php:168
+msgid "Settings Saved"
+msgstr "Inställningar sparade"
+
+#: includes/global-functions.php:49
+msgid "Submit"
+msgstr "Skicka"

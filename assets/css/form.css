@@ -1,0 +1,51 @@
+.qterest-form-container {
+  position: relative; }
+  .qterest-form-container .qterest-form.loading .qterest-spinner-overlay {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex; }
+  .qterest-form-container .qterest-form .qterest-success-messages {
+    display: none;
+    padding: 0.4rem 1rem;
+    color: #FFFFFF;
+    background-color: #61cf4d; }
+    .qterest-form-container .qterest-form .qterest-success-messages.show {
+      display: block; }
+  .qterest-form-container .qterest-form .qterest-error-messages {
+    display: none;
+    padding: 0.4rem 1rem;
+    color: #FFFFFF;
+    background-color: #cf4d4d; }
+    .qterest-form-container .qterest-form .qterest-error-messages.show {
+      display: block; }
+  .qterest-form-container .qterest-form .qterest-spinner-overlay {
+    position: absolute;
+    display: none;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    background-color: rgba(255, 255, 255, 0.4); }
+    .qterest-form-container .qterest-form .qterest-spinner-overlay .qterest-spinner {
+      display: inline-block;
+      width: 50px;
+      height: 50px;
+      border: 3px solid #a0a0a0;
+      border-radius: 50%;
+      border-top-color: #3d3d3d;
+      animation: qterest-spin 1s ease-in-out infinite;
+      -webkit-animation: qterest-spin 1s ease-in-out infinite; }
+
+@keyframes qterest-spin {
+  to {
+    -webkit-transform: rotate(360deg); } }
+
+@-webkit-keyframes qterest-spin {
+  to {
+    -webkit-transform: rotate(360deg); } }
