@@ -10,6 +10,7 @@ use QTEREST\Helpers;
 use function QTEREST\Helpers\validate_email;
 use function QTEREST\Helpers\get_client_ip;
 use function QTEREST\Helpers\mailchimp_api_key_is_valid;
+use function QTEREST\Helpers\maybe_get_notification_email;
 
 use DrewM\MailChimp\MailChimp;
 
@@ -132,7 +133,7 @@ class REST_Controller extends \WP_REST_Controller
             'success' => __("Thank you! We will contact you as fast as we can!", 'qterest'),
             'mail_subject' => __("New contact request!", 'qterest'),
             'mail_body' => __("<p>New contact request is available. Click the link below to acces it</p><br>{LINK}", 'qterest'),
-            'mail_to' => NULL
+            'mail_to' => maybe_get_notification_email()
         );
 
         /**

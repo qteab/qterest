@@ -4,13 +4,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: QTEREST 1.0.0\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/qterest\n"
+"POT-Creation-Date: 2019-04-09T15:43:50+02:00\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2019-03-05T12:29:14+01:00\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.1.0\n"
 "X-Domain: qterest\n"
 
@@ -30,54 +31,59 @@ msgstr ""
 msgid "https://getqte.se/"
 msgstr ""
 
-#: includes/class.rest-controller.php:75
+#: includes/class.rest-controller.php:76
 msgid "Search is not enabled for this site"
 msgstr "Sök är inte aktiverat på denna webbplatsen"
 
-#: includes/class.rest-controller.php:124
+#: includes/class.rest-controller.php:125
 msgid "Contact is not enabled for this site"
 msgstr "Kontakt är inte aktiverat på denna webbplatsen"
 
-#: includes/class.rest-controller.php:128
+#: includes/class.rest-controller.php:129
 msgid "Name cannot be empty!"
 msgstr "Namn får inte vara tomt!"
 
-#: includes/class.rest-controller.php:129
-#: includes/class.rest-controller.php:233
+#: includes/class.rest-controller.php:130
+#: includes/class.rest-controller.php:234
 msgid "Email cannot be empty!"
 msgstr "E-post får inte vara tomt!"
 
-#: includes/class.rest-controller.php:130
-#: includes/class.rest-controller.php:234
+#: includes/class.rest-controller.php:131
+#: includes/class.rest-controller.php:235
 msgid "Email is not valid!"
 msgstr "E-post är ogiltig!"
 
-#: includes/class.rest-controller.php:131
-#: includes/class.rest-controller.php:235
+#: includes/class.rest-controller.php:132
+#: includes/class.rest-controller.php:236
 msgid "Something went wrong. Please try again later!"
 msgstr "Något gick fel. Försök igen!"
 
-#: includes/class.rest-controller.php:132
+#: includes/class.rest-controller.php:133
 msgid "Thank you! We will contact you as fast as we can!"
 msgstr "Tack! Vi kommer att svara dig så fort vi kan!"
 
-#: includes/class.rest-controller.php:133
+#: includes/class.rest-controller.php:134
 msgid "New contact request!"
 msgstr "Ny kontaktförfrågan!"
 
-#: includes/class.rest-controller.php:134
-msgid "<p>New contact request is available. Click the link below to acces it</p><br>{LINK}"
-msgstr "<p>Ny kontaktförfågan finns tillgänglig. Klicka på länken nedan för att komma till den</p><br>{LINK}"
+#: includes/class.rest-controller.php:135
+msgid ""
+"<p>New contact request is available. Click the link below to acces it</"
+"p><br>{LINK}"
+msgstr ""
+"<p>Ny kontaktförfågan finns tillgänglig. Klicka på länken nedan för att "
+"komma till den</p><br>{LINK}"
 
-#: includes/class.rest-controller.php:228
-msgid "MailChimp is not enabled for this site"
+#: includes/class.rest-controller.php:229
+#, fuzzy
+msgid "Mailchimp is not enabled for this site"
 msgstr "MailChimp är inte aktiverat på denna webbplatsen"
 
-#: includes/class.rest-controller.php:232
+#: includes/class.rest-controller.php:233
 msgid "Invalid MailChimp API key!"
 msgstr "Ogiltig API nyckel till MailChimp!"
 
-#: includes/class.rest-controller.php:236
+#: includes/class.rest-controller.php:237
 msgid "Thank you for subscribing to our newsletter!"
 msgstr "Tack för att du har prenumererat på vårt nyhetsbrev!"
 
@@ -95,8 +101,7 @@ msgstr "Kontaktförfrågan"
 msgid "Contact Requests"
 msgstr "Kontaktförfrågningar"
 
-#: includes/cpts.php:23
-#: includes/cpts.php:49
+#: includes/cpts.php:23 includes/cpts.php:49
 msgid "Contact Request"
 msgstr "Kontaktförfrågningar"
 
@@ -136,8 +141,7 @@ msgstr "Ändra förfrågan"
 msgid "Update Request"
 msgstr "Uppdatera förfrågan"
 
-#: includes/cpts.php:33
-#: includes/cpts.php:34
+#: includes/cpts.php:33 includes/cpts.php:34
 msgid "View Request"
 msgstr "Visa förfrågan"
 
@@ -193,30 +197,54 @@ msgstr ""
 msgid "Contact requests"
 msgstr "Kontaktförfrågningar"
 
-#: includes/settings-page.php:30
+#: includes/global-functions.php:52
+msgid "Submit"
+msgstr "Skicka"
+
+#: includes/settings-page.php:37
 msgid "MailChimp"
 msgstr "MailChimp"
 
-#: includes/settings-page.php:40
+#: includes/settings-page.php:47
 msgid "MailChimp API Key"
 msgstr "MailChimp API nyckel"
 
-#: includes/settings-page.php:58
+#: includes/settings-page.php:65
 msgid "MailChimp Lista"
 msgstr "MailChimp Lista"
 
-#: includes/settings-page.php:82
-msgid "Settings for MailChimp"
-msgstr ""
+#: includes/settings-page.php:86
+#, fuzzy
+msgid "Contact forms"
+msgstr "Kontaktförfrågningar"
 
 #: includes/settings-page.php:96
+msgid "Notification email"
+msgstr "Notifikationsmail"
+
+#: includes/settings-page.php:132
+msgid "Settings for MailChimp"
+msgstr "Inställningar för MailChimp"
+
+#: includes/settings-page.php:142
+msgid "Settings for Contact forms"
+msgstr "Inställningar för kontaktformulär"
+
+#: includes/settings-page.php:156
 msgid "Enter your Mailchimp API key "
 msgstr "Ange din MailChimp API nyckel"
 
-#: includes/settings-page.php:168
+#: includes/settings-page.php:203
+msgid ""
+"Enter a valid email that you want to recive notifications to when a new "
+"contact request is recived"
+msgstr ""
+
+#: includes/settings-page.php:242
 msgid "Settings Saved"
 msgstr "Inställningar sparade"
 
-#: includes/global-functions.php:49
-msgid "Submit"
-msgstr "Skicka"
+#: includes/shortcodes.php:19
+#, fuzzy
+msgid "Contact is disabled on this site!"
+msgstr "Kontakt är inte aktiverat på denna webbplatsen"

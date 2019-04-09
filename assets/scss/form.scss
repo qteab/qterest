@@ -52,6 +52,19 @@
                 -webkit-animation: qterest-spin 1s ease-in-out infinite;
             }
         }
+        .qterest-form-row {
+            margin-bottom: 1rem;
+            width: 100%;
+            input[type="text"],
+            input[type="email"],
+            input[type="tel"],
+            input[type="number"],
+            textarea {
+                width: 100%;
+            }
+
+
+        }
     }
 }
 

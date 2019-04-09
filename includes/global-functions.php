@@ -8,6 +8,8 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
+use function QTEREST\Form\render_field;
+
 /**
  * This function renders a qterest form from an array.
  * 
@@ -28,6 +30,7 @@ if (!defined('ABSPATH')) {
  *              'type' => (string) The field type
  *              'value' => (string) The field value
  *              'class' => (string) The field class
+ *              'label' => (string) If filled a label will be added
  *              'options' => [ Options for select 
  *                      'name' => (string) Name for option
  *                      'value' => (string) Value for option
@@ -77,48 +80,7 @@ function qterest_render_form(array $args, bool $echo = true){
 
             $form .= "<div class=\"$args[form_row_class]\">";
 
-            $required = $field['required'] ? "required" : null;
-
-            $class = isset($field['class']) ? "class=\"$field[class]\"" : null;
-
-            switch($field['type']){
-                case "select":
-
-                    $form .= "<select $class name=\"$field[name]\" $required ><option>$field[placeholder]</option>";
-
-                    if(isset($field['options']) && $field['options']) {
-
-                        foreach($field['options'] as $option){
-                            $form .= "<option value=\"$option[value]\">$option[name]</option>";
-                        }
-
-                    }
-
-                    $form .= "</select>";
-
-                    break;
-
-                case "textarea":
-
-                    $form .= "<textarea $class name=\"$field[name]\" placeholder=\"$field[placeholder]\" $required ></textarea>";
-
-                    break;
-                
-                case "tel":
-                case "text":
-                case "email":
-                case "hidden":
-                    
-                    $form .= "<input $class type=\"$field[type]\" name=\"$field[name]\" placeholder=\"$field[placeholder]\" value=\"$field[value]\" $required />";
-
-                    break;
-
-                case "checkbox":
-                case "radio":
-
-                    $form .= "<label class=\"qterest-$field[type] $field[class]\"><input type=\"$field[type]\" name=\"$field[name]\" value=\"$field[value]\"$required />$field[placeholder]</label>";
-
-            }
+            $form .= render_field($field);
 
             $form .= "</div>";
 

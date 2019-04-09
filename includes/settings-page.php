@@ -14,17 +14,24 @@ if (!defined('ABSPATH')) {
 global $qterest_settings;
 
 /**
- * Register settings page if MailChimp is activated for this site 
+ * Register settings page if MailChimp is activated for this site
  */
-if ($qterest_settings['mailchimp']) {
+if ($qterest_settings['mailchimp'] || $qterest_settings['contact']) {
 
     function settings_init()
     {
-
-        // register a new setting for "wporg" page
+        /**
+         * Register a new setting for qterest
+         */
         register_setting('qterest', 'qterest_options');
+    }
 
-        // register a new section in the "wporg" page
+    function settings_mailchimp()
+    {
+
+        /**
+         * Register a settings section for mailchimp
+         */
         add_settings_section(
             'qterest_mailchimp_section',
             __('MailChimp', 'qterest'),
@@ -68,10 +75,53 @@ if ($qterest_settings['mailchimp']) {
         }
     }
 
+    function settings_contact()
+    {
+
+        /**
+         * Register a settings section for contact
+         */
+        add_settings_section(
+            'qterest_contact_section',
+            __('Contact forms', 'qterest'),
+            __NAMESPACE__ . '\\qterest_contact_section_cb',
+            'qterest'
+        );
+
+        /**
+         * Register Contact Notification email field
+         */
+        add_settings_field(
+            'qterest_field_contact_notification_email',
+            __('Notification email', 'qterest'),
+            __NAMESPACE__ . '\\qterest_field_contact_notification_email_cb',
+            'qterest',
+            'qterest_contact_section',
+            [
+                'label_for' => 'qterest_field_contact_notification_email',
+            ]
+        );
+
+    }
+
     /**
-     * register our wporg_settings_init to the admin_init action hook
+     * Global settings init
      */
     add_action('admin_init', __NAMESPACE__ . '\\settings_init');
+
+    /**
+     * Register mailchimp settings
+     */
+    if ($qterest_settings['mailchimp']) {
+        add_action('admin_init', __NAMESPACE__ . '\\settings_mailchimp');
+    }
+
+    /**
+     * Register contact settings
+     */
+    if ($qterest_settings['contact']) {
+        add_action('admin_init', __NAMESPACE__ . '\\settings_contact');
+    }
 
     /**
      * Callback for title to the mailchimp section
@@ -80,6 +130,16 @@ if ($qterest_settings['mailchimp']) {
     {
         ?>
         <p id="<?php echo esc_attr($args['id']); ?>"><?php esc_html_e('Settings for MailChimp', 'qterest');?></p>
+        <?php
+    }
+
+    /**
+     * Callback for title to the contact section
+     */
+    function qterest_contact_section_cb($args)
+    {
+        ?>
+        <p id="<?php echo esc_attr($args['id']); ?>"><?php esc_html_e('Settings for Contact forms', 'qterest');?></p>
         <?php
     }
 
@@ -95,7 +155,7 @@ if ($qterest_settings['mailchimp']) {
             <input type="text" value="<?php echo isset($options[$args['label_for']]) ? $options[$args['label_for']] : null; ?>" id="<?php echo esc_attr($args['label_for']); ?>" data-custom="<?php echo esc_attr($args['qterest_custom_data']); ?>" name="qterest_options[<?php echo esc_attr($args['label_for']); ?>]" size="50">
             <p class="description"><?php esc_html_e('Enter your Mailchimp API key ', 'qterest');?></p>
         <?php
-}
+    }
 
     /**
      * Callback for MailChimp mail list field
@@ -110,15 +170,15 @@ if ($qterest_settings['mailchimp']) {
             <select id="<?php echo esc_attr($args['label_for']); ?>" data-custom="<?php echo esc_attr($args['qterest_custom_data']); ?>" name="qterest_options[<?php echo esc_attr($args['label_for']); ?>]">
                 <?php
 
-                    $MailChimp = new MailChimp($options['qterest_field_mailchimp_api_key']);
+        $MailChimp = new MailChimp($options['qterest_field_mailchimp_api_key']);
 
-                    $response = $MailChimp->get("lists");
+        $response = $MailChimp->get("lists");
 
-                    foreach ($response['lists'] as $list) { ?>
+        foreach ($response['lists'] as $list) {?>
                                     <option value="<?php echo $list['id'] ?>" <?php echo isset($options[$args['label_for']]) ? (selected($options[$args['label_for']], $list['id'], false)) : (''); ?>>
                                         <?php esc_html_e($list['name'], 'do_sub');?>
                                     </option>
-                    <?php } ?>
+                    <?php }?>
             </select>
             <p class="description">
                 <?php esc_html_e('Choose which list you want to add new subscribers to', 'do_sub');?>
@@ -128,6 +188,20 @@ if ($qterest_settings['mailchimp']) {
                 <?php esc_html_e('Please enter a valid api key', 'do_sub');?>
             </b></p>
         <?php endif;
+    }
+
+    /**
+     * Callback for Contact notification email field
+     */
+    function qterest_field_contact_notification_email_cb($args)
+    {
+
+        $options = get_option('qterest_options');
+
+        ?>
+            <input type="email" value="<?php echo isset($options[$args['label_for']]) ? $options[$args['label_for']] : null; ?>" id="<?php echo esc_attr($args['label_for']); ?>" name="qterest_options[<?php echo esc_attr($args['label_for']); ?>]" size="50">
+            <p class="description"><?php esc_html_e('Enter a valid email that you want to recive notifications to when a new contact request is recived', 'qterest');?></p>
+        <?php
     }
 
     /**
@@ -151,7 +225,7 @@ if ($qterest_settings['mailchimp']) {
     add_action('admin_menu', __NAMESPACE__ . '\\qterest_options_page');
 
     /**
-     * page callback
+     * Page callback
      */
     function qterest_options_page_html()
     {
@@ -173,15 +247,14 @@ if ($qterest_settings['mailchimp']) {
         <div class="wrap">
             <h1><?php echo esc_html(get_admin_page_title()); ?></h1>
             <form action="options.php" method="post">
-                <?php
-                    settings_fields('qterest');
+            <?php
+                settings_fields('qterest');
 
-                    do_settings_sections('qterest');
+                do_settings_sections('qterest');
 
-                    submit_button('Save Settings');
-                ?>
+                submit_button('Save Settings');
+            ?>
             </form>
-        </div>
-    <?php
+        </div><?php
     }
 }

@@ -2,7 +2,7 @@
 /*
  * Plugin Name: QTEREST
  * Description: QTEREST adds new endpoints for the Wordpress API
- * Version: 1.0.0
+ * Version: 1.1.0
  * Author: QTE Development AB
  * Author URI: https://getqte.se/
  * Domain Path: /languages
@@ -12,7 +12,7 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
-define('QTEREST_VERSION', '1.0.0');
+define('QTEREST_VERSION', '1.1.0');
 
 define('QTEREST_PLUGIN_DIR', plugin_dir_url(__FILE__));
 define('QTEREST_PLUGIN_PATH', plugin_dir_path(__FILE__));

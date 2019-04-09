@@ -1,4 +1,4 @@
-$(document).ready(function () {
+jQuery(document).ready(function ($) {
 
     $('form.qterest-form').submit(function (e) {
         e.preventDefault();

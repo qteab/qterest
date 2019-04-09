@@ -1,0 +1,7 @@
+.qterest-error {
+  display: block;
+  padding: 0.4rem 0.8rem;
+  background-color: #cf4d4d;
+  color: #FFFFFF;
+  font-weight: 700;
+  border-radius: 4px; }

@@ -72,3 +72,24 @@ function mailchimp_api_key_is_valid()
     return false;
 
 }
+
+
+/**
+ * This function returns the notification email enter on the qterest settings page
+ * 
+ * @return mixed Null if not enterd
+ */
+function maybe_get_notification_email(){
+
+    $options = get_option('qterest_options');
+
+    $option_key = "qterest_field_contact_notification_email";
+
+    $email = isset($options[$option_key]) ? $options[$option_key] : "";
+
+    if(!empty($email)){
+        return $email;
+    } 
+
+    return NULL;
+}

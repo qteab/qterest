@@ -1,0 +1,76 @@
+<?php
+
+/**
+ * This file contains all the shortcodes for qterest.
+ */
+
+namespace QTEREST\Shortcodes;
+
+if (!defined('ABSPATH')) {
+    exit;
+}
+
+function handle_qterest_form_shortcode($atts, $content){
+
+    global $qterest_settings;
+
+    if(!$qterest_settings['contact']){
+        if(current_user_can('manage_options')){
+            return "<p class=\"qterest-error\">" . __('Contact is disabled on this site!', 'qterest') . "</p>";
+        }
+        return;
+    }
+
+    $field_defaults = array(
+        'type' => 'text',
+        'required' => false,
+        'name' => '',
+        'placeholder' => '',
+        'value' => '',
+        'class' => '',
+        'id' => '',
+    );
+    
+    $lines = explode("\n", $content);
+
+    $fields = [];
+
+    foreach($lines as $line){
+        $raw_args = explode('|', $line);
+
+        $parsed_args = [];
+        
+        if(!empty(trim($line))){
+
+            foreach($raw_args as $arg){
+
+                $parsed_arg = explode('=', $arg);
+
+                if(\sizeof($parsed_arg) > 1){
+                    $parsed_args[trim($parsed_arg[0])] = trim($parsed_arg[1]);
+                }
+
+            }
+
+            if(isset($parsed_args['name']) && !empty($parsed_args['name'])){
+                $fields[] = wp_parse_args($parsed_args, $field_defaults);
+            }
+
+        }
+        
+    }
+
+    $form_args = array(
+        'fields' => $fields,
+    );
+
+    if(is_array($atts)){
+        foreach($atts as $key => $val){
+            $form_args[$key] = $val;
+        }
+    }
+
+    return \qterest_render_form($form_args, false);
+    
+}
+add_shortcode('qterest-form', __NAMESPACE__ . "\\handle_qterest_form_shortcode");
