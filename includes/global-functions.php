@@ -9,6 +9,7 @@ if (!defined('ABSPATH')) {
 }
 
 use function QTEREST\Form\render_field;
+use function QTEREST\Form\render_misc;
 
 /**
  * This function renders a qterest form from an array.
@@ -46,6 +47,7 @@ function qterest_render_form(array $args, bool $echo = true){
         'wrapper_class' => "qterest-form-container",
         'form_class' => "qterest-form",
         'form_row_class' => "qterest-form-row",
+        'form_misc_class' => "qterest-form-misc",
         'error_messages_class' => "qterest-error-messages",
         'success_messages_class' => "qterest-success-messages",
         'form_fields_class' => "qterest-form-fields",
@@ -78,11 +80,35 @@ function qterest_render_form(array $args, bool $echo = true){
 
         foreach($args['fields'] as $field){ // Loop through all fields
 
-            $form .= "<div class=\"$args[form_row_class]\">";
+            switch($field['type']){
+                case "paragraph":
+                case "link":
+                case "title":
 
-            $form .= render_field($field);
+                    $toggles_on = isset($field['toggles_on']) && !empty($field['toggles_on']) ? "data-qterest-toggles-on=\"field_$field[toggles_on]\"" : null;
 
-            $form .= "</div>";
+                    $form .= "<div class=\"$args[form_misc_class]\" $toggles_on>";
+
+                    $form .= render_misc($field);
+
+                    $form .= "</div>";
+
+                    break;
+
+                default:
+
+                    $toggles_on = isset($field['toggles_on']) && !empty($field['toggles_on']) ? "data-qterest-toggles-on=\"field_$field[toggles_on]\"" : null;
+
+                    $form .= "<div class=\"$args[form_row_class]\" $toggles_on>";
+
+                    $form .= render_field($field);
+
+                    $form .= "</div>";
+
+                    break;
+            }
+
+            
 
         }
     }

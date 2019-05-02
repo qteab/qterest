@@ -93,3 +93,35 @@ function maybe_get_notification_email(){
 
     return NULL;
 }
+
+/**
+ * This function searchs for name in with other keys like first_name and last_name
+ * 
+ * @param array $params array
+ * 
+ * @return mixed
+ */
+function maybe_fix_name($params){
+
+
+    if(isset($params['first_name'], $params['last_name']) && !empty($params['first_name']) && !empty($params['last_name']) ){
+
+        $params['name'] = $params['first_name'] . " " . $params['last_name'];
+
+        return $params;
+
+    }
+
+    if(isset($params['first-name'], $params['last-name']) && !empty($params['first-name']) && !empty($params['last-name']) ){
+
+        $params['name'] = $params['first-name'] . " " . $params['last-name'];
+
+        return $params;
+
+    }
+
+    return $params;
+
+
+
+}

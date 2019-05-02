@@ -99,11 +99,11 @@ msgstr "Kontaktförfrågan"
 
 #: includes/cpts.php:22
 msgid "Contact Requests"
-msgstr "Kontaktförfrågningar"
+msgstr "Kontaktförfrågni..."
 
 #: includes/cpts.php:23 includes/cpts.php:49
 msgid "Contact Request"
-msgstr "Kontaktförfrågningar"
+msgstr "Kontaktförfrågni..."
 
 #: includes/cpts.php:24
 msgid "Request Archives"
@@ -238,11 +238,15 @@ msgstr "Ange din MailChimp API nyckel"
 msgid ""
 "Enter a valid email that you want to recive notifications to when a new "
 "contact request is recived"
-msgstr ""
+msgstr "Ange en giltig e-post som du vill ska få notifikation när en ny kontaktförfågan är mottagen"
 
 #: includes/settings-page.php:242
 msgid "Settings Saved"
 msgstr "Inställningar sparade"
+
+#: includes/settings-page.php:255
+msgid "Save Settings"
+msgstr "Spara inställningar"
 
 #: includes/shortcodes.php:19
 #, fuzzy

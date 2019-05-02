@@ -29,9 +29,16 @@ function handle_qterest_form_shortcode($atts, $content){
         'value' => '',
         'class' => '',
         'id' => '',
+        'toggles_on' => '',
+        'toggles' => false,
+    );
+
+    $title_defaults = array(
+        'type' => 'title',
+        'size' => 1
     );
     
-    $lines = explode("\n", $content);
+    $lines = explode("\n", str_replace('<br />', '', $content));
 
     $fields = [];
 
@@ -47,18 +54,52 @@ function handle_qterest_form_shortcode($atts, $content){
                 $parsed_arg = explode('=', $arg);
 
                 if(\sizeof($parsed_arg) > 1){
-                    $parsed_args[trim($parsed_arg[0])] = trim($parsed_arg[1]);
+                    if(trim($parsed_arg[0]) == "options"){
+                        $parsed_options = array();
+                        $raw_options = explode(';', $parsed_arg[1]);
+
+                        foreach($raw_options as $raw_option){
+                            if(!empty($raw_option)){
+                                $parsed_option = explode(':', $raw_option);
+
+                                $parsed_options[] = array(
+                                    'value' => trim($parsed_option[0]),
+                                    'name' => trim($parsed_option[1])
+                                );
+                            }
+                            
+                        }
+
+                        $parsed_args[trim($parsed_arg[0])] = $parsed_options;
+
+                    } else {
+                        $parsed_args[trim($parsed_arg[0])] = trim($parsed_arg[1]);
+                    }
+                    
                 }
 
             }
 
-            if(isset($parsed_args['name']) && !empty($parsed_args['name'])){
-                $fields[] = wp_parse_args($parsed_args, $field_defaults);
+            switch($parsed_args['type']){
+                case 'title':
+                    if(isset($parsed_args['text']) && !empty($parsed_args['text'])){
+                        $fields[] = wp_parse_args($parsed_args, $title_defaults);
+                    }
+
+                    break;
+                default:
+                    if(isset($parsed_args['name']) && !empty($parsed_args['name'])){
+                        $fields[] = wp_parse_args($parsed_args, $field_defaults);
+                    }
+
+                    break;
+
             }
 
         }
         
     }
+
 
     $form_args = array(
         'fields' => $fields,

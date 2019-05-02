@@ -41,13 +41,18 @@
       border-top-color: #3d3d3d;
       animation: qterest-spin 1s ease-in-out infinite;
       -webkit-animation: qterest-spin 1s ease-in-out infinite; }
+  .qterest-form-container .qterest-form .qterest-form-misc.qterest-hide {
+    display: none; }
   .qterest-form-container .qterest-form .qterest-form-row {
     margin-bottom: 1rem;
     width: 100%; }
+    .qterest-form-container .qterest-form .qterest-form-row.qterest-hide {
+      display: none; }
     .qterest-form-container .qterest-form .qterest-form-row input[type="text"],
     .qterest-form-container .qterest-form .qterest-form-row input[type="email"],
     .qterest-form-container .qterest-form .qterest-form-row input[type="tel"],
     .qterest-form-container .qterest-form .qterest-form-row input[type="number"],
+    .qterest-form-container .qterest-form .qterest-form-row select,
     .qterest-form-container .qterest-form .qterest-form-row textarea {
       width: 100%; }
 

@@ -252,7 +252,7 @@ if ($qterest_settings['mailchimp'] || $qterest_settings['contact']) {
 
                 do_settings_sections('qterest');
 
-                submit_button('Save Settings');
+                submit_button(__('Save Settings', 'qterest'));
             ?>
             </form>
         </div><?php

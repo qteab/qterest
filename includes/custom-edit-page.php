@@ -45,7 +45,7 @@ function contact_custom_box_html($post)
 
                     $is_link = substr($value, 0, 4) == "http";
 
-                    echo "<tr><th>" . \ucfirst($key) . "</th><td>" . ($is_link ? "<a href=\"$value\">$value</a>" : $value ) . "</td></tr>";
+                    echo "<tr><th>" . \ucfirst(str_replace("_", ' ', $key)) . "</th><td>" . ($is_link ? "<a href=\"$value\">$value</a>" : $value ) . "</td></tr>";
 
                 }
             

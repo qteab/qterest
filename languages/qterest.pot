@@ -237,6 +237,11 @@ msgstr ""
 msgid "Settings Saved"
 msgstr ""
 
+#: includes/settings-page.php:255
+msgid "Save Settings"
+msgstr ""
+
 #: includes/shortcodes.php:19
 msgid "Contact is disabled on this site!"
 msgstr ""
+

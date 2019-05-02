@@ -11,6 +11,7 @@ use function QTEREST\Helpers\validate_email;
 use function QTEREST\Helpers\get_client_ip;
 use function QTEREST\Helpers\mailchimp_api_key_is_valid;
 use function QTEREST\Helpers\maybe_get_notification_email;
+use function QTEREST\Helpers\maybe_fix_name;
 
 use DrewM\MailChimp\MailChimp;
 
@@ -149,7 +150,13 @@ class REST_Controller extends \WP_REST_Controller
          */
         if(empty($params['name'])) {
 
-            return array('success' => false, 'error_msg' => $messages['name_empty']);
+            $params = maybe_fix_name($params);
+
+            if(empty($params['name'])) {
+
+                return array('success' => false, 'error_msg' => $messages['name_empty']);
+
+            }
 
         }
 

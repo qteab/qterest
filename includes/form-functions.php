@@ -57,9 +57,11 @@ function render_field($args, $echo = false){
 
     $required = $args['required'] ? "required" : null;
 
-    $class = isset($args['class']) ? "class=\"$args[class]\"" : null;
+    $class = isset($args['class']) || $required ? "class=\"$args[class] $required\"" : null;
 
-    $id = isset($args['id']) ?: "field-" . $args['name'];
+    $id = isset($args['id']) && !empty($args['id']) ? $args['id'] : "field_" . $args['name'];
+
+    $toggles = isset($args['toggles']) && $args['toggles'] && $args['type'] == "checkbox" ? "qterest-toggles" : null;
 
     switch($args['type']){
         case "select":
@@ -108,7 +110,7 @@ function render_field($args, $echo = false){
         case "checkbox":
         case "radio":
 
-            $field .= "<label for=\"$id\" class=\"qterest-$args[type] $args[class]\"><input id=\"$id\" type=\"$args[type]\" name=\"$args[name]\" value=\"$args[value]\"$required />$args[label]</label>";
+            $field .= "<label for=\"$id\" class=\"qterest-$args[type] $args[class]\"><input id=\"$id\" class=\"$toggles $required\" type=\"$args[type]\" name=\"$args[name]\" value=\"$args[value]\"$required />$args[label]</label>";
 
     }
 
@@ -117,5 +119,35 @@ function render_field($args, $echo = false){
     } else {
         return $field;
     }
+
+}
+
+/**
+ * This function renders a misc form the given parameters
+ */
+function render_misc($args, $echo = false){
+
+    $misc = "";
+
+    switch($args['type']){
+        case "title":
+            $misc .= "<h$args[size]>$args[text]</$args[size]>";
+            break;
+
+        case "paragraph":
+            $misc .= "<p>$args[text]</p>";
+            break;
+
+        case "link":
+            $misc .= "<a href=\"$args[href]\">$args[text]</a>";
+    }
+    
+
+    if($echo){
+        echo $misc;
+        return;
+    } 
+
+    return $misc;
 
 }
