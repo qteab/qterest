@@ -33,9 +33,8 @@ function handle_qterest_form_shortcode($atts, $content){
         'toggles' => false,
     );
 
-    $title_defaults = array(
+    $misc_defaults = array(
         'type' => 'title',
-        'size' => 1
     );
     
     $lines = explode("\n", str_replace('<br />', '', $content));
@@ -82,8 +81,10 @@ function handle_qterest_form_shortcode($atts, $content){
 
             switch($parsed_args['type']){
                 case 'title':
+                case 'paragraph':
+                case 'link':
                     if(isset($parsed_args['text']) && !empty($parsed_args['text'])){
-                        $fields[] = wp_parse_args($parsed_args, $title_defaults);
+                        $fields[] = wp_parse_args($parsed_args, $misc_defaults);
                     }
 
                     break;

@@ -140,6 +140,7 @@ function render_misc($args, $echo = false){
 
         case "link":
             $misc .= "<a href=\"$args[href]\">$args[text]</a>";
+            break;
     }
     
 
