@@ -61,13 +61,15 @@ function render_field($args, $echo = false){
 
     $id = isset($args['id']) && !empty($args['id']) ? $args['id'] : "field_" . $args['name'];
 
+    $for = isset($args['label_for']) && !$args['label_for'] ? null : $id;
+
     $toggles = isset($args['toggles']) && $args['toggles'] && $args['type'] == "checkbox" ? "qterest-toggles" : null;
 
     switch($args['type']){
         case "select":
 
             if(isset($args['label']) && !empty($args['label'])){
-                $field .= render_label($id, $args['label']);
+                $field .= render_label($for, $args['label']);
             }
 
             $field .= "<select id=\"$id\" $class name=\"$args[name]\" $required ><option>$args[placeholder]</option>";
@@ -100,7 +102,7 @@ function render_field($args, $echo = false){
         case "hidden":
 
             if(isset($args['label']) && !empty($args['label'])){
-                $field .= render_label($id, $args['label']);
+                $field .= render_label($for, $args['label']);
             }
             
             $field .= "<input id=\"$id\" $class type=\"$args[type]\" name=\"$args[name]\" placeholder=\"$args[placeholder]\" value=\"$args[value]\" $required />";
@@ -110,7 +112,7 @@ function render_field($args, $echo = false){
         case "checkbox":
         case "radio":
 
-            $field .= "<label for=\"$id\" class=\"qterest-$args[type] $args[class]\"><input id=\"$id\" class=\"$toggles $required\" type=\"$args[type]\" name=\"$args[name]\" value=\"$args[value]\"$required />$args[label]</label>";
+            $field .= "<label for=\"$for\" class=\"qterest-$args[type] $args[class]\"><input id=\"$id\" class=\"$toggles $required\" type=\"$args[type]\" name=\"$args[name]\" value=\"$args[value]\"$required />$args[label]</label>";
 
     }
 
