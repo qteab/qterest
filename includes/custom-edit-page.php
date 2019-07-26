@@ -39,13 +39,31 @@ function contact_custom_box_html($post)
         <tbody>
             <?php $request_content = get_post_meta($post->ID, 'request_content', true);
 
+                $bulk_formatted_keys = apply_filters("qterest_format_bulk_keys", array());  
+
                 $request_content = \unserialize($request_content);
 
                 foreach($request_content as $key => $value){
 
+                    if( has_filter("qterest_format_key_$key") ){
+                        $formatted_key = apply_filters("qterest_format_key_$key", $key);
+                    } else if( array_key_exists($key, $bulk_formatted_keys) ){
+                        $formatted_key = $bulk_formatted_keys[$key];
+                    } else if( has_filter("qterest_format_key") ){
+                        $formatted_key = apply_filters("qterest_format_key", $key);
+                    } else {
+                        $formatted_key = \ucfirst(str_replace("_", ' ', $key));
+                    }
+
+                    if( has_filter("qterest_format_value_$key")){
+                        $formatted_value = apply_filters("qterest_format_value_$key", $value);
+                    } else {
+                        $formatted_value = apply_filters("qterest_format_value", $value);
+                    }
+                        
                     $is_link = substr($value, 0, 4) == "http";
 
-                    echo "<tr><th>" . \ucfirst(str_replace("_", ' ', $key)) . "</th><td>" . ($is_link ? "<a href=\"$value\">$value</a>" : $value ) . "</td></tr>";
+                    echo "<tr><th>" . $formatted_key . "</th><td>" . ($is_link ? "<a href=\"$value\">$formatted_value</a>" : $formatted_value ) . "</td></tr>";
 
                 }
             
