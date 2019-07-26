@@ -65,6 +65,8 @@ function render_field($args, $echo = false){
 
     $toggles = isset($args['toggles']) && $args['toggles'] && $args['type'] == "checkbox" ? "qterest-toggles" : null;
 
+    $rows = isset($args['rows']) && $args['rows'] ? $args['rows'] : 4;
+
     switch($args['type']){
         case "select":
 
@@ -92,7 +94,7 @@ function render_field($args, $echo = false){
                 $field .= render_label($id, $args['label']);
             }
 
-            $field .= "<textarea id=\"$id\" $class name=\"$args[name]\" rows=\"8\" placeholder=\"$args[placeholder]\" $required ></textarea>";
+            $field .= "<textarea id=\"$id\" $class name=\"$args[name]\" rows=\"$rows\" placeholder=\"$args[placeholder]\" $required ></textarea>";
 
             break;
         
