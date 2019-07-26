@@ -12,6 +12,7 @@ use function QTEREST\Helpers\get_client_ip;
 use function QTEREST\Helpers\mailchimp_api_key_is_valid;
 use function QTEREST\Helpers\maybe_get_notification_email;
 use function QTEREST\Helpers\maybe_fix_name;
+use function QTEREST\Helpers\get_translated_string;
 
 use DrewM\MailChimp\MailChimp;
 
@@ -74,7 +75,7 @@ class REST_Controller extends \WP_REST_Controller
         global $qterest_settings; 
 
         if(!$qterest_settings['search']) {
-            return array('success' => false, 'error_msg' => __("Search is not enabled for this site", 'qterest'));
+            return array('success' => false, 'error_msg' => get_translated_string("Search is not enabled for this site", 'qterest'));
         }
 
         $params = $request->get_params(); //Get search params
@@ -123,17 +124,17 @@ class REST_Controller extends \WP_REST_Controller
         global $qterest_settings; 
 
         if(!$qterest_settings['contact']) {
-            return array('success' => false, 'error_msg' => __("Contact is not enabled for this site", 'qterest'));
+            return array('success' => false, 'error_msg' => get_translated_string("Contact is not enabled for this site", 'qterest'));
         }
 
         $messages = array(
-            'name_empty' => __("Name cannot be empty!", 'qterest'),
-            'email_empty' => __("Email cannot be empty!", 'qterest'),
-            'email_invalid' => __("Email is not valid!", 'qterest'),
-            'failed' => __("Something went wrong. Please try again later!", 'qterest'),
-            'success' => __("Thank you! We will contact you as fast as we can!", 'qterest'),
-            'mail_subject' => __("New contact request!", 'qterest'),
-            'mail_body' => __("<p>New contact request is available. Click the link below to acces it</p><br>{LINK}", 'qterest'),
+            'name_empty' => get_translated_string("Name cannot be empty!", 'qterest'),
+            'email_empty' => get_translated_string("Email cannot be empty!", 'qterest'),
+            'email_invalid' => get_translated_string("Email is not valid!", 'qterest'),
+            'failed' => get_translated_string("Something went wrong. Please try again later!", 'qterest'),
+            'success' => get_translated_string("Thank you! We will contact you as fast as we can!", 'qterest'),
+            'mail_subject' => get_translated_string("New contact request!", 'qterest'),
+            'mail_body' => get_translated_string("<p>New contact request is available. Click the link below to acces it</p><br>{LINK}", 'qterest'),
             'mail_to' => maybe_get_notification_email()
         );
 
@@ -233,15 +234,15 @@ class REST_Controller extends \WP_REST_Controller
         global $qterest_settings; 
 
         if(!$qterest_settings['mailchimp']) {
-            return array('success' => false, 'error_msg' => __("Mailchimp is not enabled for this site", 'qterest'));
+            return array('success' => false, 'error_msg' => get_translated_string("Mailchimp is not enabled for this site", 'qterest'));
         }
 
         $messages = array(
-            'invalid_api_key' => __("Invalid MailChimp API key!", 'qterest'),
-            'email_empty' => __("Email cannot be empty!", 'qterest'),
-            'email_invalid' => __("Email is not valid!", 'qterest'),
-            'failed' => __("Something went wrong. Please try again later!", 'qterest'),
-            'success' => __("Thank you for subscribing to our newsletter!", 'qterest'),
+            'invalid_api_key' => get_translated_string("Invalid MailChimp API key!", 'qterest'),
+            'email_empty' => get_translated_string("Email cannot be empty!", 'qterest'),
+            'email_invalid' => get_translated_string("Email is not valid!", 'qterest'),
+            'failed' => get_translated_string("Something went wrong. Please try again later!", 'qterest'),
+            'success' => get_translated_string("Thank you for subscribing to our newsletter!", 'qterest'),
         );
 
 

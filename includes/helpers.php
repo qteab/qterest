@@ -125,3 +125,20 @@ function maybe_fix_name($params){
 
 
 }
+
+/**
+ * This function is a temporary fix for polylang
+ */
+function get_translated_string(string $string) {
+
+    $pll_lang = $_COOKIE['pll_language'];
+
+    if($pll_lang !== null){
+        
+        return pll_translate_string($string, $pll_lang);
+    }
+
+
+    return __($string, 'qterest');
+
+}
