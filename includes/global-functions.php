@@ -19,6 +19,7 @@ use function QTEREST\Form\render_misc;
  *      'wrapper_class' => (string) Overrides the default wrapper class
  *      'form_class' => (string) Overrides the default form class
  *      'form_row_class' => (string) Overrides the default form row class
+ *      'form_title' => (string) Adds a h3-tag with the given content
  *      'error_messages_class' => (string) Overrides the default error message class
  *      'success_message_class' => (string) Overrides the default success message class
  *      'form_fields_class' => (string) Overrides the default form fields class
@@ -32,6 +33,8 @@ use function QTEREST\Form\render_misc;
  *              'value' => (string) The field value
  *              'class' => (string) The field class
  *              'label' => (string) If filled a label will be added
+ *              'toggles' => (boolean) Should this field toggle other fields ONLY when type is 'checkbox'
+ *              'toggles_on' => (string) The id of the field that this field toggles on 
  *              'options' => [ Options for select 
  *                      'name' => (string) Name for option
  *                      'value' => (string) Value for option

@@ -147,21 +147,6 @@ class REST_Controller extends \WP_REST_Controller
         $params = $request->get_params(); //Get contact request params
 
         /**
-         * Checks the name isn't empty
-         */
-        if(empty($params['name'])) {
-
-            $params = maybe_fix_name($params);
-
-            if(empty($params['name'])) {
-
-                return array('success' => false, 'error_msg' => $messages['name_empty']);
-
-            }
-
-        }
-
-        /**
          * Checks that email isn't empty
          */
         if(empty($params['email'])) {
@@ -180,9 +165,11 @@ class REST_Controller extends \WP_REST_Controller
         }
 
         $post_id = wp_insert_post(array(
-            'post_title' => $params['name'] . " - " . date("Y-m-d H:m:s"),
+            'post_title' => $params['email'] . " - " . date("Y-m-d H:m:s"),
             'post_type' => 'contact_requests',
             'post_status' => 'publish',
+            'exclude_from_searcg' => true,
+            'show_in_rest' => false,
             'meta_input' => array(
                 'request_content' => serialize($params),
             )
@@ -198,7 +185,7 @@ class REST_Controller extends \WP_REST_Controller
         }
 
         /**
-         * This hook can be used to change the post tha was just inserted
+         * This hook can be used to change the post that was just inserted
          */
         do_action('qterest_after_post_insertion', $post_id, $params);
 
