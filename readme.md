@@ -191,4 +191,4 @@ add_filter('qterest_format_bulk_keys', 'theme_format_bulk_keys');
 * Frontend form in React
 
 ---
-_This plugin is build and maintained by Noah Olsson_
+_This plugin is built and maintained by Noah Olsson_
