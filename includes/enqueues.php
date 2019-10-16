@@ -25,6 +25,15 @@ if($qterest_settings['contact']){
     add_action('wp_enqueue_scripts', __NAMESPACE__ . '\\load_contact_scripts');
 }
 
+if($qterest_settings['mailchimp']){
+    function load_mailchimp_scripts($hook) {
+        
+        wp_enqueue_script( 'qterest-mailchimp', QTEREST_PLUGIN_DIR . '/assets/js/mailchimp.js', array('jquery', 'wp-api'),"1.1.0", true );
+    
+    }
+    add_action('wp_enqueue_scripts', __NAMESPACE__ . '\\load_mailchimp_scripts');
+}
+
 function load_global_scripts($hook) {
         
     wp_enqueue_style( 'qterest-general', QTEREST_PLUGIN_DIR . '/assets/css/general.css', false, '1.0.0' );

@@ -11,7 +11,7 @@ if (!defined('ABSPATH')) {
 global $qterest_settings; 
 
 $qterest_settings = array(
-    'search' => false,
+    'search' => false,  
     'contact' => true,
-    'mailchimp' => false
+    'mailchimp' => true
 );

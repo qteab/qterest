@@ -55,9 +55,13 @@ function render_field($args, $echo = false){
 
     $field = "";
 
-    $required = $args['required'] ? "required" : null;
+    $required = isset($args['required']) && $args['required'] ? "required" : "";
 
-    $class = isset($args['class']) || $required ? "class=\"$args[class] $required\"" : null;
+    if ($args['required']) {
+        $args['class'] = isset($args['class']) ? $args['class'] .= " required" : "required";
+    };
+
+    $class = isset($args['class']) ? "class=\"$args[class]\"" : null;
 
     $id = isset($args['id']) && !empty($args['id']) ? $args['id'] : "field_" . $args['name'];
 
@@ -94,7 +98,7 @@ function render_field($args, $echo = false){
                 $field .= render_label($id, $args['label']);
             }
 
-            $field .= "<textarea id=\"$id\" $class name=\"$args[name]\" rows=\"$rows\" placeholder=\"$args[placeholder]\" $required ></textarea>";
+            $field .= "<textarea id=\"$id\" $class name=\"$args[name]\" rows=\"$rows\" placeholder=\"". (isset($args['placeholder']) ? $args['placeholder'] : "")  . "\" $required ></textarea>";
 
             break;
         
@@ -107,7 +111,7 @@ function render_field($args, $echo = false){
                 $field .= render_label($for, $args['label']);
             }
             
-            $field .= "<input id=\"$id\" $class type=\"$args[type]\" name=\"$args[name]\" placeholder=\"$args[placeholder]\" value=\"$args[value]\" $required />";
+            $field .= "<input id=\"$id\" $class type=\"$args[type]\" name=\"$args[name]\" placeholder=\"". (isset($args['placeholder']) ? $args['placeholder'] : "")  . "\" value=\"". (isset($args['value']) ? $args['value'] : "")  . "\" $required/>";
 
             break;
 

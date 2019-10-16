@@ -73,13 +73,13 @@ function mailchimp_api_key_is_valid()
 
 }
 
-
 /**
  * This function returns the notification email enter on the qterest settings page
- * 
+ *
  * @return mixed Null if not enterd
  */
-function maybe_get_notification_email(){
+function maybe_get_notification_email()
+{
 
     $options = get_option('qterest_options');
 
@@ -87,24 +87,24 @@ function maybe_get_notification_email(){
 
     $email = isset($options[$option_key]) ? $options[$option_key] : "";
 
-    if(!empty($email)){
+    if (!empty($email)) {
         return $email;
-    } 
+    }
 
-    return NULL;
+    return null;
 }
 
 /**
  * This function searchs for name in with other keys like first_name and last_name
- * 
+ *
  * @param array $params array
- * 
+ *
  * @return mixed
  */
-function maybe_fix_name($params){
+function maybe_fix_name($params)
+{
 
-
-    if(isset($params['first_name'], $params['last_name']) && !empty($params['first_name']) && !empty($params['last_name']) ){
+    if (isset($params['first_name'], $params['last_name']) && !empty($params['first_name']) && !empty($params['last_name'])) {
 
         $params['name'] = $params['first_name'] . " " . $params['last_name'];
 
@@ -112,7 +112,7 @@ function maybe_fix_name($params){
 
     }
 
-    if(isset($params['first-name'], $params['last-name']) && !empty($params['first-name']) && !empty($params['last-name']) ){
+    if (isset($params['first-name'], $params['last-name']) && !empty($params['first-name']) && !empty($params['last-name'])) {
 
         $params['name'] = $params['first-name'] . " " . $params['last-name'];
 
@@ -121,24 +121,22 @@ function maybe_fix_name($params){
     }
 
     return $params;
-
-
-
 }
 
 /**
  * This function is a temporary fix for polylang
  */
-function get_translated_string(string $string) {
+function get_translated_string(string $string)
+{
 
-    $pll_lang = $_COOKIE['pll_language'];
+    if (isset($_COOKIE['pll_language'])) {
+        $pll_lang = $_COOKIE['pll_language'];
 
-    if($pll_lang !== null){
-        
-        return pll_translate_string($string, $pll_lang);
+        if ($pll_lang !== null) {
+
+            return pll_translate_string($string, $pll_lang);
+        }
     }
 
-
     return __($string, 'qterest');
-
 }

@@ -131,3 +131,46 @@ function qterest_render_form(array $args, bool $echo = true){
     echo $form;
 
 }
+
+/**
+ * This function makes a simple MailChimp sign up form.
+ * 
+ * @param string $input_label
+ * @param string $submit_label
+ * @param bool $echo 
+ */
+function qterest_render_mailchimp_form(string $input_label, string $submit_label, bool $echo = true) {
+
+    $form = "<div class=\"qterest-form-container\">";
+
+    $form .= "<form class=\"qterest-mailchimp-signup\">";
+
+    $form .= "<div class=\"qterest-spinner-overlay\"><div class=\"qterest-spinner\"></div></div>";
+
+    $form .= "<div class=\"qterest-error-messages\"></div>";
+
+    $form .= "<div class=\"qterest-success-messages\"></div>";
+
+    $form .= "<div class=\"qterest-form-row\">";
+
+    $form .= render_field([
+        'name' => "email",
+        'type' => 'email',
+        'label' => $input_label,
+        'required' => true,
+    ]);
+
+    $form .= "</div>";
+
+    $form .= "<div class=\"qterest-form-row\"><input class=\"button submit\" type=\"submit\" value=\"$submit_label\"></div>";
+
+    $form .= "</form>";
+
+    $form .= "</div>";
+
+    if(!$echo) {
+       return $form; 
+    }
+
+    echo $form;
+}

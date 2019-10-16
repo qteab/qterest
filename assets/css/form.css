@@ -1,24 +1,30 @@
 .qterest-form-container {
   position: relative; }
-  .qterest-form-container .qterest-form.loading .qterest-spinner-overlay {
+  .qterest-form-container .qterest-form.loading .qterest-spinner-overlay,
+  .qterest-form-container .qterest-mailchimp-signup.loading .qterest-spinner-overlay {
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex; }
-  .qterest-form-container .qterest-form .qterest-success-messages {
+  .qterest-form-container .qterest-form .qterest-success-messages,
+  .qterest-form-container .qterest-mailchimp-signup .qterest-success-messages {
     display: none;
     padding: 0.4rem 1rem;
     color: #FFFFFF;
     background-color: #61cf4d; }
-    .qterest-form-container .qterest-form .qterest-success-messages.show {
+    .qterest-form-container .qterest-form .qterest-success-messages.show,
+    .qterest-form-container .qterest-mailchimp-signup .qterest-success-messages.show {
       display: block; }
-  .qterest-form-container .qterest-form .qterest-error-messages {
+  .qterest-form-container .qterest-form .qterest-error-messages,
+  .qterest-form-container .qterest-mailchimp-signup .qterest-error-messages {
     display: none;
     padding: 0.4rem 1rem;
     color: #FFFFFF;
     background-color: #cf4d4d; }
-    .qterest-form-container .qterest-form .qterest-error-messages.show {
+    .qterest-form-container .qterest-form .qterest-error-messages.show,
+    .qterest-form-container .qterest-mailchimp-signup .qterest-error-messages.show {
       display: block; }
-  .qterest-form-container .qterest-form .qterest-spinner-overlay {
+  .qterest-form-container .qterest-form .qterest-spinner-overlay,
+  .qterest-form-container .qterest-mailchimp-signup .qterest-spinner-overlay {
     position: absolute;
     display: none;
     top: 0;
@@ -32,7 +38,8 @@
     -ms-flex-align: center;
     align-items: center;
     background-color: rgba(255, 255, 255, 0.4); }
-    .qterest-form-container .qterest-form .qterest-spinner-overlay .qterest-spinner {
+    .qterest-form-container .qterest-form .qterest-spinner-overlay .qterest-spinner,
+    .qterest-form-container .qterest-mailchimp-signup .qterest-spinner-overlay .qterest-spinner {
       display: inline-block;
       width: 50px;
       height: 50px;
@@ -41,21 +48,31 @@
       border-top-color: #3d3d3d;
       animation: qterest-spin 1s ease-in-out infinite;
       -webkit-animation: qterest-spin 1s ease-in-out infinite; }
-  .qterest-form-container .qterest-form .qterest-form-misc {
+  .qterest-form-container .qterest-form .qterest-form-misc,
+  .qterest-form-container .qterest-mailchimp-signup .qterest-form-misc {
     margin-bottom: 1rem; }
-    .qterest-form-container .qterest-form .qterest-form-misc.qterest-hide {
+    .qterest-form-container .qterest-form .qterest-form-misc.qterest-hide,
+    .qterest-form-container .qterest-mailchimp-signup .qterest-form-misc.qterest-hide {
       display: none; }
-  .qterest-form-container .qterest-form .qterest-form-row {
+  .qterest-form-container .qterest-form .qterest-form-row,
+  .qterest-form-container .qterest-mailchimp-signup .qterest-form-row {
     margin-bottom: 1rem;
     width: 100%; }
-    .qterest-form-container .qterest-form .qterest-form-row.qterest-hide {
+    .qterest-form-container .qterest-form .qterest-form-row.qterest-hide,
+    .qterest-form-container .qterest-mailchimp-signup .qterest-form-row.qterest-hide {
       display: none; }
     .qterest-form-container .qterest-form .qterest-form-row input[type="text"],
     .qterest-form-container .qterest-form .qterest-form-row input[type="email"],
     .qterest-form-container .qterest-form .qterest-form-row input[type="tel"],
     .qterest-form-container .qterest-form .qterest-form-row input[type="number"],
     .qterest-form-container .qterest-form .qterest-form-row select,
-    .qterest-form-container .qterest-form .qterest-form-row textarea {
+    .qterest-form-container .qterest-form .qterest-form-row textarea,
+    .qterest-form-container .qterest-mailchimp-signup .qterest-form-row input[type="text"],
+    .qterest-form-container .qterest-mailchimp-signup .qterest-form-row input[type="email"],
+    .qterest-form-container .qterest-mailchimp-signup .qterest-form-row input[type="tel"],
+    .qterest-form-container .qterest-mailchimp-signup .qterest-form-row input[type="number"],
+    .qterest-form-container .qterest-mailchimp-signup .qterest-form-row select,
+    .qterest-form-container .qterest-mailchimp-signup .qterest-form-row textarea {
       width: 100%; }
 
 @keyframes qterest-spin {

@@ -1,0 +1,193 @@
+<html>
+      <head>
+        <meta charset="UTF-8">
+        <title>readme.md</title>
+      </head>
+      <body>
+        <h1 id="qte-rest">QTE Rest</h1>
+<p>This plugin can be used for making forms, newsletter signup (mailchimp) and search.</p>
+<h2 id="settings">Settings</h2>
+<p>This plugin needs to be configured before uploaded to wordpress. There&#39;s a file called <code>settings.php</code> where you can configure which parts of the plugin you want to use. </p>
+<pre><code class="lang-php">$qterest_settings = array(
+    &#39;search&#39; =&gt; false, // (boolean) Adds a search endpoint
+    &#39;contact&#39; =&gt; true, // (boolean) Adds a contact endpoint for forms
+    &#39;mailchimp&#39; =&gt; false, // (boolean) Adds a signup endpoint for mailchimp
+);
+</code></pre>
+<h2 id="contact">Contact</h2>
+<p>This part of the plugin handles the forms. </p>
+<h3 id="creating-forms">Creating forms</h3>
+<p>Creating forms can be done with <code>qterest_render_form(array $args, bool $echo = true)</code></p>
+<h4 id="arguments-array-">Arguments (array)</h4>
+<p>The following arguments are accepted</p>
+<pre><code class="lang-php">$args = [
+    &#39;wrapper_class&#39; =&gt; &quot;qterest-form-container&quot;, // (string) Overrides the default wrapper class
+    &#39;form_class&#39; =&gt; &quot;qterest-form&quot;, // (string) Overrides the default form class
+    &#39;form_row_class&#39; =&gt; &quot;qterest-form-row&quot;, // (string) Overrides the default form row class
+    &#39;form_misc_class&#39; =&gt; &quot;qterest-form-misc&quot;, // (string) Overrides the default form misc class
+    &#39;form_title&#39; =&gt; &quot;Contact form&quot;, // (string) Adds a h3-tag with the given content
+    &#39;error_messages_class&#39; =&gt; &quot;qterest-error-messages&quot;, // (string) Overrides the default error message class
+    &#39;success_message_class&#39; =&gt; &quot;qterest-success-messages&quot;, // (string) Overrides the default success message class
+    &#39;form_fields_class&#39; =&gt; &quot;qterest-form-fields&quot;, // (string) Overrides the default form fields class
+    &#39;submit_label&#39; =&gt; __(&quot;Submit&quot;, &#39;qterest&#39;), // (string) Overrides the default submit label
+    &#39;submit_class&#39; =&gt; &#39;button submit&#39;, // (string) Overrides the default submit class
+    &#39;fields&#39; =&gt; $fields, // (array) Check the next section
+]
+</code></pre>
+<h4 id="fields">Fields</h4>
+<p>The following fields are accepted</p>
+<pre><code class="lang-php">$fields = [
+    [
+        &#39;type&#39; =&gt; &#39;text&#39;, // REQUIRED (string) Possible values are text, email, tel, hidden and textarea
+        &#39;name&#39; =&gt; &#39;my_text_field&#39;, // REQUIRED (string) HTML Attribute name
+        &#39;placeholder&#39; =&gt; &#39;Text&#39;, // (string) HTML Attribute placeholder
+        &#39;value&#39; =&gt; &#39;some_value&#39;, // (string) HTML Attribute value
+        &#39;label&#39; =&gt; &#39;Text&#39;, // (string) Label text
+        &#39;class&#39; =&gt; &#39;form-control&#39;, // (string) Overrides default class
+        &#39;required&#39; =&gt; true, // (string) Is the field required?
+        &#39;toggles_on&#39; =&gt; &#39;my_checkbox_field&#39;, // (string) The id of the field that you want to toogle this field
+    ],
+    [
+        &#39;type&#39; =&gt; &#39;checkbox&#39;, // REQUIRED (string) Possible values are text, email, tel, hidden and textarea
+        &#39;name&#39; =&gt; &#39;my_checkbox_field&#39;, // REQUIRED (string) HTML Attribute name
+        &#39;value&#39; =&gt; &#39;yes&#39;, // (string) HTML Attribute value
+        &#39;label&#39; =&gt; &#39;Checkbox&#39;, // (string) Label text
+        &#39;class&#39; =&gt; &#39;form-control&#39;, // (string) Overrides default class
+        &#39;toggles&#39; =&gt; true, // (bool) Can this field toggle other fields? ONLY checbox
+    ],
+    [
+        &#39;type&#39; =&gt; &#39;select&#39;, // REQUIRED (string) Possible values are select
+        &#39;name&#39; =&gt; &#39;my_text_field&#39;, // REQUIRED (string) HTML Attribute name
+        &#39;placeholder&#39; =&gt; &#39;Text&#39;, // (string) HTML Attribute placeholder
+        &#39;value&#39; =&gt; &#39;some_value&#39;, // (string) HTML Attribute value
+        &#39;label&#39; =&gt; &#39;Text&#39;, // (string) Label text
+        &#39;class&#39; =&gt; &#39;form-control&#39;, // (string) Overrides default class
+        &#39;toggles_on&#39; =&gt; &#39;my_checkbox_field&#39;, // (string) The id of the field that you want to toogle this field
+        &#39;options&#39; =&gt; [
+            [
+                &#39;name&#39; =&gt; &#39;My first option&#39;, // REQUIRED (string) The name of this option
+                &#39;value&#39; =&gt; &#39;my_first_option&#39;, // REQUIRED (string) The value of this option
+            ],
+            [
+                &#39;name&#39; =&gt; &#39;My second option&#39;, // REQUIRED (string) The name of this option
+                &#39;value&#39; =&gt; &#39;my_second_option&#39;, // REQUIRED (string) The value of this option
+            ]
+        ]
+    ],
+]
+</code></pre>
+<h4 id="misc">Misc</h4>
+<p>It&#39;s also possible to put misc in the fields array. These miscs are accepted</p>
+<pre><code class="lang-php">$fields = [
+    [
+        &#39;type&#39; =&gt; &#39;title&#39;,
+        &#39;text&#39; =&gt; &#39;Hejsan&#39;,
+        &#39;size&#39; =&gt; &#39;3&#39; // This will be a h3 element
+    ],
+    [
+        &#39;type&#39; =&gt; &#39;paragraph&#39;,
+        &#39;text&#39; =&gt; &#39;Lorem ipsum dolor sit&#39;
+    ],
+    [
+        &#39;type&#39; =&gt; &#39;link&#39;,
+        &#39;href&#39; =&gt; &#39;https://google.se&#39;,
+        &#39;text&#39; =&gt; &#39;Google.se&#39;
+    ]
+]
+</code></pre>
+<h4 id="example-form">Example form</h4>
+<p>This is a example of a very basic contact form</p>
+<pre><code class="lang-php">qterest_render_form([
+    &#39;form_title&#39; =&gt; &#39;Simple contact form&#39;,
+    &#39;submit_label&#39; =&gt; __(&#39;Send&#39;, &#39;text_domain&#39;)
+    &#39;fields&#39; =&gt; [
+        [
+            &#39;type&#39; =&gt; &#39;text&#39;,
+            &#39;name&#39; =&gt; &#39;name&#39;,
+            &#39;label&#39; =&gt; &#39;Name&#39;,
+            &#39;placeholder&#39; =&gt; &#39;Sven Svensson&#39;,
+        ],
+        [
+            &#39;type&#39; =&gt; &#39;email&#39;,
+            &#39;name&#39; =&gt; &#39;email&#39;, // This field is required by the plugin
+            &#39;label&#39; =&gt; &#39;Email *&#39;,
+            &#39;required&#39; =&gt; true,
+            &#39;placeholder&#39; =&gt; &#39;sven.svensson@company.com&#39;,
+        ],
+        [
+            &#39;type&#39; =&gt; &#39;textarea&#39;,
+            &#39;name&#39; =&gt; &#39;message&#39;,
+            &#39;label&#39; =&gt; &#39;Message&#39;,
+            &#39;placeholder&#39; =&gt; &#39;Hello! I have a question about...&#39;,
+        ],
+        [
+            &#39;type&#39; =&gt; &#39;checkbox&#39;,
+            &#39;name&#39; =&gt; &#39;gdpr&#39;,
+            &#39;label&#39; =&gt; &#39;I agree to the following &lt;a href=&quot;google.se&quot;&gt;terms&lt;/a&gt;&#39;,
+            &#39;required&#39; =&gt; true,
+        ]
+    ]
+]);
+</code></pre>
+<h3 id="filters-and-actions">Filters and Actions</h3>
+<p>There is a few filters and actions availible for you to customize som things</p>
+<h4 id="messages">Messages</h4>
+<p>Example for customizing messages</p>
+<pre><code class="lang-php">function theme_custom_qterest_messages($messages) {
+
+    $messages[&#39;success&#39;] = __(&quot;Thank you! We will contact you as soon as possible!&quot;, &#39;text_domain&#39;);
+
+    return $messages;
+
+}
+add_filter(&#39;qterest_contact_messages&#39;, &#39;theme_custom_qterest_messages&#39;);
+</code></pre>
+<p>The following messages can be changed</p>
+<ul>
+<li>name_empty</li>
+<li>email_empty</li>
+<li>email_invalid</li>
+<li>failed</li>
+<li>success</li>
+<li>mail_subject</li>
+<li>mail_body</li>
+</ul>
+<h4 id="fomatting-keys-admin-">Fomatting keys (ADMIN)</h4>
+<p>When looking at a contact request you can see that the name of the field identifies the value. This can be changed by adding a filter to display a better name for the customer. The filter name looks like this <code>qterest_format_key_${key}</code>.</p>
+<pre><code class="lang-php">function theme_format_keys_bulk($key) {
+    return &quot;Does this person have a dog?&quot;;
+}
+add_filter(&#39;qterest_format_key_has_dog&#39;, &#39;theme_format_key_has_dog&#39;);
+</code></pre>
+<p>You can also bulk format keys with the filter <code>qterest_format_bulk_keys</code>.</p>
+<pre><code class="lang-php">function theme_format_bulk_keys($key) {
+    return [
+        &#39;has_dog&#39; =&gt; &quot;Does this person have a dog?&quot;,
+        &#39;email&#39; =&gt; __(&quot;Email address&quot;, &#39;text_domain&#39;), // TIP: You can use localization here if the site is multi language
+    ]
+}
+add_filter(&#39;qterest_format_bulk_keys&#39;, &#39;theme_format_bulk_keys&#39;);
+</code></pre>
+<h2 id="mailchimp">MailChimp</h2>
+<p>MailChimp is very esay to use with this plugin. All you have to do is to add a API key in the settings page and select the list you want the users to be added to.</p>
+<h3 id="subscribe-form">Subscribe form</h3>
+<p>There is a helper function available for rendering MailChimp forms.</p>
+<pre><code class="lang-php">qterest_render_mailchimp_form(string $input_label, string $submit_label, bool $echo = false);
+</code></pre>
+<p>Example</p>
+<pre><code class="lang-php">qterest_render_mailchimp_form(&quot;Email&quot;, &quot;Subscribe&quot;);
+</code></pre>
+<h2 id="comming-soon">Comming soon</h2>
+<ul>
+<li>Search Documentation</li>
+</ul>
+<h2 id="future-plans">Future plans</h2>
+<ul>
+<li>Form builder in React</li>
+<li>Frontend form in React</li>
+</ul>
+<hr>
+<p><em>This plugin is built and maintained by Noah Olsson</em></p>
+
+      </body>
+    </html>

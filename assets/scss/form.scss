@@ -1,6 +1,7 @@
 .qterest-form-container {
     position: relative;
-    .qterest-form {
+    .qterest-form,
+    .qterest-mailchimp-signup {
         &.loading {
             .qterest-spinner-overlay {
                 display: flex;

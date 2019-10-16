@@ -182,9 +182,21 @@ function theme_format_bulk_keys($key) {
 add_filter('qterest_format_bulk_keys', 'theme_format_bulk_keys');
 ```
 
+## MailChimp
+MailChimp is very esay to use with this plugin. All you have to do is to add a API key in the settings page and select the list you want the users to be added to.
+
+### Subscribe form
+There is a helper function available for rendering MailChimp forms.
+```php
+qterest_render_mailchimp_form(string $input_label, string $submit_label, bool $echo = false);
+```
+Example
+```php
+qterest_render_mailchimp_form("Email", "Subscribe");
+```
+
 ## Comming soon
 * Search Documentation
-* Mailchimp Documentation
 
 ## Future plans
 * Form builder in React
