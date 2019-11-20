@@ -52,7 +52,6 @@ function get_client_ip()
  */
 function mailchimp_api_key_is_valid()
 {
-
     $options = get_option('qterest_options');
 
     $option_key = "qterest_field_mailchimp_api_key";
@@ -70,7 +69,6 @@ function mailchimp_api_key_is_valid()
     }
 
     return false;
-
 }
 
 /**
@@ -80,7 +78,6 @@ function mailchimp_api_key_is_valid()
  */
 function maybe_get_notification_email()
 {
-
     $options = get_option('qterest_options');
 
     $option_key = "qterest_field_contact_notification_email";
@@ -103,21 +100,16 @@ function maybe_get_notification_email()
  */
 function maybe_fix_name($params)
 {
-
     if (isset($params['first_name'], $params['last_name']) && !empty($params['first_name']) && !empty($params['last_name'])) {
-
         $params['name'] = $params['first_name'] . " " . $params['last_name'];
 
         return $params;
-
     }
 
     if (isset($params['first-name'], $params['last-name']) && !empty($params['first-name']) && !empty($params['last-name'])) {
-
         $params['name'] = $params['first-name'] . " " . $params['last-name'];
 
         return $params;
-
     }
 
     return $params;
@@ -128,12 +120,10 @@ function maybe_fix_name($params)
  */
 function get_translated_string(string $string)
 {
-
     if (isset($_COOKIE['pll_language'])) {
         $pll_lang = $_COOKIE['pll_language'];
 
         if ($pll_lang !== null) {
-
             return pll_translate_string($string, $pll_lang);
         }
     }

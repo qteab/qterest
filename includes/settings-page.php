@@ -17,7 +17,6 @@ global $qterest_settings;
  * Register settings page if MailChimp is activated for this site
  */
 if ($qterest_settings['mailchimp'] || $qterest_settings['contact']) {
-
     function settings_init()
     {
         /**
@@ -101,7 +100,6 @@ if ($qterest_settings['mailchimp'] || $qterest_settings['contact']) {
                 'label_for' => 'qterest_field_contact_notification_email',
             ]
         );
-
     }
 
     /**
@@ -129,7 +127,7 @@ if ($qterest_settings['mailchimp'] || $qterest_settings['contact']) {
     function qterest_mailchimp_section_cb($args)
     {
         ?>
-        <p id="<?php echo esc_attr($args['id']); ?>"><?php esc_html_e('Settings for MailChimp', 'qterest');?></p>
+        <p id="<?php echo esc_attr($args['id']); ?>"><?php esc_html_e('Settings for MailChimp', 'qterest'); ?></p>
         <?php
     }
 
@@ -139,7 +137,7 @@ if ($qterest_settings['mailchimp'] || $qterest_settings['contact']) {
     function qterest_contact_section_cb($args)
     {
         ?>
-        <p id="<?php echo esc_attr($args['id']); ?>"><?php esc_html_e('Settings for Contact forms', 'qterest');?></p>
+        <p id="<?php echo esc_attr($args['id']); ?>"><?php esc_html_e('Settings for Contact forms', 'qterest'); ?></p>
         <?php
     }
 
@@ -148,12 +146,9 @@ if ($qterest_settings['mailchimp'] || $qterest_settings['contact']) {
      */
     function qterest_field_mailchimp_api_key_cb($args)
     {
-
-        $options = get_option('qterest_options');
-
-        ?>
+        $options = get_option('qterest_options'); ?>
             <input type="text" value="<?php echo isset($options[$args['label_for']]) ? $options[$args['label_for']] : null; ?>" id="<?php echo esc_attr($args['label_for']); ?>" data-custom="<?php echo esc_attr($args['qterest_custom_data']); ?>" name="qterest_options[<?php echo esc_attr($args['label_for']); ?>]" size="50">
-            <p class="description"><?php esc_html_e('Enter your Mailchimp API key ', 'qterest');?></p>
+            <p class="description"><?php esc_html_e('Enter your Mailchimp API key ', 'qterest'); ?></p>
         <?php
     }
 
@@ -162,7 +157,6 @@ if ($qterest_settings['mailchimp'] || $qterest_settings['contact']) {
      */
     function qterest_field_mailchimp_mail_list_cb($args)
     {
-
         $options = get_option('qterest_options');
 
         if (mailchimp_api_key_is_valid()):
@@ -178,14 +172,14 @@ if ($qterest_settings['mailchimp'] || $qterest_settings['contact']) {
                                     <option value="<?php echo $list['id'] ?>" <?php echo isset($options[$args['label_for']]) ? (selected($options[$args['label_for']], $list['id'], false)) : (''); ?>>
                                         <?php esc_html_e($list['name'], 'do_sub');?>
                                     </option>
-                    <?php }?>
+                    <?php } ?>
             </select>
             <p class="description">
-                <?php esc_html_e('Choose which list you want to add new subscribers to', 'do_sub');?>
+                <?php esc_html_e('Choose which list you want to add new subscribers to', 'do_sub'); ?>
             </p>
         <?php else: ?>
             <p><b>
-                <?php esc_html_e('Please enter a valid api key', 'do_sub');?>
+                <?php esc_html_e('Please enter a valid api key', 'do_sub'); ?>
             </b></p>
         <?php endif;
     }
@@ -195,12 +189,9 @@ if ($qterest_settings['mailchimp'] || $qterest_settings['contact']) {
      */
     function qterest_field_contact_notification_email_cb($args)
     {
-
-        $options = get_option('qterest_options');
-
-        ?>
+        $options = get_option('qterest_options'); ?>
             <input type="email" value="<?php echo isset($options[$args['label_for']]) ? $options[$args['label_for']] : null; ?>" id="<?php echo esc_attr($args['label_for']); ?>" name="qterest_options[<?php echo esc_attr($args['label_for']); ?>]" size="50">
-            <p class="description"><?php esc_html_e('Enter a valid email that you want to recive notifications to when a new contact request is recived', 'qterest');?></p>
+            <p class="description"><?php esc_html_e('Enter a valid email that you want to recive notifications to when a new contact request is recived', 'qterest'); ?></p>
         <?php
     }
 
@@ -209,7 +200,6 @@ if ($qterest_settings['mailchimp'] || $qterest_settings['contact']) {
      */
     function qterest_options_page()
     {
-
         add_menu_page(
             'Settings',
             'QTE Rest',
@@ -238,22 +228,19 @@ if ($qterest_settings['mailchimp'] || $qterest_settings['contact']) {
         }
 
         if (isset($_GET['settings-updated'])) {
-
             add_settings_error('qterest_messages', 'qterest_message', __('Settings Saved', 'qterest'), 'updated');
         }
 
-        settings_errors('qterest_messages');
-        ?>
+        settings_errors('qterest_messages'); ?>
         <div class="wrap">
             <h1><?php echo esc_html(get_admin_page_title()); ?></h1>
             <form action="options.php" method="post">
             <?php
                 settings_fields('qterest');
 
-                do_settings_sections('qterest');
+        do_settings_sections('qterest');
 
-                submit_button(__('Save Settings', 'qterest'));
-            ?>
+        submit_button(__('Save Settings', 'qterest')); ?>
             </form>
         </div><?php
     }

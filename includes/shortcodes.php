@@ -10,12 +10,12 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
-function handle_qterest_form_shortcode($atts, $content) {
-
+function handle_qterest_form_shortcode($atts, $content)
+{
     global $qterest_settings;
 
-    if(!$qterest_settings['contact']){
-        if(current_user_can('manage_options')){
+    if (!$qterest_settings['contact']) {
+        if (current_user_can('manage_options')) {
             return "<p class=\"qterest-error\">" . __('Contact is disabled on this site!', 'qterest') . "</p>";
         }
         return;
@@ -41,24 +41,22 @@ function handle_qterest_form_shortcode($atts, $content) {
 
     $fields = [];
 
-    foreach($lines as $line){
+    foreach ($lines as $line) {
         $raw_args = explode('|', $line);
 
         $parsed_args = [];
         
-        if(!empty(trim($line))){
-
-            foreach($raw_args as $arg){
-
+        if (!empty(trim($line))) {
+            foreach ($raw_args as $arg) {
                 $parsed_arg = explode('=', $arg);
 
-                if(\sizeof($parsed_arg) > 1){
-                    if(trim($parsed_arg[0]) == "options"){
+                if (\sizeof($parsed_arg) > 1) {
+                    if (trim($parsed_arg[0]) == "options") {
                         $parsed_options = array();
                         $raw_options = explode(';', $parsed_arg[1]);
 
-                        foreach($raw_options as $raw_option){
-                            if(!empty($raw_option)){
+                        foreach ($raw_options as $raw_option) {
+                            if (!empty($raw_option)) {
                                 $parsed_option = explode(':', $raw_option);
 
                                 $parsed_options[] = array(
@@ -66,39 +64,33 @@ function handle_qterest_form_shortcode($atts, $content) {
                                     'name' => trim($parsed_option[1])
                                 );
                             }
-                            
                         }
 
                         $parsed_args[trim($parsed_arg[0])] = $parsed_options;
-
                     } else {
                         $parsed_args[trim($parsed_arg[0])] = trim($parsed_arg[1]);
                     }
-                    
                 }
-
             }
 
-            switch($parsed_args['type']){
+            switch ($parsed_args['type']) {
                 case 'title':
                 case 'paragraph':
                 case 'link':
-                    if(isset($parsed_args['text']) && !empty($parsed_args['text'])){
+                    if (isset($parsed_args['text']) && !empty($parsed_args['text'])) {
                         $fields[] = wp_parse_args($parsed_args, $misc_defaults);
                     }
 
                     break;
                 default:
-                    if(isset($parsed_args['name']) && !empty($parsed_args['name'])){
+                    if (isset($parsed_args['name']) && !empty($parsed_args['name'])) {
                         $fields[] = wp_parse_args($parsed_args, $field_defaults);
                     }
 
                     break;
 
             }
-
         }
-        
     }
 
 
@@ -106,19 +98,18 @@ function handle_qterest_form_shortcode($atts, $content) {
         'fields' => $fields,
     );
 
-    if(is_array($atts)){
-        foreach($atts as $key => $val){
+    if (is_array($atts)) {
+        foreach ($atts as $key => $val) {
             $form_args[$key] = $val;
         }
     }
 
     return \qterest_render_form($form_args, false);
-    
 }
 add_shortcode('qterest-form', __NAMESPACE__ . "\\handle_qterest_form_shortcode");
 
-function handle_qterest_mailchimp_form_shortcode($atts, $content) {
-
+function handle_qterest_mailchimp_form_shortcode($atts, $content)
+{
     $input_label = $atts['input_label'] ?? __("Email", 'qterest');
     $submit_label = $atts['submit_label'] ?? __("Subscribe", 'qterest');
 
@@ -126,4 +117,3 @@ function handle_qterest_mailchimp_form_shortcode($atts, $content) {
 }
 
 add_shortcode('qterest-mailchimp-form', __NAMESPACE__ . "\\handle_qterest_mailchimp_form_shortcode");
-

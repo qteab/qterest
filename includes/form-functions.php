@@ -12,29 +12,28 @@ if (!defined('ABSPATH')) {
 
 /**
  * This function makes a label from the given parameters
- * 
+ *
  * @param string $for The id for the element which the label belongs to
  * @param string $text The content of the label
  * @param boolean $echo Determines whether or not to echo the label. Default is false
- * 
- * @return mixed 
+ *
+ * @return mixed
  */
-function render_label($for, $text, $echo = false){
-
+function render_label($for, $text, $echo = false)
+{
     $label = "<label for=\"$for\">$text</label>";
 
-    if($echo){
+    if ($echo) {
         echo $label;
     } else {
         return $label;
     }
-
 }
 
 /**
  * This function make a field form the given parameters
- * 
- * @param array $args => [ 
+ *
+ * @param array $args => [
  *              'name' => (string) The name for the form field
  *              'placeholder => (string) The placeholder for the field
  *              'type' => (string) The field type
@@ -42,17 +41,17 @@ function render_label($for, $text, $echo = false){
  *              'class' => (string) The field class
  *              'label' => (string) If filled a label will be added
  *              'required' => (string) Is the field required?
- *              'options' => [ Options for select 
+ *              'options' => [ Options for select
  *                  'name' => (string) Name for option
  *                  'value' => (string) Value for option
  *              ],
  *          ]
  * @param boolean $echo Determines whether or not to echo the label. Default is false
- * 
+ *
  * @return mixed
  */
-function render_field($args, $echo = false){
-
+function render_field($args, $echo = false)
+{
     $field = "";
 
     $required = isset($args['required']) && $args['required'] ? "required" : "";
@@ -71,21 +70,19 @@ function render_field($args, $echo = false){
 
     $rows = isset($args['rows']) && $args['rows'] ? $args['rows'] : 4;
 
-    switch($args['type']){
+    switch ($args['type']) {
         case "select":
 
-            if(isset($args['label']) && !empty($args['label'])){
+            if (isset($args['label']) && !empty($args['label'])) {
                 $field .= render_label($for, $args['label']);
             }
 
             $field .= "<select id=\"$id\" $class name=\"$args[name]\" $required ><option>$args[placeholder]</option>";
 
-            if(isset($args['options']) && $args['options']) {
-
-                foreach($args['options'] as $option){
+            if (isset($args['options']) && $args['options']) {
+                foreach ($args['options'] as $option) {
                     $field .= "<option value=\"$option[value]\">$option[name]</option>";
                 }
-
             }
 
             $field .= "</select>";
@@ -94,7 +91,7 @@ function render_field($args, $echo = false){
 
         case "textarea":
 
-            if(isset($args['label']) && !empty($args['label'])){
+            if (isset($args['label']) && !empty($args['label'])) {
                 $field .= render_label($id, $args['label']);
             }
 
@@ -107,7 +104,7 @@ function render_field($args, $echo = false){
         case "email":
         case "hidden":
 
-            if(isset($args['label']) && !empty($args['label'])){
+            if (isset($args['label']) && !empty($args['label'])) {
                 $field .= render_label($for, $args['label']);
             }
             
@@ -122,22 +119,21 @@ function render_field($args, $echo = false){
 
     }
 
-    if($echo){
+    if ($echo) {
         echo $field;
     } else {
         return $field;
     }
-
 }
 
 /**
  * This function renders a misc form the given parameters
  */
-function render_misc($args, $echo = false){
-
+function render_misc($args, $echo = false)
+{
     $misc = "";
 
-    switch($args['type']){
+    switch ($args['type']) {
         case "title":
             $misc .= "<h$args[size]>$args[text]</$args[size]>";
             break;
@@ -152,11 +148,10 @@ function render_misc($args, $echo = false){
     }
     
 
-    if($echo){
+    if ($echo) {
         echo $misc;
         return;
-    } 
+    }
 
     return $misc;
-
 }

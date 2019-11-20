@@ -24,16 +24,16 @@ class REST_Controller extends \WP_REST_Controller
 {
  
     //The namespace and version for the REST SERVER
-    var $qterest_namespace = 'qte/v';
-    var $qterest_version = '1';
+    public $qterest_namespace = 'qte/v';
+    public $qterest_version = '1';
 
     public function register_routes()
     {
-        global $qterest_settings; 
+        global $qterest_settings;
 
         $namespace = $this->qterest_namespace . $this->qterest_version;
 
-        if($qterest_settings['search']) {
+        if ($qterest_settings['search']) {
             $base = 'search';
             register_rest_route($namespace, '/' . $base, array(
                 array(
@@ -43,7 +43,7 @@ class REST_Controller extends \WP_REST_Controller
             ));
         }
 
-        if($qterest_settings['contact']) {
+        if ($qterest_settings['contact']) {
             $base = 'contact';
             register_rest_route($namespace, '/' . $base, array(
                 array(
@@ -53,7 +53,7 @@ class REST_Controller extends \WP_REST_Controller
             ));
         }
 
-        if($qterest_settings['mailchimp']) {
+        if ($qterest_settings['mailchimp']) {
             $base = 'mailchimp/add-subscriber';
             register_rest_route($namespace, '/' . $base, array(
                 array(
@@ -72,9 +72,9 @@ class REST_Controller extends \WP_REST_Controller
 
     public function handle_search(\WP_REST_Request $request)
     {
-        global $qterest_settings; 
+        global $qterest_settings;
 
-        if(!$qterest_settings['search']) {
+        if (!$qterest_settings['search']) {
             return array('success' => false, 'error_msg' => get_translated_string("Search is not enabled for this site", 'qterest'));
         }
 
@@ -110,7 +110,6 @@ class REST_Controller extends \WP_REST_Controller
              * This hook is used to add code for the single posts
              */
             do_action('qterest_search_content');
-
         }
         wp_reset_query();
 
@@ -121,9 +120,9 @@ class REST_Controller extends \WP_REST_Controller
 
     public function handle_contact(\WP_REST_Request $request)
     {
-        global $qterest_settings; 
+        global $qterest_settings;
 
-        if(!$qterest_settings['contact']) {
+        if (!$qterest_settings['contact']) {
             return array('success' => false, 'error_msg' => get_translated_string("Contact is not enabled for this site", 'qterest'));
         }
 
@@ -149,19 +148,15 @@ class REST_Controller extends \WP_REST_Controller
         /**
          * Checks that email isn't empty
          */
-        if(empty($params['email'])) {
-
+        if (empty($params['email'])) {
             return array('success' => false, 'error_msg' => $messages['email_empty']);
-            
         }
 
         /**
          * Checks if email is valid
          */
-        if(!validate_email($params['email'])) {
-            
+        if (!validate_email($params['email'])) {
             return array('success' => false, 'error_msg' => $messages['email_invalid']);
-
         }
 
         $post_id = wp_insert_post(array(
@@ -178,10 +173,8 @@ class REST_Controller extends \WP_REST_Controller
         /**
          * Checks if request got inserted
          */
-        if(is_wp_error($post_id)){
-
+        if (is_wp_error($post_id)) {
             return array('success' => false, 'error_msg' => $messages['failed']);
-
         }
 
         /**
@@ -200,7 +193,7 @@ class REST_Controller extends \WP_REST_Controller
         $to = $messages['mail_to'];
         $subject = $messages['mail_subject'];
         $body = $messages['mail_body'];
-        $body = \preg_replace('#{LINK}#', "<a href=\"$link\">$link</a>", $body); 
+        $body = \preg_replace('#{LINK}#', "<a href=\"$link\">$link</a>", $body);
         $headers = array('Content-Type: text/html; charset=UTF-8');
 
         /**
@@ -209,18 +202,19 @@ class REST_Controller extends \WP_REST_Controller
         do_action('qterest_contact_before_send_mail', $to, $subject, $body, $headers);
         
 
-        if($messages['mail_to'] != NULL){
-            wp_mail( $to, $subject, $body, $headers );
+        if ($messages['mail_to'] != null) {
+            wp_mail($to, $subject, $body, $headers);
         }
         
 
         return array('success' => true, 'success_msg' => $messages['success']);
     }
 
-    public function handle_mailchimp_add_subscriber(\WP_REST_Request $request) {
-        global $qterest_settings; 
+    public function handle_mailchimp_add_subscriber(\WP_REST_Request $request)
+    {
+        global $qterest_settings;
 
-        if(!$qterest_settings['mailchimp']) {
+        if (!$qterest_settings['mailchimp']) {
             return array('success' => false, 'error_msg' => get_translated_string("Mailchimp is not enabled for this site", 'qterest'));
         }
 
@@ -243,21 +237,21 @@ class REST_Controller extends \WP_REST_Controller
         /**
          *  Check if email is not empty
          */
-        if(!isset($params['email']) && empty($params['email'])){
+        if (!isset($params['email']) && empty($params['email'])) {
             return array('success' => false, 'error_msg' => $messages['email_empty']);
         }
 
         /**
          * Check if email is valid
          */
-        if(!validate_email($params['email'])){
+        if (!validate_email($params['email'])) {
             return array('success' => false, 'error_msg' => $messages['email_invalid']);
         }
 
         /**
          * Check if MailChimp API key is valid
          */
-        if(!mailchimp_api_key_is_valid()){
+        if (!mailchimp_api_key_is_valid()) {
             return array('success' => false, 'error_msg' => $messages['invalid_api_key']);
         }
 
@@ -272,7 +266,7 @@ class REST_Controller extends \WP_REST_Controller
          */
         try {
             $MailChimp = new MailChimp($options['qterest_field_mailchimp_api_key']);
-        } catch (\Exception $e){
+        } catch (\Exception $e) {
             return array('succes' => false, 'error_msg' => $e->getMessage());
         }
 
@@ -287,7 +281,7 @@ class REST_Controller extends \WP_REST_Controller
         /**
          * Check if already subscribed and if subscribed make sure that the status is subscribed
          */
-        if($repsonse['title'] == "Member Exists"){
+        if ($repsonse['title'] == "Member Exists") {
             $repsonse = $MailChimp->put("/lists/$options[qterest_field_mailchimp_mail_list]/members/" . $MailChimp->subscriberHash($params['email']), array(
                 'status' => 'subscribed',
             ));
@@ -296,11 +290,10 @@ class REST_Controller extends \WP_REST_Controller
         /**
          * Check if user added or updated
          */
-        if(!isset($repsonse['id'])){
+        if (!isset($repsonse['id'])) {
             return array('success' => false, 'error_msg' => $messages['failed']);
         }
 
-        return array('success' => true, 'success_msg' => $messages['success'], 'debug' => $repsonse);
-        
+        return array('success' => true, 'success_msg' => $messages['success']);
     }
 }

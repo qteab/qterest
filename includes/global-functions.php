@@ -13,7 +13,7 @@ use function QTEREST\Form\render_misc;
 
 /**
  * This function renders a qterest form from an array.
- * 
+ *
  * @param array $args Arry containing the form structure
  * $args => [
  *      'wrapper_class' => (string) Overrides the default wrapper class
@@ -26,7 +26,7 @@ use function QTEREST\Form\render_misc;
  *      'submit_label' => (string) Overrides the default submit label
  *      'submit_class' => (string) Overrides the default submit class
  *      'fields' = [ // Defines the form fields
- *          $anyKey => [ 
+ *          $anyKey => [
  *              'name' => (string) The name for the form field
  *              'placeholder => (string) The placeholder for the field
  *              'type' => (string) The field type
@@ -34,18 +34,18 @@ use function QTEREST\Form\render_misc;
  *              'class' => (string) The field class
  *              'label' => (string) If filled a label will be added
  *              'toggles' => (boolean) Should this field toggle other fields ONLY when type is 'checkbox'
- *              'toggles_on' => (string) The id of the field that this field toggles on 
- *              'options' => [ Options for select 
+ *              'toggles_on' => (string) The id of the field that this field toggles on
+ *              'options' => [ Options for select
  *                      'name' => (string) Name for option
  *                      'value' => (string) Value for option
  *                  ],
  *          ],
  *      ]
  *  ]
- * @param bool $echo Tells whether or not to echo. True as default 
+ * @param bool $echo Tells whether or not to echo. True as default
  */
-function qterest_render_form(array $args, bool $echo = true){
-
+function qterest_render_form(array $args, bool $echo = true)
+{
     $defaults = array(
         'wrapper_class' => "qterest-form-container",
         'form_class' => "qterest-form",
@@ -64,10 +64,8 @@ function qterest_render_form(array $args, bool $echo = true){
 
     $form .= "<form class=\"$args[form_class]\">";
 
-    if(isset($args['form_title']) && $args['form_title']){
-        
+    if (isset($args['form_title']) && $args['form_title']) {
         $form .= "<h3>$args[form_title]</h3>";
-
     }
 
     $form .= "<div class=\"qterest-spinner-overlay\"><div class=\"qterest-spinner\"></div></div>";
@@ -79,11 +77,10 @@ function qterest_render_form(array $args, bool $echo = true){
     $form .= "<div class=\"$args[form_fields_class]\">";
 
 
-    if(isset($args['fields']) && $args['fields']){
+    if (isset($args['fields']) && $args['fields']) {
+        foreach ($args['fields'] as $field) { // Loop through all fields
 
-        foreach($args['fields'] as $field){ // Loop through all fields
-
-            switch($field['type']){
+            switch ($field['type']) {
                 case "paragraph":
                 case "link":
                 case "title":
@@ -110,9 +107,6 @@ function qterest_render_form(array $args, bool $echo = true){
 
                     break;
             }
-
-            
-
         }
     }
 
@@ -124,23 +118,22 @@ function qterest_render_form(array $args, bool $echo = true){
 
     $form .= "</div>";
 
-    if(!$echo){
+    if (!$echo) {
         return $form;
     }
 
     echo $form;
-
 }
 
 /**
  * This function makes a simple MailChimp sign up form.
- * 
+ *
  * @param string $input_label
  * @param string $submit_label
- * @param bool $echo 
+ * @param bool $echo
  */
-function qterest_render_mailchimp_form(string $input_label, string $submit_label, bool $echo = true) {
-
+function qterest_render_mailchimp_form(string $input_label, string $submit_label, bool $echo = true)
+{
     $form = "<div class=\"qterest-form-container\">";
 
     $form .= "<form class=\"qterest-mailchimp-signup\">";
@@ -168,8 +161,8 @@ function qterest_render_mailchimp_form(string $input_label, string $submit_label
 
     $form .= "</div>";
 
-    if(!$echo) {
-       return $form; 
+    if (!$echo) {
+        return $form;
     }
 
     echo $form;
