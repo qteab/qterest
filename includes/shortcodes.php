@@ -117,10 +117,10 @@ function handle_qterest_form_shortcode($atts, $content) {
 }
 add_shortcode('qterest-form', __NAMESPACE__ . "\\handle_qterest_form_shortcode");
 
-function handle_qterest_mailchimp_form_chortcode($atts, $content) {
+function handle_qterest_mailchimp_form_shortcode($atts, $content) {
 
-    $input_label = $atts['input_label'] ?? "";
-    $submit_label = $atts['submit_label'] ?? "";
+    $input_label = $atts['input_label'] ?? __("Email", 'qterest');
+    $submit_label = $atts['submit_label'] ?? __("Subscribe", 'qterest');
 
     return \qterest_render_mailchimp_form($input_label, $submit_label, false);
 }

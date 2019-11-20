@@ -1,25 +1,25 @@
 # Copyright (C) 2019 QTE Development AB
-# This file is distributed under the same license as the QTEREST plugin.
+# This file is distributed under the same license as the QTE Rest plugin.
 msgid ""
 msgstr ""
-"Project-Id-Version: QTEREST 1.1.0\n"
+"Project-Id-Version: QTE Rest 1.2.0\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/qterest\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2019-04-09T15:43:50+02:00\n"
+"POT-Creation-Date: 2019-11-20T07:42:32+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"X-Generator: WP-CLI 2.1.0\n"
+"X-Generator: WP-CLI 2.4.0\n"
 "X-Domain: qterest\n"
 
 #. Plugin Name of the plugin
-msgid "QTEREST"
+msgid "QTE Rest"
 msgstr ""
 
 #. Description of the plugin
-msgid "QTEREST adds new endpoints for the Wordpress API"
+msgid "QTE Rest adds new endpoints for the Wordpress API"
 msgstr ""
 
 #. Author of the plugin
@@ -193,7 +193,7 @@ msgstr ""
 msgid "Contact requests"
 msgstr ""
 
-#: includes/global-functions.php:52
+#: includes/global-functions.php:57
 msgid "Submit"
 msgstr ""
 
@@ -245,3 +245,10 @@ msgstr ""
 msgid "Contact is disabled on this site!"
 msgstr ""
 
+#: includes/shortcodes.php:122
+msgid "Email"
+msgstr ""
+
+#: includes/shortcodes.php:123
+msgid "Subscribe"
+msgstr ""
