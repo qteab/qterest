@@ -212,7 +212,7 @@ if ($qterest_settings['mailchimp'] || $qterest_settings['contact']) {
 
         add_menu_page(
             'Settings',
-            'QTEREST Settings',
+            'QTE Rest',
             'manage_options',
             'qterest_settings',
             __NAMESPACE__ . '\\qterest_options_page_html'

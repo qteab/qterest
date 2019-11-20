@@ -1,7 +1,7 @@
 <?php
 /*
- * Plugin Name: QTEREST
- * Description: QTEREST adds new endpoints for the Wordpress API
+ * Plugin Name: QTE Rest
+ * Description: QTE Rest adds new endpoints for the Wordpress API
  * Version: 1.2.0
  * Author: QTE Development AB
  * Author URI: https://getqte.se/

@@ -10,7 +10,7 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
-function handle_qterest_form_shortcode($atts, $content){
+function handle_qterest_form_shortcode($atts, $content) {
 
     global $qterest_settings;
 
@@ -116,3 +116,14 @@ function handle_qterest_form_shortcode($atts, $content){
     
 }
 add_shortcode('qterest-form', __NAMESPACE__ . "\\handle_qterest_form_shortcode");
+
+function handle_qterest_mailchimp_form_chortcode($atts, $content) {
+
+    $input_label = $atts['input_label'] ?? "";
+    $submit_label = $atts['submit_label'] ?? "";
+
+    return \qterest_render_mailchimp_form($input_label, $submit_label, false);
+}
+
+add_shortcode('qterest-mailchimp-form', __NAMESPACE__ . "\\handle_qterest_mailchimp_form_shortcode");
+
