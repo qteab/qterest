@@ -150,6 +150,7 @@ function qterest_render_mailchimp_form(string $input_label, string $submit_label
         'name' => "email",
         'type' => 'email',
         'label' => $input_label,
+        'placeholder' => $input_label,
         'required' => true,
     ]);
 
