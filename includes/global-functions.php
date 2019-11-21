@@ -144,6 +144,8 @@ function qterest_render_mailchimp_form(string $input_label, string $submit_label
 
     $form .= "<div class=\"qterest-success-messages\"></div>";
 
+    $form . "<div class=\"qterest-form-fields\"/>";
+
     $form .= "<div class=\"qterest-form-row\">";
 
     $form .= render_field([
@@ -157,6 +159,8 @@ function qterest_render_mailchimp_form(string $input_label, string $submit_label
     $form .= "</div>";
 
     $form .= "<div class=\"qterest-form-row\"><input class=\"button submit\" type=\"submit\" value=\"$submit_label\"></div>";
+
+    $form .= "</div>";
 
     $form .= "</form>";
 
