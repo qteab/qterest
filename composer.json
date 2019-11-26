@@ -1,6 +1,7 @@
 {
     "require": {
-        "drewm/mailchimp-api": "^2.5"
+        "drewm/mailchimp-api": "^2.5",
+        "yahnis-elsts/plugin-update-checker": "^4.8"
     },
     "require-dev": {
         "friendsofphp/php-cs-fixer": "^2.16"
