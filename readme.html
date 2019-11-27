@@ -9,7 +9,7 @@
 <h2 id="installation">Installation</h2>
 <p>Follow these steps to install the  plugin.</p>
 <ol>
-<li>Download the <a href="https://github.com/qteab/qterest/releases">latest release</a> as a zip.</li>
+<li>Download the <a href="https://github.com/qteab/qterest/releases/latest">latest release</a> as a zip.</li>
 <li>Go over to your wordpress admin panel.</li>
 <li>Go to &quot;Plugins&quot; and &quot;Add New&quot;</li>
 <li>Press &quot;Upload Plugin&quot; and select the file you downloaded earlier.</li>
@@ -57,12 +57,12 @@
         &#39;toggles_on&#39; =&gt; &#39;my_checkbox_field&#39;, // (string) The id of the field that you want to toogle this field
     ],
     [
-        &#39;type&#39; =&gt; &#39;checkbox&#39;, // REQUIRED (string) Possible values are text, email, tel, hidden and textarea
+        &#39;type&#39; =&gt; &#39;checkbox&#39;, // REQUIRED (string) Possible values are checkbox and radio
         &#39;name&#39; =&gt; &#39;my_checkbox_field&#39;, // REQUIRED (string) HTML Attribute name
         &#39;value&#39; =&gt; &#39;yes&#39;, // (string) HTML Attribute value
         &#39;label&#39; =&gt; &#39;Checkbox&#39;, // (string) Label text
         &#39;class&#39; =&gt; &#39;form-control&#39;, // (string) Overrides default class
-        &#39;toggles&#39; =&gt; true, // (bool) Can this field toggle other fields? ONLY checbox
+        &#39;toggles&#39; =&gt; true, // (bool) Can this field toggle other fields? ONLY checkbox
     ],
     [
         &#39;type&#39; =&gt; &#39;select&#39;, // REQUIRED (string) Possible values are select
@@ -99,7 +99,7 @@
     ],
     [
         &#39;type&#39; =&gt; &#39;link&#39;,
-        &#39;href&#39; =&gt; &#39;https://google.se&#39;,
+        &#39;href&#39; =&gt; &#39;https://google.com&#39;,
         &#39;text&#39; =&gt; &#39;Google.se&#39;
     ]
 ]
@@ -139,7 +139,7 @@
 ]);
 </code></pre>
 <h3 id="filters-and-actions">Filters and Actions</h3>
-<p>There is a few filters and actions availible for you to customize som things</p>
+<p>There is a few filters and actions available for you to customize som things</p>
 <h4 id="messages">Messages</h4>
 <p>Example for customizing messages</p>
 <pre><code class="lang-php">function theme_custom_qterest_messages($messages) {
@@ -161,7 +161,7 @@ add_filter(&#39;qterest_contact_messages&#39;, &#39;theme_custom_qterest_message
 <li>mail_subject</li>
 <li>mail_body</li>
 </ul>
-<h4 id="fomatting-keys-admin-">Fomatting keys (ADMIN)</h4>
+<h4 id="formatting-keys-admin-">Formatting keys (ADMIN)</h4>
 <p>When looking at a contact request you can see that the name of the field identifies the value. This can be changed by adding a filter to display a better name for the customer. The filter name looks like this <code>qterest_format_key_${key}</code>.</p>
 <pre><code class="lang-php">function theme_format_keys_bulk($key) {
     return &quot;Does this person have a dog?&quot;;
@@ -186,7 +186,7 @@ add_filter(&#39;qterest_format_bulk_keys&#39;, &#39;theme_format_bulk_keys&#39;)
 <p>Example</p>
 <pre><code class="lang-php">qterest_render_mailchimp_form(&quot;Email&quot;, &quot;Subscribe&quot;);
 </code></pre>
-<h2 id="comming-soon">Comming soon</h2>
+<h2 id="coming-soon">Coming soon</h2>
 <ul>
 <li>Search Documentation</li>
 </ul>

@@ -3,7 +3,7 @@ This plugin can be used for making forms, newsletter signup (mailchimp) and sear
 
 ## Installation
 Follow these steps to install the  plugin.
-1. Download the [latest release](https://github.com/qteab/qterest/releases) as a zip.
+1. Download the [latest release](https://github.com/qteab/qterest/releases/latest) as a zip.
 2. Go over to your wordpress admin panel.
 3. Go to "Plugins" and "Add New"
 4. Press "Upload Plugin" and select the file you downloaded earlier.
@@ -59,12 +59,12 @@ $fields = [
         'toggles_on' => 'my_checkbox_field', // (string) The id of the field that you want to toogle this field
     ],
     [
-        'type' => 'checkbox', // REQUIRED (string) Possible values are text, email, tel, hidden and textarea
+        'type' => 'checkbox', // REQUIRED (string) Possible values are checkbox and radio
         'name' => 'my_checkbox_field', // REQUIRED (string) HTML Attribute name
         'value' => 'yes', // (string) HTML Attribute value
         'label' => 'Checkbox', // (string) Label text
         'class' => 'form-control', // (string) Overrides default class
-        'toggles' => true, // (bool) Can this field toggle other fields? ONLY checbox
+        'toggles' => true, // (bool) Can this field toggle other fields? ONLY checkbox
     ],
     [
         'type' => 'select', // REQUIRED (string) Possible values are select
@@ -104,7 +104,7 @@ $fields = [
 	],
 	[
 		'type' => 'link',
-		'href' => 'https://google.se',
+		'href' => 'https://google.com',
 		'text' => 'Google.se'
 	]
 ]
@@ -147,7 +147,7 @@ qterest_render_form([
 ```
 
 ### Filters and Actions
-There is a few filters and actions availible for you to customize som things
+There is a few filters and actions available for you to customize som things
 
 #### Messages
 Example for customizing messages
@@ -171,7 +171,7 @@ The following messages can be changed
 * mail_subject
 * mail_body
 
-#### Fomatting keys (ADMIN)
+#### Formatting keys (ADMIN)
 When looking at a contact request you can see that the name of the field identifies the value. This can be changed by adding a filter to display a better name for the customer. The filter name looks like this `qterest_format_key_${key}`.
 ```php
 function theme_format_keys_bulk($key) {
@@ -204,7 +204,7 @@ Example
 qterest_render_mailchimp_form("Email", "Subscribe");
 ```
 
-## Comming soon
+## Coming soon
 * Search Documentation
 
 ## Future plans
