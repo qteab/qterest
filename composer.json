@@ -1,5 +1,5 @@
 {
-    "name": "QTE Rest",
+    "name": "qteab/qterest",
     "description": "QTE Rest adds new endpoints for the Wordpress API",
     "require": {
         "drewm/mailchimp-api": "^2.5",
