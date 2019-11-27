@@ -1,6 +1,15 @@
 # QTE Rest
 This plugin can be used for making forms, newsletter signup (mailchimp) and search.
 
+## Installation
+Follow these steps to install the  plugin.
+1. Download the [latest release](https://github.com/qteab/qterest/releases) as a zip.
+2. Go over to your wordpress admin panel.
+3. Go to "Plugins" and "Add New"
+4. Press "Upload Plugin" and select the file you downloaded earlier.
+
+The plugin is now installed.
+
 ## Settings
 This plugin needs to be configured before uploaded to wordpress. There's a file called `settings.php` where you can configure which parts of the plugin you want to use. 
 ```php
