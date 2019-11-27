@@ -14,6 +14,7 @@ class ComposerStaticInit6b17fbcd090bec6b9614ec79c92df752
         'D' => 
         array (
             'DrewM\\MailChimp\\' => 16,
+            'Dealerdirect\\Composer\\Plugin\\Installers\\PHPCodeSniffer\\' => 55,
         ),
     );
 
@@ -21,6 +22,10 @@ class ComposerStaticInit6b17fbcd090bec6b9614ec79c92df752
         'DrewM\\MailChimp\\' => 
         array (
             0 => __DIR__ . '/..' . '/drewm/mailchimp-api/src',
+        ),
+        'Dealerdirect\\Composer\\Plugin\\Installers\\PHPCodeSniffer\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/dealerdirect/phpcodesniffer-composer-installer/src',
         ),
     );
 
