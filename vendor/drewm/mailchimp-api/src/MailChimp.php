@@ -46,7 +46,7 @@ class MailChimp
 
         if ($api_endpoint === null) {
             if (strpos($this->api_key, '-') === false) {
-                throw new \Exception("Invalid MailChimp API key `{$api_key}` supplied.");
+                throw new \Exception("Invalid MailChimp API key supplied.");
             }
             list(, $data_center) = explode('-', $this->api_key);
             $this->api_endpoint = str_replace('<dc>', $data_center, $this->api_endpoint);
@@ -85,7 +85,7 @@ class MailChimp
      *
      * @return  string          Hashed version of the input
      */
-    public function subscriberHash($email)
+    public static function subscriberHash($email)
     {
         return md5(strtolower($email));
     }
@@ -227,6 +227,10 @@ class MailChimp
             $httpHeader[] = "Accept-Language: " . $args["language"];
         }
 
+        if ($http_verb === 'put') {
+            $httpHeader[] = 'Allow: PUT, PATCH, POST';
+        }
+
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, $url);
         curl_setopt($ch, CURLOPT_HTTPHEADER, $httpHeader);
@@ -236,7 +240,6 @@ class MailChimp
         curl_setopt($ch, CURLOPT_HEADER, true);
         curl_setopt($ch, CURLOPT_TIMEOUT, $timeout);
         curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, $this->verify_ssl);
-        curl_setopt($ch, CURLOPT_HTTP_VERSION, CURL_HTTP_VERSION_1_0);
         curl_setopt($ch, CURLOPT_ENCODING, '');
         curl_setopt($ch, CURLINFO_HEADER_OUT, true);
 
@@ -325,7 +328,7 @@ class MailChimp
         $headers = array();
 
         foreach (explode("\r\n", $headersAsString) as $i => $line) {
-            if ($i === 0) { // HTTP code
+            if (preg_match('/HTTP\/[1-2]/', substr($line, 0, 7)) === 1) { // http code
                 continue;
             }
 
