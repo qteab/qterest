@@ -4,8 +4,8 @@
  * This file loads all the other files
  */
 
-if (!defined('ABSPATH')) {
-    exit;
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
 }
 
 require_once QTEREST_PLUGIN_PATH . 'settings.php';
