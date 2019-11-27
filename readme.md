@@ -1,4 +1,6 @@
 # QTE Rest
+![Actions Status](https://github.com/qteab/qterest/workflows/PHP%20CS/badge.svg)
+
 This plugin can be used for making forms, newsletter signup (mailchimp) and search.
 
 ## Installation
