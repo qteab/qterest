@@ -8,8 +8,8 @@ namespace QTEREST\Helpers;
 
 use DrewM\MailChimp\MailChimp;
 
-if (!defined('ABSPATH')) {
-    exit;
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
 }
 
 /**
@@ -19,13 +19,12 @@ if (!defined('ABSPATH')) {
  *
  * @return boolean
  */
-function validate_email($email)
-{
-    if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
-        return true;
-    } else {
-        return false;
-    }
+function validate_email( $email ) {
+	if ( filter_var( $email, FILTER_VALIDATE_EMAIL ) ) {
+		return true;
+	} else {
+		return false;
+	}
 }
 
 /**
@@ -33,16 +32,15 @@ function validate_email($email)
  *
  * @return string
  */
-function get_client_ip()
-{
-    if (!empty($_SERVER['HTTP_CLIENT_IP'])) { //check ip from share internet
-        $ip = $_SERVER['HTTP_CLIENT_IP'];
-    } elseif (!empty($_SERVER['HTTP_X_FORWARDED_FOR'])) { //to check ip is pass from proxy
-        $ip = $_SERVER['HTTP_X_FORWARDED_FOR'];
-    } else {
-        $ip = $_SERVER['REMOTE_ADDR'];
-    }
-    return $ip;
+function get_client_ip() {
+	if ( ! empty( $_SERVER['HTTP_CLIENT_IP'] ) ) { // check ip from share internet
+		$ip = $_SERVER['HTTP_CLIENT_IP'];
+	} elseif ( ! empty( $_SERVER['HTTP_X_FORWARDED_FOR'] ) ) { // to check ip is pass from proxy
+		$ip = $_SERVER['HTTP_X_FORWARDED_FOR'];
+	} else {
+		$ip = $_SERVER['REMOTE_ADDR'];
+	}
+	return $ip;
 }
 
 /**
@@ -50,25 +48,24 @@ function get_client_ip()
  *
  * @return boolean
  */
-function mailchimp_api_key_is_valid()
-{
-    $options = get_option('qterest_options');
+function mailchimp_api_key_is_valid() {
+	 $options = get_option( 'qterest_options' );
 
-    $option_key = "qterest_field_mailchimp_api_key";
+	$option_key = 'qterest_field_mailchimp_api_key';
 
-    try {
-        $MailChimp = new MailChimp($options[$option_key]);
-    } catch (\Exception $e) {
-        return false;
-    }
+	try {
+		$MailChimp = new MailChimp( $options[ $option_key ] );
+	} catch ( \Exception $e ) {
+		return false;
+	}
 
-    $response = $MailChimp->get("");
+	$response = $MailChimp->get( '' );
 
-    if (isset($response['account_id'])) {
-        return true;
-    }
+	if ( isset( $response['account_id'] ) ) {
+		return true;
+	}
 
-    return false;
+	return false;
 }
 
 /**
@@ -76,19 +73,18 @@ function mailchimp_api_key_is_valid()
  *
  * @return mixed Null if not enterd
  */
-function maybe_get_notification_email()
-{
-    $options = get_option('qterest_options');
+function maybe_get_notification_email() {
+	$options = get_option( 'qterest_options' );
 
-    $option_key = "qterest_field_contact_notification_email";
+	$option_key = 'qterest_field_contact_notification_email';
 
-    $email = isset($options[$option_key]) ? $options[$option_key] : "";
+	$email = isset( $options[ $option_key ] ) ? $options[ $option_key ] : '';
 
-    if (!empty($email)) {
-        return $email;
-    }
+	if ( ! empty( $email ) ) {
+		return $email;
+	}
 
-    return null;
+	return null;
 }
 
 /**
@@ -98,35 +94,33 @@ function maybe_get_notification_email()
  *
  * @return mixed
  */
-function maybe_fix_name($params)
-{
-    if (isset($params['first_name'], $params['last_name']) && !empty($params['first_name']) && !empty($params['last_name'])) {
-        $params['name'] = $params['first_name'] . " " . $params['last_name'];
+function maybe_fix_name( $params ) {
+	if ( isset( $params['first_name'], $params['last_name'] ) && ! empty( $params['first_name'] ) && ! empty( $params['last_name'] ) ) {
+		$params['name'] = $params['first_name'] . ' ' . $params['last_name'];
 
-        return $params;
-    }
+		return $params;
+	}
 
-    if (isset($params['first-name'], $params['last-name']) && !empty($params['first-name']) && !empty($params['last-name'])) {
-        $params['name'] = $params['first-name'] . " " . $params['last-name'];
+	if ( isset( $params['first-name'], $params['last-name'] ) && ! empty( $params['first-name'] ) && ! empty( $params['last-name'] ) ) {
+		$params['name'] = $params['first-name'] . ' ' . $params['last-name'];
 
-        return $params;
-    }
+		return $params;
+	}
 
-    return $params;
+	return $params;
 }
 
 /**
  * This function is a temporary fix for polylang
  */
-function get_translated_string(string $string)
-{
-    if (isset($_COOKIE['pll_language'])) {
-        $pll_lang = $_COOKIE['pll_language'];
+function get_translated_string( string $string ) {
+	if ( isset( $_COOKIE['pll_language'] ) ) {
+		$pll_lang = $_COOKIE['pll_language'];
 
-        if ($pll_lang !== null) {
-            return pll_translate_string($string, $pll_lang);
-        }
-    }
+		if ( $pll_lang !== null ) {
+			return pll_translate_string( $string, $pll_lang );
+		}
+	}
 
-    return __($string, 'qterest');
+	return __( $string, 'qterest' );
 }

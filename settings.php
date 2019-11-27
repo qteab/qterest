@@ -4,14 +4,14 @@
  * This file contains settings for qterest;
  */
 
-if (!defined('ABSPATH')) {
-    exit;
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
 }
 
 global $qterest_settings;
 
 $qterest_settings = array(
-    'search' => false,
-    'contact' => true,
-    'mailchimp' => true
+	'search'    => false,
+	'contact'   => true,
+	'mailchimp' => true,
 );
