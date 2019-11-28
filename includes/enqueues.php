@@ -29,11 +29,11 @@ if ( $qterest_settings['mailchimp'] ) {
 	add_action( 'wp_enqueue_scripts', __NAMESPACE__ . '\\load_mailchimp_scripts' );
 }
 
-if( $qterest_settings['mailchimp'] || $qterest_settings['contact'] ) {
-    function load_shared_scripts( $hook ) {
-        wp_enqueue_style( 'qterest-form', QTEREST_PLUGIN_DIR . '/assets/css/form.css', false, '1.1.0' );
-    }
-    add_action( 'wp_enqueue_scripts', __NAMESPACE__ . '\\load_shared_scripts' );
+if ( $qterest_settings['mailchimp'] || $qterest_settings['contact'] ) {
+	function load_shared_scripts( $hook ) {
+		wp_enqueue_style( 'qterest-form', QTEREST_PLUGIN_DIR . '/assets/css/form.css', false, '1.1.0' );
+	}
+	add_action( 'wp_enqueue_scripts', __NAMESPACE__ . '\\load_shared_scripts' );
 }
 
 function load_global_scripts( $hook ) {
