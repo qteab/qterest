@@ -5,18 +5,17 @@
 namespace QTEREST\SettingsPage;
 
 use DrewM\MailChimp\MailChimp;
+use QTEREST\Settings;
 use function QTEREST\Helpers\mailchimp_api_key_is_valid;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-global $qterest_settings;
-
 /**
  * Register settings page if MailChimp is activated for this site
  */
-if ( $qterest_settings['mailchimp'] || $qterest_settings['contact'] ) {
+if ( Settings::isEnabled(Settings::Contact) || Settings::isEnabled(Settings::MailChimp) ) {
 	function settings_init() {
 		/**
 		 * Register a new setting for qterest
@@ -107,14 +106,14 @@ if ( $qterest_settings['mailchimp'] || $qterest_settings['contact'] ) {
 	/**
 	 * Register mailchimp settings
 	 */
-	if ( $qterest_settings['mailchimp'] ) {
+	if ( Settings::isEnabled(Settings::MailChimp) ) {
 		add_action( 'admin_init', __NAMESPACE__ . '\\settings_mailchimp' );
 	}
 
 	/**
 	 * Register contact settings
 	 */
-	if ( $qterest_settings['contact'] ) {
+	if ( Settings::isEnabled(Settings::Contact) ) {
 		add_action( 'admin_init', __NAMESPACE__ . '\\settings_contact' );
 	}
 

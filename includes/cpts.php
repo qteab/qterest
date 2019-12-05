@@ -6,12 +6,14 @@
 
 namespace QTEREST\CPTS;
 
+use QTEREST\Settings;
+
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
 
-if ( $qterest_settings['contact'] ) {
+if ( Settings::isEnabled(Settings::Contact)) {
 
 	// Register Custom Post Type
 	function contact_post_type() {

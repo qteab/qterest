@@ -7,6 +7,7 @@
 namespace QTEREST\REST_Controller;
 
 use QTEREST\Helpers;
+use QTEREST\Settings;
 use function QTEREST\Helpers\validate_email;
 use function QTEREST\Helpers\get_client_ip;
 use function QTEREST\Helpers\mailchimp_api_key_is_valid;
@@ -28,11 +29,10 @@ class REST_Controller extends \WP_REST_Controller {
 	public $qterest_version   = '1';
 
 	public function register_routes() {
-		global $qterest_settings;
 
 		$namespace = $this->qterest_namespace . $this->qterest_version;
 
-		if ( $qterest_settings['search'] ) {
+		if ( Settings::isEnabled(Settings::Search) ) {
 			$base = 'search';
 			register_rest_route(
 				$namespace,
@@ -46,7 +46,7 @@ class REST_Controller extends \WP_REST_Controller {
 			);
 		}
 
-		if ( $qterest_settings['contact'] ) {
+		if ( Settings::isEnabled(Settings::Contact) ) {
 			$base = 'contact';
 			register_rest_route(
 				$namespace,
@@ -60,7 +60,7 @@ class REST_Controller extends \WP_REST_Controller {
 			);
 		}
 
-		if ( $qterest_settings['mailchimp'] ) {
+		if ( Settings::isEnabled(Settings::MailChimp) ) {
 			$base = 'mailchimp/add-subscriber';
 			register_rest_route(
 				$namespace,
@@ -81,9 +81,8 @@ class REST_Controller extends \WP_REST_Controller {
 	}
 
 	public function handle_search( \WP_REST_Request $request ) {
-		global $qterest_settings;
 
-		if ( ! $qterest_settings['search'] ) {
+		if ( ! Settings::isEnabled(Settings::Search) ) {
 			return array(
 				'success'   => false,
 				'error_msg' => get_translated_string( 'Search is not enabled for this site', 'qterest' ),
@@ -134,9 +133,8 @@ class REST_Controller extends \WP_REST_Controller {
 	}
 
 	public function handle_contact( \WP_REST_Request $request ) {
-		global $qterest_settings;
 
-		if ( ! $qterest_settings['contact'] ) {
+		if ( ! Settings::isEnabled(Settings::Contact) ) {
 			return array(
 				'success'   => false,
 				'error_msg' => get_translated_string( 'Contact is not enabled for this site', 'qterest' ),
@@ -238,9 +236,8 @@ class REST_Controller extends \WP_REST_Controller {
 	}
 
 	public function handle_mailchimp_add_subscriber( \WP_REST_Request $request ) {
-		global $qterest_settings;
 
-		if ( ! $qterest_settings['mailchimp'] ) {
+		if ( ! Settings::isEnabled(Settings::MailChimp) ) {
 			return array(
 				'success'   => false,
 				'error_msg' => get_translated_string( 'Mailchimp is not enabled for this site', 'qterest' ),
