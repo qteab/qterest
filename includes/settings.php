@@ -14,72 +14,76 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 class Settings {
 
-    const MailChimp = 'mailchimp';
-    const Search =  'search';
-    const Contact = 'contact';
+	const MailChimp = 'mailchimp';
+	const Search    = 'search';
+	const Contact   = 'contact';
 
-    /**
-     * Available settings
-     */
-    const Settings = [
-        self::Search,
-        self::Contact,
-        self::MailChimp,
-    ];
+	/**
+	 * Available settings
+	 */
+	const Settings = array(
+		self::Search,
+		self::Contact,
+		self::MailChimp,
+	);
 
-    /**
-     * @var array
-     */
-    private static $defaults = [
-        self::Search => false,
-        self::Contact => true,
-        self::MailChimp => false,
-    ];
+	/**
+	 * @var array
+	 */
+	private static $defaults = array(
+		self::Search    => false,
+		self::Contact   => true,
+		self::MailChimp => false,
+	);
 
-    static private function verifySettings($settings): bool {
-        if (!$settings) {
-            return false;
-        }
+	/**
+	 * @param $settings
+	 * @return bool
+	 */
+	private static function verifySettings( $settings ): bool {
+		if ( ! $settings ) {
+			return false;
+		}
 
-        foreach(self::Settings as $setting) {
-            if (!key_exists($setting, $settings)) {
-                return false;
-            }
-        }
+		foreach ( self::Settings as $setting ) {
+			if ( ! key_exists( $setting, $settings ) ) {
+				return false;
+			}
+		}
 
-        return true;
-    }
+		return true;
+	}
 
-    /**
-     * @return array
-     * @throws Exception
-     */
-    static public function getSettings(): array {
+	/**
+	 * @return array
+	 * @throws Exception
+	 */
+	public static function getSettings(): array {
 
-        global $qterest_settings;
+		global $qterest_settings;
 
-        if (!$qterest_settings) {
-            $qterest_settings = apply_filters('qterest_settings', self::$defaults);
-        }
+		if ( ! $qterest_settings ) {
+			$qterest_settings = apply_filters( 'qterest_settings', self::$defaults );
+		}
 
-        if (!self::verifySettings($qterest_settings)) {
-            throw new Exception("Missing settings or invalid format!");
-        }
+		if ( ! self::verifySettings( $qterest_settings ) ) {
+			throw new Exception( 'Missing settings or invalid format!' );
+		}
 
-        return $qterest_settings;
-    }
+		return $qterest_settings;
+	}
 
-    /**
-     * @param string $setting
-     * @return mixed
-     * @throws Exception
-     */
-    static public function isEnabled(string $setting): bool {
+	/**
+	 * @param string $setting
+	 * @return mixed
+	 * @throws Exception
+	 */
+	public static function isEnabled( string $setting ): bool {
 
-        if (!in_array($setting, self::Settings)) {
-            throw new Exception("Can't find setting {$setting}");
-        }
+		if ( ! in_array( $setting, self::Settings ) ) {
+			throw new Exception( "Can't find setting {$setting}" );
+		}
 
-        return self::getSettings()[$setting];
-    }
+		return self::getSettings()[ $setting ];
+	}
 }

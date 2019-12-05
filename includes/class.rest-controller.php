@@ -32,7 +32,7 @@ class REST_Controller extends \WP_REST_Controller {
 
 		$namespace = $this->qterest_namespace . $this->qterest_version;
 
-		if ( Settings::isEnabled(Settings::Search) ) {
+		if ( Settings::isEnabled( Settings::Search ) ) {
 			$base = 'search';
 			register_rest_route(
 				$namespace,
@@ -46,7 +46,7 @@ class REST_Controller extends \WP_REST_Controller {
 			);
 		}
 
-		if ( Settings::isEnabled(Settings::Contact) ) {
+		if ( Settings::isEnabled( Settings::Contact ) ) {
 			$base = 'contact';
 			register_rest_route(
 				$namespace,
@@ -60,7 +60,7 @@ class REST_Controller extends \WP_REST_Controller {
 			);
 		}
 
-		if ( Settings::isEnabled(Settings::MailChimp) ) {
+		if ( Settings::isEnabled( Settings::MailChimp ) ) {
 			$base = 'mailchimp/add-subscriber';
 			register_rest_route(
 				$namespace,
@@ -82,7 +82,7 @@ class REST_Controller extends \WP_REST_Controller {
 
 	public function handle_search( \WP_REST_Request $request ) {
 
-		if ( ! Settings::isEnabled(Settings::Search) ) {
+		if ( ! Settings::isEnabled( Settings::Search ) ) {
 			return array(
 				'success'   => false,
 				'error_msg' => get_translated_string( 'Search is not enabled for this site', 'qterest' ),
@@ -134,7 +134,7 @@ class REST_Controller extends \WP_REST_Controller {
 
 	public function handle_contact( \WP_REST_Request $request ) {
 
-		if ( ! Settings::isEnabled(Settings::Contact) ) {
+		if ( ! Settings::isEnabled( Settings::Contact ) ) {
 			return array(
 				'success'   => false,
 				'error_msg' => get_translated_string( 'Contact is not enabled for this site', 'qterest' ),
@@ -237,7 +237,7 @@ class REST_Controller extends \WP_REST_Controller {
 
 	public function handle_mailchimp_add_subscriber( \WP_REST_Request $request ) {
 
-		if ( ! Settings::isEnabled(Settings::MailChimp) ) {
+		if ( ! Settings::isEnabled( Settings::MailChimp ) ) {
 			return array(
 				'success'   => false,
 				'error_msg' => get_translated_string( 'Mailchimp is not enabled for this site', 'qterest' ),

@@ -13,7 +13,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 
-if ( Settings::isEnabled(Settings::Contact)) {
+if ( Settings::isEnabled( Settings::Contact ) ) {
 
 	// Register Custom Post Type
 	function contact_post_type() {

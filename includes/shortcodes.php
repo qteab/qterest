@@ -14,7 +14,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 function handle_qterest_form_shortcode( $atts, $content ) {
 
-	if ( ! Settings::isEnabled(Settings::Contact) ) {
+	if ( ! Settings::isEnabled( Settings::Contact ) ) {
 		if ( current_user_can( 'manage_options' ) ) {
 			return '<p class="qterest-error">' . __( 'Contact is disabled on this site!', 'qterest' ) . '</p>';
 		}
@@ -109,12 +109,12 @@ add_shortcode( 'qterest-form', __NAMESPACE__ . '\\handle_qterest_form_shortcode'
 
 function handle_qterest_mailchimp_form_shortcode( $atts, $content ) {
 
-    if ( ! Settings::isEnabled(Settings::MailChimp) ) {
-        if ( current_user_can( 'manage_options' ) ) {
-            return '<p class="qterest-error">' . __( 'MailChimp is disabled on this site!', 'qterest' ) . '</p>';
-        }
-        return;
-    }
+	if ( ! Settings::isEnabled( Settings::MailChimp ) ) {
+		if ( current_user_can( 'manage_options' ) ) {
+			return '<p class="qterest-error">' . __( 'MailChimp is disabled on this site!', 'qterest' ) . '</p>';
+		}
+		return;
+	}
 
 	$input_label  = $atts['input_label'] ?? __( 'Email', 'qterest' );
 	$submit_label = $atts['submit_label'] ?? __( 'Subscribe', 'qterest' );

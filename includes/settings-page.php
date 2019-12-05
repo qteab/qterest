@@ -15,7 +15,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * Register settings page if MailChimp is activated for this site
  */
-if ( Settings::isEnabled(Settings::Contact) || Settings::isEnabled(Settings::MailChimp) ) {
+if ( Settings::isEnabled( Settings::Contact ) || Settings::isEnabled( Settings::MailChimp ) ) {
 	function settings_init() {
 		/**
 		 * Register a new setting for qterest
@@ -106,14 +106,14 @@ if ( Settings::isEnabled(Settings::Contact) || Settings::isEnabled(Settings::Mai
 	/**
 	 * Register mailchimp settings
 	 */
-	if ( Settings::isEnabled(Settings::MailChimp) ) {
+	if ( Settings::isEnabled( Settings::MailChimp ) ) {
 		add_action( 'admin_init', __NAMESPACE__ . '\\settings_mailchimp' );
 	}
 
 	/**
 	 * Register contact settings
 	 */
-	if ( Settings::isEnabled(Settings::Contact) ) {
+	if ( Settings::isEnabled( Settings::Contact ) ) {
 		add_action( 'admin_init', __NAMESPACE__ . '\\settings_contact' );
 	}
 
