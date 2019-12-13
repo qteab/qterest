@@ -193,6 +193,19 @@ function theme_format_bulk_keys($key) {
 add_filter('qterest_format_bulk_keys', 'theme_format_bulk_keys');
 ```
 
+#### Fields
+You can change the HTML of the fields with this filter. The filter name looks like this `qterest_contact_field_${field_type}_html`
+
+Example of custom checkbox field
+```php
+function theme_custom_checkbox_field_html($field, $args) {
+    $newField = "<label for=\"$args[id]\">$args[label]</label>";
+    $newField = "<input id=\"$args[id]\" type=\"$args[type]\" name=\"$args[name]\" value=\"$args[value]\"";
+	return $newField;
+}
+add_filter('qterest_contact_field_text_html', 'theme_custom_checkbox_field_html', 2, 10);
+```
+
 ## MailChimp
 MailChimp is very esay to use with this plugin. All you have to do is to add a API key in the settings page and select the list you want the users to be added to.
 
