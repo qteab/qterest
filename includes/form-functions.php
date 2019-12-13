@@ -112,6 +112,10 @@ function render_field( $args, $echo = false ) {
 			$field .= "<label for=\"$for\" class=\"qterest-$args[type] $args[class]\"><input id=\"$id\" class=\"$toggles $required\" type=\"$args[type]\" name=\"$args[name]\" value=\"$args[value]\"$required />$args[label]</label>";
 
 	}
+	/**
+	 * This filter can be used to overwrite the default HTML for a specific field type.
+	 */
+	$field = apply_filters( "qterest_contact_field_{$args['type']}_html", $field, $args );
 
 	if ( $echo ) {
 		echo $field;

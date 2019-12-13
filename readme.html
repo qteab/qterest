@@ -178,6 +178,16 @@ add_filter(&#39;qterest_format_key_has_dog&#39;, &#39;theme_format_key_has_dog&#
 }
 add_filter(&#39;qterest_format_bulk_keys&#39;, &#39;theme_format_bulk_keys&#39;);
 </code></pre>
+<h4 id="fields">Fields</h4>
+<p>You can change the HTML of the fields with this filter. The filter name looks like this <code>qterest_contact_field_${field_type}_html</code></p>
+<p>Example of custom checkbox field</p>
+<pre><code class="lang-php">function theme_custom_checkbox_field_html($field, $args) {
+    $newField = &quot;&lt;label for=\&quot;$args[id]\&quot;&gt;$args[label]&lt;/label&gt;&quot;;
+    $newField = &quot;&lt;input id=\&quot;$args[id]\&quot; type=\&quot;$args[type]\&quot; name=\&quot;$args[name]\&quot; value=\&quot;$args[value]\&quot;&quot;;
+    return $newField;
+}
+add_filter(&#39;qterest_contact_field_text_html&#39;, &#39;theme_custom_checkbox_field_html&#39;, 2, 10);
+</code></pre>
 <h2 id="mailchimp">MailChimp</h2>
 <p>MailChimp is very esay to use with this plugin. All you have to do is to add a API key in the settings page and select the list you want the users to be added to.</p>
 <h3 id="subscribe-form">Subscribe form</h3>
