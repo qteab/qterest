@@ -3,114 +3,117 @@
 
 namespace QTEREST\Export;
 
-
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 use wpdb;
 
-class Exporter
-{
-    /**
-     * @var Spreadsheet
-     */
-    protected $spreadsheet;
+class Exporter {
+
+	/**
+	 * @var Spreadsheet
+	 */
+	protected $spreadsheet;
 
 
 
-    public function __construct()
-    {
-        $this->spreadsheet = new Spreadsheet();
-    }
+	public function __construct() {
+		$this->spreadsheet = new Spreadsheet();
+	}
 
-    public function export() {
-        $formResponses = $this->getFormResponses();
-        $columns = $this->getColumnsFromResponses($formResponses);
+	public function export() {
+		$formResponses = $this->getFormResponses();
+		$columns       = $this->getColumnsFromResponses( $formResponses );
 
-        $data = $this->prepareDataForSpreadSheet($formResponses, $columns);
+		$data = $this->prepareDataForSpreadSheet( $formResponses, $columns );
 
-        $sheet = $this->spreadsheet->getActiveSheet();
+		$sheet = $this->spreadsheet->getActiveSheet();
 
-        $sheet->fromArray($data);
+		$sheet->fromArray( $data );
 
-        $filename = "qterest-export-" . date('Y-m-d') . ".xlsx";
+		$filename = 'qterest-export-' . date( 'Y-m-d' ) . '.xlsx';
 
-        $this->setHeaders($filename);
+		$this->setHeaders( $filename );
 
-        $writer = new Xlsx($this->spreadsheet);
-        $writer->save('php://output');
+		$writer = new Xlsx( $this->spreadsheet );
+		$writer->save( 'php://output' );
 
-        die();
-    }
+		die();
+	}
 
-    /**
-     * @return array
-     */
-    private function getFormResponses(): array {
-        /** @var $wpdb wpdb */
-        global $wpdb;
+	/**
+	 * @return array
+	 */
+	private function getFormResponses(): array {
+		/** @var $wpdb wpdb */
+		global $wpdb;
 
-        $results = $wpdb->get_results("SELECT postmeta.meta_value AS response, posts.post_date AS date
+		$results = $wpdb->get_results(
+			"SELECT postmeta.meta_value AS response, posts.post_date AS date
                             FROM {$wpdb->postmeta} postmeta
                             INNER JOIN {$wpdb->posts} posts
                                 ON posts.id = postmeta.post_id
                             WHERE posts.post_type = 'contact_requests'
-                            AND postmeta.meta_key = 'request_content'");
+                            AND postmeta.meta_key = 'request_content'"
+		);
 
-        $processedResponses = [];
-        foreach($results as $result) {
-            $responseData = unserialize(maybe_unserialize($result->response));
-            $processedResponses[] = array_merge([
-                'date' => $result->date,
-            ], $responseData);
-        }
+		$processedResponses = array();
+		foreach ( $results as $result ) {
+			$responseData         = unserialize( maybe_unserialize( $result->response ) );
+			$processedResponses[] = array_merge(
+				array(
+					'date' => $result->date,
+				),
+				$responseData
+			);
+		}
 
-        return $processedResponses;
-    }
+		return $processedResponses;
+	}
 
-    /**
-     * @param array $responses
-     * @return array
-     */
-    private function getColumnsFromResponses(array $responses): array {
-        $columns = [];
+	/**
+	 * @param array $responses
+	 * @return array
+	 */
+	private function getColumnsFromResponses( array $responses ): array {
+		$columns = array();
 
-        foreach ($responses as $response) {
-            foreach ($response as $column => $value) {
-                if (!isset($columns[$column])) {
-                    $columns[$column] = count($columns);
-                }
-            }
-        }
+		foreach ( $responses as $response ) {
+			foreach ( $response as $column => $value ) {
+				if ( ! isset( $columns[ $column ] ) ) {
+					$columns[ $column ] = count( $columns );
+				}
+			}
+		}
 
-        return array_flip($columns);
-    }
+		return array_flip( $columns );
+	}
 
-    /**
-     * @param array $responses
-     * @param array $columns
-     * @return array
-     */
-    private function prepareDataForSpreadSheet(array $responses, array $columns): array {
-        $data = [$columns];
+	/**
+	 * @param array $responses
+	 * @param array $columns
+	 * @return array
+	 */
+	private function prepareDataForSpreadSheet( array $responses, array $columns ): array {
+		$data = array( $columns );
 
-        foreach($responses as $response) {
-            $row = [];
-            foreach($columns as $column) {
-                $row[] = $response[$column] ?? "";
-            }
-            $data[] = $row;
-        }
+		foreach ( $responses as $response ) {
+			$row = array();
+			foreach ( $columns as $column ) {
+				$row[] = $response[ $column ] ?? '';
+			}
+			$data[] = $row;
+		}
 
-        return $data;
-    }
+		return $data;
+	}
 
-    private function setHeaders($filename) {
-        header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
-        header('Content-Disposition: attachment;filename="' . $filename .'"');
-        header('Cache-Control: max-age=0');
-        header('Cache-Control: max-age=1');
-        header('Cache-Control: cache, must-revalidate');
-        header('Pragma: public');
-    }
+	private function setHeaders( $filename ) {
+		header( 'Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' );
+		header( 'Content-Disposition: attachment;filename="' . $filename . '"' );
+		header( 'Cache-Control: max-age=0' );
+		header( 'Cache-Control: max-age=1' );
+		header( 'Cache-Control: cache, must-revalidate' );
+		header( 'Pragma: public' );
+	}
 
 }
