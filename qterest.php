@@ -21,6 +21,8 @@ require_once QTEREST_PLUGIN_PATH . 'includes/load.php';
 $qterest_controller = new QTEREST\REST_Controller\REST_Controller();
 $qterest_controller->hook_rest_server();
 
+new \QTEREST\Admin\ExportPage();
+
 // Setting up update
 $qterestUpdateChecker = Puc_v4p8_Factory::buildUpdateChecker(
 	'https://github.com/qteab/qterest/',
