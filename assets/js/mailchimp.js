@@ -29,6 +29,7 @@ jQuery(document).ready(function ($) {
                     $(errorMessages).addClass('show');
                 }
                 $(form).removeClass('loading');
+                $(window).scrollTop($(form).offset().top - 30);
             })
 
     })
