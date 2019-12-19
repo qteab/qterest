@@ -30,6 +30,19 @@ msgstr ""
 msgid "https://getqte.se/"
 msgstr ""
 
+#: assets/pages/export-page.php:10
+msgid "Press the button below to export all contact requests"
+msgstr "Klicka på knappen nedan för att exportera all kontaktförfrågningar"
+
+#: assets/pages/export-page:12
+#: classes/Admin/ExportPage.php:19
+msgid "Export"
+msgstr "Exportera"
+
+#: classes/Admin/ExportPage.php:18
+msgid "Export contact requests"
+msgstr "Exportera kontaktförfrågningar"
+
 #: includes/class.rest-controller.php:76
 msgid "Search is not enabled for this site"
 msgstr "Sök är inte aktiverat på denna webbplatsen"
