@@ -18,8 +18,8 @@ define( 'QTEREST_PLUGIN_PATH', plugin_dir_path( __FILE__ ) );
 require_once QTEREST_PLUGIN_PATH . 'vendor/autoload.php';
 require_once QTEREST_PLUGIN_PATH . 'includes/load.php';
 
-$qterest_controller = new QTEREST\REST_Controller\REST_Controller();
-$qterest_controller->hook_rest_server();
+$restController = new \QTEREST\Controllers\RestController();
+$restController->hook_rest_server();
 
 new \QTEREST\Admin\ExportPage();
 

@@ -42,54 +42,54 @@ msgstr ""
 msgid "Export contact requests"
 msgstr ""
 
-#: includes/class.rest-controller.php:76
+#: classes/Controllers/RestController.php:76
 msgid "Search is not enabled for this site"
 msgstr ""
 
-#: includes/class.rest-controller.php:125
+#: classes/Controllers/RestController.php:125
 msgid "Contact is not enabled for this site"
 msgstr ""
 
-#: includes/class.rest-controller.php:129
+#: classes/Controllers/RestController.php:129
 msgid "Name cannot be empty!"
 msgstr ""
 
-#: includes/class.rest-controller.php:130
-#: includes/class.rest-controller.php:234
+#: classes/Controllers/RestController.php:130
+#: classes/Controllers/RestController.php:234
 msgid "Email cannot be empty!"
 msgstr ""
 
-#: includes/class.rest-controller.php:131
-#: includes/class.rest-controller.php:235
+#: classes/Controllers/RestController.php:131
+#: classes/Controllers/RestController.php:235
 msgid "Email is not valid!"
 msgstr ""
 
-#: includes/class.rest-controller.php:132
-#: includes/class.rest-controller.php:236
+#: classes/Controllers/RestController.php:132
+#: classes/Controllers/RestController.php:236
 msgid "Something went wrong. Please try again later!"
 msgstr ""
 
-#: includes/class.rest-controller.php:133
+#: classes/Controllers/RestController.php:133
 msgid "Thank you! We will contact you as fast as we can!"
 msgstr ""
 
-#: includes/class.rest-controller.php:134
+#: classes/Controllers/RestController.php:134
 msgid "New contact request!"
 msgstr ""
 
-#: includes/class.rest-controller.php:135
+#: classes/Controllers/RestController.php:135
 msgid "<p>New contact request is available. Click the link below to acces it</p><br>{LINK}"
 msgstr ""
 
-#: includes/class.rest-controller.php:229
+#: classes/Controllers/RestController.php:229
 msgid "Mailchimp is not enabled for this site"
 msgstr ""
 
-#: includes/class.rest-controller.php:233
+#: classes/Controllers/RestController.php:233
 msgid "Invalid MailChimp API key!"
 msgstr ""
 
-#: includes/class.rest-controller.php:237
+#: classes/Controllers/RestController.php:237
 msgid "Thank you for subscribing to our newsletter!"
 msgstr ""
 

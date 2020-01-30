@@ -20,5 +20,3 @@ require_once QTEREST_PLUGIN_PATH . 'includes/form-functions.php';
 require_once QTEREST_PLUGIN_PATH . 'includes/global-functions.php';
 
 require_once QTEREST_PLUGIN_PATH . 'includes/shortcodes.php';
-
-require_once QTEREST_PLUGIN_PATH . 'includes/class.rest-controller.php';

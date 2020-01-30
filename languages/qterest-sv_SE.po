@@ -43,54 +43,54 @@ msgstr "Exportera"
 msgid "Export contact requests"
 msgstr "Exportera kontaktförfrågningar"
 
-#: includes/class.rest-controller.php:76
+#: classes/Controllers/RestController.php:76
 msgid "Search is not enabled for this site"
 msgstr "Sök är inte aktiverat på denna webbplatsen"
 
-#: includes/class.rest-controller.php:125
+#: classes/Controllers/RestController.php:125
 msgid "Contact is not enabled for this site"
 msgstr "Kontakt är inte aktiverat på denna webbplatsen"
 
-#: includes/class.rest-controller.php:129
+#: classes/Controllers/RestController.php:129
 msgid "Name cannot be empty!"
 msgstr "Namn får inte vara tomt!"
 
-#: includes/class.rest-controller.php:130
-#: includes/class.rest-controller.php:234
+#: classes/Controllers/RestController.php:130
+#: classes/Controllers/RestController.php:234
 msgid "Email cannot be empty!"
 msgstr "E-post får inte vara tomt!"
 
-#: includes/class.rest-controller.php:131
-#: includes/class.rest-controller.php:235
+#: classes/Controllers/RestController.php:131
+#: classes/Controllers/RestController.php:235
 msgid "Email is not valid!"
 msgstr "E-post är ogiltig!"
 
-#: includes/class.rest-controller.php:132
-#: includes/class.rest-controller.php:236
+#: classes/Controllers/RestController.php:132
+#: classes/Controllers/RestController.php:236
 msgid "Something went wrong. Please try again later!"
 msgstr "Något gick fel. Försök igen!"
 
-#: includes/class.rest-controller.php:133
+#: classes/Controllers/RestController.php:133
 msgid "Thank you! We will contact you as fast as we can!"
 msgstr "Tack! Vi kommer att svara dig så fort vi kan!"
 
-#: includes/class.rest-controller.php:134
+#: classes/Controllers/RestController.php:134
 msgid "New contact request!"
 msgstr "Ny kontaktförfrågan!"
 
-#: includes/class.rest-controller.php:135
+#: classes/Controllers/RestController.php:135
 msgid "<p>New contact request is available. Click the link below to acces it</p><br>{LINK}"
 msgstr "<p>Ny kontaktförfågan finns tillgänglig. Klicka på länken nedan för att komma till den</p><br>{LINK}"
 
-#: includes/class.rest-controller.php:229
+#: classes/Controllers/RestController.php:229
 msgid "Mailchimp is not enabled for this site"
 msgstr "MailChimp är inte aktiverat på denna webbplatsen"
 
-#: includes/class.rest-controller.php:233
+#: classes/Controllers/RestController.php:233
 msgid "Invalid MailChimp API key!"
 msgstr "Ogiltig API nyckel till MailChimp!"
 
-#: includes/class.rest-controller.php:237
+#: classes/Controllers/RestController.php:237
 msgid "Thank you for subscribing to our newsletter!"
 msgstr "Tack för att du har prenumererat på vårt nyhetsbrev!"
 
