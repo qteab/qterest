@@ -2,7 +2,7 @@
 /*
  * Plugin Name: QTE Rest
  * Description: QTE Rest adds new endpoints for the WordPress API
- * Version: 1.2.6
+ * Version: 1.3.0
  * Author: QTE Development AB
  * Author URI: https://getqte.se/
  * Domain Path: /languages
