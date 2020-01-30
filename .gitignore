@@ -1,4 +1,6 @@
-prepros.cfg
-prepros-6.config
 .idea
 vendor
+build
+
+prepros.cfg
+prepros-6.config
