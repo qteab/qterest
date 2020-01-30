@@ -4,3 +4,4 @@ build
 
 prepros.cfg
 prepros-6.config
+.phpunit.result.cache
