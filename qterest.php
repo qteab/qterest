@@ -29,3 +29,4 @@ $qterestUpdateChecker = Puc_v4p8_Factory::buildUpdateChecker(
 	__FILE__,
 	'qterest'
 );
+$qterestUpdateChecker->getVcsApi()->enableReleaseAssets();

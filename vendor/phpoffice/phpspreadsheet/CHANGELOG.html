@@ -1,0 +1,443 @@
+<html>
+      <head>
+        <meta charset="UTF-8">
+        <title>CHANGELOG.md</title>
+      </head>
+      <body>
+        <h1 id="changelog">Changelog</h1>
+<p>All notable changes to this project will be documented in this file.</p>
+<p>The format is based on <a href="https://keepachangelog.com">Keep a Changelog</a>
+and this project adheres to <a href="https://semver.org">Semantic Versioning</a>.</p>
+<h2 id="-1-10-1-2019-12-02">[1.10.1] - 2019-12-02</h2>
+<h3 id="changed">Changed</h3>
+<ul>
+<li>PHP 7.4 compatibility</li>
+</ul>
+<h3 id="fixed">Fixed</h3>
+<ul>
+<li>FLOOR() function accept negative number and negative significance <a href="https://github.com/PHPOffice/PhpSpreadsheet/pull/1245">#1245</a></li>
+<li>Correct column style even when using rowspan <a href="https://github.com/PHPOffice/PhpSpreadsheet/pull/1249">#1249</a></li>
+<li>Do not confuse defined names and cell refs <a href="https://github.com/PHPOffice/PhpSpreadsheet/pull/1263">#1263</a></li>
+<li>XLSX reader/writer keep decimal for floats with a zero decimal part <a href="https://github.com/PHPOffice/PhpSpreadsheet/pull/1262">#1262</a></li>
+<li>ODS writer prevent invalid numeric value if locale decimal separator is comma <a href="https://github.com/PHPOffice/PhpSpreadsheet/pull/1268">#1268</a></li>
+<li>Xlsx writer actually writes plotVisOnly and dispBlanksAs from chart properties <a href="https://github.com/PHPOffice/PhpSpreadsheet/pull/1266">#1266</a></li>
+</ul>
+<h2 id="-1-10-0-2019-11-18">[1.10.0] - 2019-11-18</h2>
+<h3 id="changed">Changed</h3>
+<ul>
+<li>Change license from LGPL 2.1 to MIT <a href="https://github.com/PHPOffice/PhpSpreadsheet/issues/140">#140</a></li>
+</ul>
+<h3 id="added">Added</h3>
+<ul>
+<li>Implementation of IFNA() logical function</li>
+<li>Support &quot;showZeros&quot; worksheet option to change how Excel shows and handles &quot;null&quot; values returned from a calculation</li>
+<li>Allow HTML Reader to accept HTML as a string into an existing spreadsheet <a href="https://github.com/PHPOffice/PhpSpreadsheet/pull/1212">#1212</a></li>
+</ul>
+<h3 id="fixed">Fixed</h3>
+<ul>
+<li>IF implementation properly handles the value <code>#N/A</code> <a href="https://github.com/PHPOffice/PhpSpreadsheet/pull/1165">#1165</a></li>
+<li>Formula Parser: Wrong line count for stuff like &quot;MyOtherSheet!A:D&quot; <a href="https://github.com/PHPOffice/PhpSpreadsheet/issues/1215">#1215</a></li>
+<li>Call garbage collector after removing a column to prevent stale cached values</li>
+<li>Trying to remove a column that doesn&#39;t exist deletes the latest column</li>
+<li>Keep big integer as integer instead of lossely casting to float <a href="https://github.com/PHPOffice/PhpSpreadsheet/pull/874">#874</a></li>
+<li>Fix branch pruning handling of non boolean conditions <a href="https://github.com/PHPOffice/PhpSpreadsheet/pull/1167">#1167</a></li>
+<li>Fix ODS Reader when no DC namespace are defined <a href="https://github.com/PHPOffice/PhpSpreadsheet/pull/1182">#1182</a></li>
+<li>Fixed Functions-&gt;ifCondition for allowing &lt;&gt; and empty condition <a href="https://github.com/PHPOffice/PhpSpreadsheet/pull/1206">#1206</a></li>
+<li>Validate XIRR inputs and return correct error values <a href="https://github.com/PHPOffice/PhpSpreadsheet/issues/1120">#1120</a></li>
+<li>Allow to read xlsx files with exotic workbook names like &quot;workbook2.xml&quot; <a href="https://github.com/PHPOffice/PhpSpreadsheet/pull/1183">#1183</a></li>
+</ul>
+<h2 id="-1-9-0-2019-08-17">[1.9.0] - 2019-08-17</h2>
+<h3 id="changed">Changed</h3>
+<ul>
+<li>Drop support for PHP 5.6 and 7.0, according to <a href="https://phpspreadsheet.readthedocs.io/en/latest/#php-version-support">https://phpspreadsheet.readthedocs.io/en/latest/#php-version-support</a></li>
+</ul>
+<h3 id="added">Added</h3>
+<ul>
+<li>When &lt;br&gt; appears in a table cell, set the cell to wrap <a href="https://github.com/PHPOffice/PhpSpreadsheet/issues/1071">#1071</a> and <a href="https://github.com/PHPOffice/PhpSpreadsheet/pull/1070">#1070</a></li>
+<li>Add MAXIFS, MINIFS, COUNTIFS and Remove MINIF, MAXIF <a href="https://github.com/PHPOffice/PhpSpreadsheet/issues/1056">#1056</a></li>
+<li>HLookup needs an ordered list even if range_lookup is set to false <a href="https://github.com/PHPOffice/PhpSpreadsheet/issues/1055">#1055</a> and <a href="https://github.com/PHPOffice/PhpSpreadsheet/pull/1076">#1076</a></li>
+<li>Improve performance of IF function calls via ranch pruning to avoid resolution of every branches <a href="https://github.com/PHPOffice/PhpSpreadsheet/pull/844">#844</a></li>
+<li>MATCH function supports <code>*?~</code> Excel functionality, when match_type=0 <a href="https://github.com/PHPOffice/PhpSpreadsheet/issues/1116">#1116</a></li>
+<li>Allow HTML Reader to accept HTML as a string <a href="https://github.com/PHPOffice/PhpSpreadsheet/pull/1136">#1136</a></li>
+</ul>
+<h3 id="fixed">Fixed</h3>
+<ul>
+<li>Fix to AVERAGEIF() function when called with a third argument</li>
+<li>Eliminate duplicate fill none style entries <a href="https://github.com/PHPOffice/PhpSpreadsheet/issues/1066">#1066</a></li>
+<li>Fix number format masks containing literal (non-decimal point) dots <a href="https://github.com/PHPOffice/PhpSpreadsheet/issues/1079">#1079</a></li>
+<li>Fix number format masks containing named colours that were being misinterpreted as date formats; and add support for masks that fully replace the value with a full text string <a href="https://github.com/PHPOffice/PhpSpreadsheet/issues/1009">#1009</a></li>
+<li>Stricter-typed comparison testing in COUNTIF() and COUNTIFS() evaluation <a href="https://github.com/PHPOffice/PhpSpreadsheet/issues/1046">#1046</a></li>
+<li>COUPNUM should not return zero when settlement is in the last period <a href="https://github.com/PHPOffice/PhpSpreadsheet/issues/1020">#1020</a> and <a href="https://github.com/PHPOffice/PhpSpreadsheet/pull/1021">#1021</a></li>
+<li>Fix handling of named ranges referencing sheets with spaces or &quot;!&quot; in their title</li>
+<li>Cover <code>getSheetByName()</code> with tests for name with quote and spaces <a href="https://github.com/PHPOffice/PhpSpreadsheet/issues/739">#739</a></li>
+<li>Best effort to support invalid colspan values in HTML reader - <a href="https://github.com/PHPOffice/PhpSpreadsheet/pull/878">#878</a></li>
+<li>Fixes incorrect rows deletion <a href="https://github.com/PHPOffice/PhpSpreadsheet/issues/868">#868</a></li>
+<li>MATCH function fix (value search by type, stop search when match_type=-1 and unordered element encountered) <a href="https://github.com/PHPOffice/PhpSpreadsheet/issues/1116">#1116</a></li>
+<li>Fix <code>getCalculatedValue()</code> error with more than two INDIRECT <a href="https://github.com/PHPOffice/PhpSpreadsheet/pull/1115">#1115</a></li>
+<li>Writer\Html did not hide columns <a href="https://github.com/PHPOffice/PhpSpreadsheet/pull/985">#985</a></li>
+</ul>
+<h2 id="-1-8-2-2019-07-08">[1.8.2] - 2019-07-08</h2>
+<h3 id="fixed">Fixed</h3>
+<ul>
+<li>Uncaught error when opening ods file and properties aren&#39;t defined <a href="https://github.com/PHPOffice/PhpSpreadsheet/issues/1047">#1047</a></li>
+<li>Xlsx Reader Cell datavalidations bug <a href="https://github.com/PHPOffice/PhpSpreadsheet/pull/1052">#1052</a></li>
+</ul>
+<h2 id="-1-8-1-2019-07-02">[1.8.1] - 2019-07-02</h2>
+<h3 id="fixed">Fixed</h3>
+<ul>
+<li>Allow nullable theme for Xlsx Style Reader class <a href="https://github.com/PHPOffice/PhpSpreadsheet/issues/1043">#1043</a></li>
+</ul>
+<h2 id="-1-8-0-2019-07-01">[1.8.0] - 2019-07-01</h2>
+<h3 id="security-fix-cve-2019-12331-">Security Fix (CVE-2019-12331)</h3>
+<ul>
+<li>Detect double-encoded xml in the Security scanner, and reject as suspicious.</li>
+<li>This change also broadens the scope of the <code>libxml_disable_entity_loader</code> setting when reading XML-based formats, so that it is enabled while the xml is being parsed and not simply while it is loaded.
+On some versions of PHP, this can cause problems because it is not thread-safe, and can affect other PHP scripts running on the same server. This flag is set to true when instantiating a loader, and back to its original setting when the Reader is no longer in scope, or manually unset.</li>
+<li><p>Provide a check to identify whether libxml_disable_entity_loader is thread-safe or not.</p>
+<p><code>XmlScanner::threadSafeLibxmlDisableEntityLoaderAvailability()</code></p>
+</li>
+<li>Provide an option to disable the libxml_disable_entity_loader call through settings. This is not recommended as it reduces the security of the XML-based readers, and should only be used if you understand the consequences and have no other choice.</li>
+</ul>
+<h3 id="added">Added</h3>
+<ul>
+<li>Added support for the SWITCH function <a href="https://github.com/PHPOffice/PhpSpreadsheet/issues/963">#963</a> and <a href="https://github.com/PHPOffice/PhpSpreadsheet/pull/983">#983</a></li>
+<li>Add accounting number format style <a href="https://github.com/PHPOffice/PhpSpreadsheet/pull/974">#974</a></li>
+</ul>
+<h3 id="fixed">Fixed</h3>
+<ul>
+<li>Whitelist <code>tsv</code> extension when opening CSV files <a href="https://github.com/PHPOffice/PhpSpreadsheet/issues/429">#429</a></li>
+<li>Fix a SUMIF warning with some versions of PHP when having different length of arrays provided as input <a href="https://github.com/PHPOffice/PhpSpreadsheet/pull/873">#873</a></li>
+<li>Fix incorrectly handled backslash-escaped space characters in number format</li>
+</ul>
+<h2 id="-1-7-0-2019-05-26">[1.7.0] - 2019-05-26</h2>
+<ul>
+<li>Added support for inline styles in Html reader (borders, alignment, width, height)</li>
+<li>QuotedText cells no longer treated as formulae if the content begins with a <code>=</code></li>
+<li>Clean handling for DDE in formulae</li>
+</ul>
+<h3 id="fixed">Fixed</h3>
+<ul>
+<li>Fix handling for escaped enclosures and new lines in CSV Separator Inference</li>
+<li>Fix MATCH an error was appearing when comparing strings against 0 (always true)</li>
+<li>Fix wrong calculation of highest column with specified row <a href="https://github.com/PHPOffice/PhpSpreadsheet/issues/700">#700</a></li>
+<li>Fix VLOOKUP</li>
+<li>Fix return type hint</li>
+</ul>
+<h2 id="-1-6-0-2019-01-02">[1.6.0] - 2019-01-02</h2>
+<h3 id="added">Added</h3>
+<ul>
+<li>Refactored Matrix Functions to use external Matrix library</li>
+<li>Possibility to specify custom colors of values for pie and donut charts <a href="https://github.com/PHPOffice/PhpSpreadsheet/pull/768">#768</a></li>
+</ul>
+<h3 id="fixed">Fixed</h3>
+<ul>
+<li>Improve XLSX parsing speed if no readFilter is applied <a href="https://github.com/PHPOffice/PhpSpreadsheet/issues/772">#772</a></li>
+<li>Fix column names if read filter calls in XLSX reader skip columns <a href="https://github.com/PHPOffice/PhpSpreadsheet/pull/777">#777</a></li>
+<li>XLSX reader can now ignore blank cells, using the setReadEmptyCells(false) method. <a href="https://github.com/PHPOffice/PhpSpreadsheet/issues/810">#810</a></li>
+<li>Fix LOOKUP function which was breaking on edge cases <a href="https://github.com/PHPOffice/PhpSpreadsheet/issues/796">#796</a></li>
+<li>Fix VLOOKUP with exact matches <a href="https://github.com/PHPOffice/PhpSpreadsheet/pull/809">#809</a></li>
+<li>Support COUNTIFS multiple arguments <a href="https://github.com/PHPOffice/PhpSpreadsheet/pull/830">#830</a></li>
+<li>Change <code>libxml_disable_entity_loader()</code> as shortly as possible <a href="https://github.com/PHPOffice/PhpSpreadsheet/pull/819">#819</a></li>
+<li>Improved memory usage and performance when loading large spreadsheets <a href="https://github.com/PHPOffice/PhpSpreadsheet/pull/822">#822</a></li>
+<li>Improved performance when loading large spreadsheets <a href="https://github.com/PHPOffice/PhpSpreadsheet/pull/825">#825</a></li>
+<li>Improved performance when loading large spreadsheets <a href="https://github.com/PHPOffice/PhpSpreadsheet/pull/824">#824</a></li>
+<li>Fix color from CSS when reading from HTML <a href="https://github.com/PHPOffice/PhpSpreadsheet/pull/831">#831</a></li>
+<li>Fix infinite loop when reading invalid ODS files <a href="https://github.com/PHPOffice/PhpSpreadsheet/pull/832">#832</a></li>
+<li>Fix time format for duration is incorrect <a href="https://github.com/PHPOffice/PhpSpreadsheet/pull/666">#666</a></li>
+<li>Fix iconv unsupported <code>//IGNORE//TRANSLIT</code> on IBM i <a href="https://github.com/PHPOffice/PhpSpreadsheet/issues/791">#791</a></li>
+</ul>
+<h3 id="changed">Changed</h3>
+<ul>
+<li><code>master</code> is the new default branch, <code>develop</code> does not exist anymore</li>
+</ul>
+<h2 id="-1-5-2-2018-11-25">[1.5.2] - 2018-11-25</h2>
+<h3 id="security">Security</h3>
+<ul>
+<li>Improvements to the design of the XML Security Scanner <a href="https://github.com/PHPOffice/PhpSpreadsheet/issues/771">#771</a></li>
+</ul>
+<h2 id="-1-5-1-2018-11-20">[1.5.1] - 2018-11-20</h2>
+<h3 id="security">Security</h3>
+<ul>
+<li>Fix and improve XXE security scanning for XML-based and HTML Readers <a href="https://github.com/PHPOffice/PhpSpreadsheet/issues/771">#771</a></li>
+</ul>
+<h3 id="added">Added</h3>
+<ul>
+<li>Support page margin in mPDF <a href="https://github.com/PHPOffice/PhpSpreadsheet/issues/750">#750</a></li>
+</ul>
+<h3 id="fixed">Fixed</h3>
+<ul>
+<li>Support numeric condition in SUMIF, SUMIFS, AVERAGEIF, COUNTIF, MAXIF and MINIF <a href="https://github.com/PHPOffice/PhpSpreadsheet/issues/683">#683</a></li>
+<li>SUMIFS containing multiple conditions <a href="https://github.com/PHPOffice/PhpSpreadsheet/issues/704">#704</a></li>
+<li>Csv reader avoid notice when the file is empty <a href="https://github.com/PHPOffice/PhpSpreadsheet/pull/743">#743</a></li>
+<li>Fix print area parser for XLSX reader <a href="https://github.com/PHPOffice/PhpSpreadsheet/pull/734">#734</a></li>
+<li>Support overriding <code>DefaultValueBinder::dataTypeForValue()</code> without overriding <code>DefaultValueBinder::bindValue()</code> <a href="https://github.com/PHPOffice/PhpSpreadsheet/pull/735">#735</a></li>
+<li>Mpdf export can exceed pcre.backtrack_limit <a href="https://github.com/PHPOffice/PhpSpreadsheet/issues/637">#637</a></li>
+<li>Fix index overflow on data values array <a href="https://github.com/PHPOffice/PhpSpreadsheet/pull/748">#748</a></li>
+</ul>
+<h2 id="-1-5-0-2018-10-21">[1.5.0] - 2018-10-21</h2>
+<h3 id="added">Added</h3>
+<ul>
+<li>PHP 7.3 support</li>
+<li>Add the DAYS() function <a href="https://github.com/PHPOffice/PhpSpreadsheet/pull/594">#594</a></li>
+</ul>
+<h3 id="fixed">Fixed</h3>
+<ul>
+<li>Sheet title can contain exclamation mark <a href="https://github.com/PHPOffice/PhpSpreadsheet/issues/325">#325</a></li>
+<li>Xls file cause the exception during open by Xls reader <a href="https://github.com/PHPOffice/PhpSpreadsheet/issues/402">#402</a></li>
+<li>Skip non numeric value in SUMIF <a href="https://github.com/PHPOffice/PhpSpreadsheet/pull/618">#618</a></li>
+<li>OFFSET should allow omitted height and width <a href="https://github.com/PHPOffice/PhpSpreadsheet/issues/561">#561</a></li>
+<li>Correctly determine delimiter when CSV contains line breaks inside enclosures <a href="https://github.com/PHPOffice/PhpSpreadsheet/issues/716">#716</a></li>
+</ul>
+<h2 id="-1-4-1-2018-09-30">[1.4.1] - 2018-09-30</h2>
+<h3 id="fixed">Fixed</h3>
+<ul>
+<li>Remove locale from formatting string <a href="https://github.com/PHPOffice/PhpSpreadsheet/pull/644">#644</a></li>
+<li>Allow iterators to go out of bounds with prev <a href="https://github.com/PHPOffice/PhpSpreadsheet/issues/587">#587</a></li>
+<li>Fix warning when reading xlsx without styles <a href="https://github.com/PHPOffice/PhpSpreadsheet/pull/631">#631</a></li>
+<li>Fix broken sample links on windows due to $baseDir having backslash <a href="https://github.com/PHPOffice/PhpSpreadsheet/pull/653">#653</a></li>
+</ul>
+<h2 id="-1-4-0-2018-08-06">[1.4.0] - 2018-08-06</h2>
+<h3 id="added">Added</h3>
+<ul>
+<li>Add excel function EXACT(value1, value2) support <a href="https://github.com/PHPOffice/PhpSpreadsheet/pull/595">#595</a></li>
+<li>Support workbook view attributes for Xlsx format <a href="https://github.com/PHPOffice/PhpSpreadsheet/issues/523">#523</a></li>
+<li>Read and write hyperlink for drawing image <a href="https://github.com/PHPOffice/PhpSpreadsheet/pull/490">#490</a></li>
+<li>Added calculation engine support for the new bitwise functions that were added in MS Excel 2013<ul>
+<li>BITAND()          Returns a Bitwise &#39;And&#39; of two numbers</li>
+<li>BITOR()           Returns a Bitwise &#39;Or&#39; of two number</li>
+<li>BITXOR()          Returns a Bitwise &#39;Exclusive Or&#39; of two numbers</li>
+<li>BITLSHIFT()       Returns a number shifted left by a specified number of bits</li>
+<li>BITRSHIFT()       Returns a number shifted right by a specified number of bits</li>
+</ul>
+</li>
+<li>Added calculation engine support for other new functions that were added in MS Excel 2013 and MS Excel 2016<ul>
+<li>Text Functions<ul>
+<li>CONCAT()        Synonym for CONCATENATE()</li>
+<li>NUMBERVALUE()   Converts text to a number, in a locale-independent way</li>
+<li>UNICHAR()       Synonym for CHAR() in PHPSpreadsheet, which has always used UTF-8 internally</li>
+<li>UNIORD()        Synonym for ORD() in PHPSpreadsheet, which has always used UTF-8 internally</li>
+<li>TEXTJOIN()      Joins together two or more text strings, separated by a delimiter</li>
+</ul>
+</li>
+<li>Logical Functions<ul>
+<li>XOR()           Returns a logical Exclusive Or of all arguments</li>
+</ul>
+</li>
+<li>Date/Time Functions<ul>
+<li>ISOWEEKNUM()    Returns the ISO 8601 week number of the year for a given date</li>
+</ul>
+</li>
+<li>Lookup and Reference Functions<ul>
+<li>FORMULATEXT()   Returns a formula as a string</li>
+</ul>
+</li>
+<li>Financial Functions<ul>
+<li>PDURATION()     Calculates the number of periods required for an investment to reach a specified value</li>
+<li>RRI()           Calculates the interest rate required for an investment to grow to a specified future value</li>
+</ul>
+</li>
+<li>Engineering Functions<ul>
+<li>ERF.PRECISE()   Returns the error function integrated between 0 and a supplied limit</li>
+<li>ERFC.PRECISE()  Synonym for ERFC</li>
+</ul>
+</li>
+<li>Math and Trig Functions<ul>
+<li>SEC()           Returns the secant of an angle</li>
+<li>SECH()          Returns the hyperbolic secant of an angle</li>
+<li>CSC()           Returns the cosecant of an angle</li>
+<li>CSCH()          Returns the hyperbolic cosecant of an angle</li>
+<li>COT()           Returns the cotangent of an angle</li>
+<li>COTH()          Returns the hyperbolic cotangent of an angle</li>
+<li>ACOT()          Returns the cotangent of an angle</li>
+<li>ACOTH()         Returns the hyperbolic cotangent of an angle</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Refactored Complex Engineering Functions to use external complex number library</li>
+<li>Added calculation engine support for the new complex number functions that were added in MS Excel 2013<ul>
+<li>IMCOSH()        Returns the hyperbolic cosine of a complex number</li>
+<li>IMCOT()         Returns the cotangent of a complex number</li>
+<li>IMCSC()         Returns the cosecant of a complex number</li>
+<li>IMCSCH()        Returns the hyperbolic cosecant of a complex number</li>
+<li>IMSEC()         Returns the secant of a complex number</li>
+<li>IMSECH()        Returns the hyperbolic secant of a complex number</li>
+<li>IMSINH()        Returns the hyperbolic sine of a complex number</li>
+<li>IMTAN()         Returns the tangent of a complex number</li>
+</ul>
+</li>
+</ul>
+<h3 id="fixed">Fixed</h3>
+<ul>
+<li>Fix ISFORMULA() function to work with a cell reference to another worksheet</li>
+<li>Xlsx reader crashed when reading a file with workbook protection <a href="https://github.com/PHPOffice/PhpSpreadsheet/pull/553">#553</a></li>
+<li>Cell formats with escaped spaces were causing incorrect date formatting <a href="https://github.com/PHPOffice/PhpSpreadsheet/issues/557">#557</a></li>
+<li>Could not open CSV file containing HTML fragment <a href="https://github.com/PHPOffice/PhpSpreadsheet/issues/564">#564</a></li>
+<li>Exclude the vendor folder in migration <a href="https://github.com/PHPOffice/PhpSpreadsheet/issues/481">#481</a></li>
+<li>Chained operations on cell ranges involving borders operated on last cell only <a href="https://github.com/PHPOffice/PhpSpreadsheet/issues/428">#428</a></li>
+<li>Avoid memory exhaustion when cloning worksheet with a drawing <a href="https://github.com/PHPOffice/PhpSpreadsheet/issues/437">#437</a></li>
+<li>Migration tool keep variables containing $PHPExcel untouched <a href="https://github.com/PHPOffice/PhpSpreadsheet/issues/598">#598</a></li>
+<li>Rowspans/colspans were incorrect when adding worksheet using loadIntoExisting <a href="https://github.com/PHPOffice/PhpSpreadsheet/issues/619">#619</a></li>
+</ul>
+<h2 id="-1-3-1-2018-06-12">[1.3.1] - 2018-06-12</h2>
+<h3 id="fixed">Fixed</h3>
+<ul>
+<li>Ranges across Z and AA columns incorrectly threw an exception <a href="https://github.com/PHPOffice/PhpSpreadsheet/issues/545">#545</a></li>
+</ul>
+<h2 id="-1-3-0-2018-06-10">[1.3.0] - 2018-06-10</h2>
+<h3 id="added">Added</h3>
+<ul>
+<li>Support to read Xlsm templates with form elements, macros, printer settings, protected elements and back compatibility drawing, and save result without losing important elements of document <a href="https://github.com/PHPOffice/PhpSpreadsheet/issues/435">#435</a></li>
+<li>Expose sheet title maximum length as <code>Worksheet::SHEET_TITLE_MAXIMUM_LENGTH</code> <a href="https://github.com/PHPOffice/PhpSpreadsheet/issues/482">#482</a></li>
+<li>Allow escape character to be set in CSV reader <a href="https://github.com/PHPOffice/PhpSpreadsheet/issues/492">#492</a></li>
+</ul>
+<h3 id="fixed">Fixed</h3>
+<ul>
+<li>Subtotal 9 in a group that has other subtotals 9 exclude the totals of the other subtotals in the range <a href="https://github.com/PHPOffice/PhpSpreadsheet/issues/332">#332</a></li>
+<li><code>Helper\Html</code> support UTF-8 HTML input <a href="https://github.com/PHPOffice/PhpSpreadsheet/issues/444">#444</a></li>
+<li>Xlsx loaded an extra empty comment for each real comment <a href="https://github.com/PHPOffice/PhpSpreadsheet/issues/375">#375</a></li>
+<li>Xlsx reader do not read rows and columns filtered out in readFilter at all <a href="https://github.com/PHPOffice/PhpSpreadsheet/issues/370">#370</a></li>
+<li>Make newer Excel versions properly recalculate formulas on document open <a href="https://github.com/PHPOffice/PhpSpreadsheet/issues/456">#456</a></li>
+<li><code>Coordinate::extractAllCellReferencesInRange()</code> throws an exception for an invalid range <a href="https://github.com/PHPOffice/PhpSpreadsheet/issues/519">#519</a></li>
+<li>Fixed parsing of conditionals in COUNTIF functions <a href="https://github.com/PHPOffice/PhpSpreadsheet/issues/526">#526</a></li>
+<li>Corruption errors for saved Xlsx docs with frozen panes <a href="https://github.com/PHPOffice/PhpSpreadsheet/issues/532">#532</a></li>
+</ul>
+<h2 id="-1-2-1-2018-04-10">[1.2.1] - 2018-04-10</h2>
+<h3 id="fixed">Fixed</h3>
+<ul>
+<li>Plain text and richtext mixed in same cell can be read <a href="https://github.com/PHPOffice/PhpSpreadsheet/issues/442">#442</a></li>
+</ul>
+<h2 id="-1-2-0-2018-03-04">[1.2.0] - 2018-03-04</h2>
+<h3 id="added">Added</h3>
+<ul>
+<li>HTML writer creates a generator meta tag <a href="https://github.com/PHPOffice/PhpSpreadsheet/issues/312">#312</a></li>
+<li>Support invalid zoom value in XLSX format <a href="https://github.com/PHPOffice/PhpSpreadsheet/pull/350">#350</a></li>
+<li>Support for <code>_xlfn.</code> prefixed functions and <code>ISFORMULA</code>, <code>MODE.SNGL</code>, <code>STDEV.S</code>, <code>STDEV.P</code> <a href="https://github.com/PHPOffice/PhpSpreadsheet/pull/390">#390</a></li>
+</ul>
+<h3 id="fixed">Fixed</h3>
+<ul>
+<li>Avoid potentially unsupported PSR-16 cache keys <a href="https://github.com/PHPOffice/PhpSpreadsheet/issues/354">#354</a></li>
+<li>Check for MIME type to know if CSV reader can read a file <a href="https://github.com/PHPOffice/PhpSpreadsheet/issues/167">#167</a></li>
+<li>Use proper € symbol for currency format <a href="https://github.com/PHPOffice/PhpSpreadsheet/pull/379">#379</a></li>
+<li>Read printing area correctly when skipping some sheets <a href="https://github.com/PHPOffice/PhpSpreadsheet/issues/371">#371</a></li>
+<li>Avoid incorrectly overwriting calculated value type <a href="https://github.com/PHPOffice/PhpSpreadsheet/issues/394">#394</a></li>
+<li>Select correct cell when calling freezePane <a href="https://github.com/PHPOffice/PhpSpreadsheet/issues/389">#389</a></li>
+<li><code>setStrikethrough()</code> did not set the font <a href="https://github.com/PHPOffice/PhpSpreadsheet/issues/403">#403</a></li>
+</ul>
+<h2 id="-1-1-0-2018-01-28">[1.1.0] - 2018-01-28</h2>
+<h3 id="added">Added</h3>
+<ul>
+<li>Support for PHP 7.2</li>
+<li>Support cell comments in HTML writer and reader <a href="https://github.com/PHPOffice/PhpSpreadsheet/issues/308">#308</a></li>
+<li>Option to stop at a conditional styling, if it matches (only XLSX format) <a href="https://github.com/PHPOffice/PhpSpreadsheet/pull/292">#292</a></li>
+<li>Support for line width for data series when rendering Xlsx <a href="https://github.com/PHPOffice/PhpSpreadsheet/pull/329">#329</a></li>
+</ul>
+<h3 id="fixed">Fixed</h3>
+<ul>
+<li>Better auto-detection of CSV separators <a href="https://github.com/PHPOffice/PhpSpreadsheet/issues/305">#305</a></li>
+<li>Support for shape style ending with <code>;</code> <a href="https://github.com/PHPOffice/PhpSpreadsheet/issues/304">#304</a></li>
+<li>Freeze Panes takes wrong coordinates for XLSX <a href="https://github.com/PHPOffice/PhpSpreadsheet/issues/322">#322</a></li>
+<li><code>COLUMNS</code> and <code>ROWS</code> functions crashed in some cases <a href="https://github.com/PHPOffice/PhpSpreadsheet/issues/336">#336</a></li>
+<li>Support XML file without styles <a href="https://github.com/PHPOffice/PhpSpreadsheet/pull/331">#331</a></li>
+<li>Cell coordinates which are already a range cause an exception <a href="https://github.com/PHPOffice/PhpSpreadsheet/issues/319">#319</a></li>
+</ul>
+<h2 id="-1-0-0-2017-12-25">[1.0.0] - 2017-12-25</h2>
+<h3 id="added">Added</h3>
+<ul>
+<li>Support to write merged cells in ODS format <a href="https://github.com/PHPOffice/PhpSpreadsheet/issues/287">#287</a></li>
+<li>Able to set the <code>topLeftCell</code> in freeze panes <a href="https://github.com/PHPOffice/PhpSpreadsheet/pull/261">#261</a></li>
+<li>Support <code>DateTimeImmutable</code> as cell value</li>
+<li>Support migration of prefixed classes</li>
+</ul>
+<h3 id="fixed">Fixed</h3>
+<ul>
+<li>Can read very small HTML files <a href="https://github.com/PHPOffice/PhpSpreadsheet/issues/194">#194</a></li>
+<li>Written DataValidation was corrupted <a href="https://github.com/PHPOffice/PhpSpreadsheet/issues/290">#290</a></li>
+<li>Date format compatible with both LibreOffice and Excel <a href="https://github.com/PHPOffice/PhpSpreadsheet/issues/298">#298</a></li>
+</ul>
+<h3 id="breaking-change">BREAKING CHANGE</h3>
+<ul>
+<li>Constant <code>TYPE_DOUGHTNUTCHART</code> is now <code>TYPE_DOUGHNUTCHART</code>.</li>
+</ul>
+<h2 id="-1-0-0-beta2-2017-11-26">[1.0.0-beta2] - 2017-11-26</h2>
+<h3 id="added">Added</h3>
+<ul>
+<li>Support for chart fill color - @CrazyBite <a href="https://github.com/PHPOffice/PhpSpreadsheet/pull/158">#158</a></li>
+<li>Support for read Hyperlink for xml - @GreatHumorist <a href="https://github.com/PHPOffice/PhpSpreadsheet/pull/223">#223</a></li>
+<li>Support for cell value validation according to data validation rules - @SailorMax <a href="https://github.com/PHPOffice/PhpSpreadsheet/pull/257">#257</a></li>
+<li>Support for custom implementation, or configuration, of PDF libraries - @SailorMax <a href="https://github.com/PHPOffice/PhpSpreadsheet/pull/266">#266</a></li>
+</ul>
+<h3 id="changed">Changed</h3>
+<ul>
+<li>Merge data-validations to reduce written worksheet size - @billblume <a href="https://github.com/PHPOffice/PhpSpreadSheet/issues/131">#131</a></li>
+<li>Throws exception if a XML file is invalid - @GreatHumorist <a href="https://github.com/PHPOffice/PhpSpreadsheet/pull/222">#222</a></li>
+<li>Upgrade to mPDF 7.0+ <a href="https://github.com/PHPOffice/PhpSpreadsheet/issues/144">#144</a></li>
+</ul>
+<h3 id="fixed">Fixed</h3>
+<ul>
+<li>Control characters in cell values are automatically escaped <a href="https://github.com/PHPOffice/PhpSpreadsheet/issues/212">#212</a></li>
+<li>Prevent color changing when copy/pasting xls files written by PhpSpreadsheet to another file - @al-lala <a href="https://github.com/PHPOffice/PhpSpreadsheet/issues/218">#218</a></li>
+<li>Add cell reference automatic when there is no cell reference(&#39;r&#39; attribute) in Xlsx file. - @GreatHumorist <a href="https://github.com/PHPOffice/PhpSpreadsheet/pull/225">#225</a> Refer to <a href="https://github.com/PHPOffice/PhpSpreadsheet/issues/201">#201</a></li>
+<li><code>Reader\Xlsx::getFromZipArchive()</code> function return false if the zip entry could not be located. - @anton-harvey <a href="https://github.com/PHPOffice/PhpSpreadsheet/pull/268">#268</a></li>
+</ul>
+<h3 id="breaking-change">BREAKING CHANGE</h3>
+<ul>
+<li>Extracted coordinate method to dedicate class <a href="./docs/topics/migration-from-PHPExcel.md">migration guide</a>.</li>
+<li>Column indexes are based on 1, see the <a href="./docs/topics/migration-from-PHPExcel.md">migration guide</a>.</li>
+<li>Standardization of array keys used for style, see the <a href="./docs/topics/migration-from-PHPExcel.md">migration guide</a>.</li>
+<li>Easier usage of PDF writers, and other custom readers and writers, see the <a href="./docs/topics/migration-from-PHPExcel.md">migration guide</a>.</li>
+<li>Easier usage of chart renderers, see the <a href="./docs/topics/migration-from-PHPExcel.md">migration guide</a>.</li>
+<li>Rename a few more classes to keep them in their related namespaces:<ul>
+<li><code>CalcEngine</code> =&gt; <code>Calculation\Engine</code></li>
+<li><code>PhpSpreadsheet\Calculation</code> =&gt; <code>PhpSpreadsheet\Calculation\Calculation</code></li>
+<li><code>PhpSpreadsheet\Cell</code> =&gt; <code>PhpSpreadsheet\Cell\Cell</code></li>
+<li><code>PhpSpreadsheet\Chart</code> =&gt; <code>PhpSpreadsheet\Chart\Chart</code></li>
+<li><code>PhpSpreadsheet\RichText</code> =&gt; <code>PhpSpreadsheet\RichText\RichText</code></li>
+<li><code>PhpSpreadsheet\Style</code> =&gt; <code>PhpSpreadsheet\Style\Style</code></li>
+<li><code>PhpSpreadsheet\Worksheet</code> =&gt; <code>PhpSpreadsheet\Worksheet\Worksheet</code></li>
+</ul>
+</li>
+</ul>
+<h2 id="-1-0-0-beta-2017-08-17">[1.0.0-beta] - 2017-08-17</h2>
+<h3 id="added">Added</h3>
+<ul>
+<li>Initial implementation of SUMIFS() function</li>
+<li>Additional codepages</li>
+<li>MemoryDrawing not working in HTML writer <a href="https://github.com/PHPOffice/PHPExcel/issues/808">#808</a></li>
+<li>CSV Reader can auto-detect the separator used in file <a href="https://github.com/PHPOffice/PhpSpreadsheet/pull/141">#141</a></li>
+<li>HTML Reader supports some basic inline styles <a href="https://github.com/PHPOffice/PhpSpreadsheet/pull/180">#180</a></li>
+</ul>
+<h3 id="changed">Changed</h3>
+<ul>
+<li>Start following <a href="https://semver.org">SemVer</a> properly.</li>
+</ul>
+<h3 id="fixed">Fixed</h3>
+<ul>
+<li>Fix to getCell() method when cell reference includes a worksheet reference - @MarkBaker</li>
+<li>Ignore inlineStr type if formula element exists - @ncrypthic <a href="https://github.com/PHPOffice/PHPExcel/issues/570">#570</a></li>
+<li>Excel 2007 Reader freezes because of conditional formatting - @rentalhost <a href="https://github.com/PHPOffice/PHPExcel/issues/575">#575</a></li>
+<li>Readers will now parse files containing worksheet titles over 31 characters <a href="https://github.com/PHPOffice/PhpSpreadsheet/pull/176">#176</a></li>
+</ul>
+<h3 id="general">General</h3>
+<ul>
+<li>Whitespace after toRichTextObject() - @MarkBaker <a href="https://github.com/PHPOffice/PHPExcel/issues/554">#554</a></li>
+<li>Optimize vlookup() sort - @umpirsky <a href="https://github.com/PHPOffice/PHPExcel/issues/548">#548</a></li>
+<li>c:max and c:min elements shall NOT be inside c:orientation elements - @vitalyrepin <a href="https://github.com/PHPOffice/PHPExcel/pull/869">#869</a></li>
+<li>Implement actual timezone adjustment into PHPExcel_Shared_Date::PHPToExcel - @sim642 <a href="https://github.com/PHPOffice/PHPExcel/pull/489">#489</a></li>
+</ul>
+<h3 id="breaking-change">BREAKING CHANGE</h3>
+<ul>
+<li>Introduction of namespaces for all classes, eg: <code>PHPExcel_Calculation_Functions</code> becomes <code>PhpOffice\PhpSpreadsheet\Calculation\Functions</code></li>
+<li>Some classes were renamed for clarity and/or consistency:</li>
+</ul>
+<p>For a comprehensive list of all class changes, and a semi-automated migration path, read the <a href="./docs/topics/migration-from-PHPExcel.md">migration guide</a>.</p>
+<ul>
+<li>Dropped <code>PHPExcel_Calculation_Functions::VERSION()</code>. Composer or git should be used to know the version.</li>
+<li>Dropped <code>PHPExcel_Settings::setPdfRenderer()</code> and <code>PHPExcel_Settings::setPdfRenderer()</code>. Composer should be used to autoload PDF libs.</li>
+<li>Dropped support for HHVM</li>
+</ul>
+<h2 id="previous-versions-of-phpexcel">Previous versions of PHPExcel</h2>
+<p>The changelog for the project when it was called PHPExcel is <a href="./CHANGELOG.PHPExcel.md">still available</a>.</p>
+
+      </body>
+    </html>
