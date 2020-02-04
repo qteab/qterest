@@ -15,23 +15,26 @@ jQuery(document).ready(function ($) {
         $(successMessages).removeClass('show');
 
         $.ajax({
-                url: wpApiSettings.root + 'qte/v1/mailchimp/add-subscriber',
-                method: 'POST',
-                data: formData
-            })
-            .done(function (data) {
-                if (data.success) {
-                    $(successMessages).html(data.success_msg);
-                    $(successMessages).addClass('show');
-                    $(fieldsContainer).hide();
-                } else {
-                    $(errorMessages).html(data.error_msg);
-                    $(errorMessages).addClass('show');
-                }
-                $(form).removeClass('loading');
-                $(window).scrollTop($(form).offset().top - 30);
-            })
+            url: wpApiSettings.root + 'qte/v1/mailchimp/add-subscriber',
+            method: 'POST',
+            data: formData
+        })
+        .done(function (data) {
+            if (data.success) {
+                $(successMessages).html(data.success_msg);
+                $(successMessages).addClass('show');
+                $(fieldsContainer).hide();
 
-    })
+                $(form).trigger('qterestSubmitted', [data]);
+            } else {
+                $(errorMessages).html(data.error_msg);
+                $(errorMessages).addClass('show');
 
-})
+                $(form).trigger('qterestError', [data]);
+            }
+
+            $(form).removeClass('loading');
+            $(window).scrollTop($(form).offset().top - 30);
+        });
+    });
+});

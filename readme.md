@@ -207,6 +207,20 @@ function theme_custom_checkbox_field_html($field, $args) {
 add_filter('qterest_contact_field_text_html', 'theme_custom_checkbox_field_html', 2, 10);
 ```
 
+### Frontend
+QTE Rest provides basic javascript to make the forms asynchronous. It also triggers events if the form submission succeeds or fails.
+
+There is 2 events available to listen on.
+* qterestSubmitted
+* qterestError
+
+Example usage of the events
+```js
+$('.qterest-form').on('qterestSubmitted', function (event, data) {
+    $('.somediv').html(`<h1>${data.success_msg}</h1>`) // qterestError contains error_msg instead
+})
+````
+
 ## MailChimp
 MailChimp is very esay to use with this plugin. All you have to do is to add a API key in the settings page and select the list you want the users to be added to.
 
