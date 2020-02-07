@@ -129,6 +129,17 @@ function qterest_render_form( array $args, bool $echo = true ) {
  * @param bool   $echo
  */
 function qterest_render_mailchimp_form( string $input_label, string $submit_label, bool $echo = true ) {
+    $field = apply_filters(
+        'qterest_mailchimp_field_arguments',
+        array(
+            'name'        => 'email',
+            'type'        => 'email',
+            'label'       => $input_label,
+            'placeholder' => $input_label,
+            'required'    => true,
+        )
+    );
+
 	$form = '<div class="qterest-form-container">';
 
 	$form .= '<form class="qterest-mailchimp-signup">';
@@ -143,15 +154,7 @@ function qterest_render_mailchimp_form( string $input_label, string $submit_labe
 
 	$form .= '<div class="qterest-form-row">';
 
-	$form .= render_field(
-		array(
-			'name'        => 'email',
-			'type'        => 'email',
-			'label'       => $input_label,
-			'placeholder' => $input_label,
-			'required'    => true,
-		)
-	);
+	$form .= render_field( $field );
 
 	$form .= '</div>';
 

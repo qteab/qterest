@@ -234,6 +234,17 @@ Example
 qterest_render_mailchimp_form("Email", "Subscribe");
 ```
 
+### Filter
+If you need to change the arguments of the field you can use the filter `qterest_mailchimp_field_arguments`.
+
+Example usage of the filter
+```php
+add_filter('qterest_mailchimp_field_arguments', 'theme_mailchimp_field_arguments');
+function theme_mailchimp_field_arguments( $field ) {
+    $field['type'] = 'text';
+    return $field;
+}
+```
 ## Coming soon
 * Search Documentation
 
