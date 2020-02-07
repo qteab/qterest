@@ -114,7 +114,7 @@ function maybe_fix_name( $params ) {
  * This function is a temporary fix for polylang
  */
 function get_translated_string( string $string ) {
-	if ( isset( $_COOKIE['pll_language'] ) ) {
+	if ( isset( $_COOKIE['pll_language'] ) && function_exists( 'pll_translate_string' ) ) {
 		$pll_lang = $_COOKIE['pll_language'];
 
 		if ( $pll_lang !== null ) {
