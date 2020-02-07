@@ -34,7 +34,6 @@ jQuery(document).ready(function ($) {
             }
 
             $(form).removeClass('loading');
-            $(window).scrollTop($(form).offset().top - 30);
         });
     });
 });
