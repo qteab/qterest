@@ -24,7 +24,7 @@ $restController->hook_rest_server();
 new \QTEREST\Admin\ExportPage();
 
 // Setting up update
-$qterestUpdateChecker = Puc_v4p8_Factory::buildUpdateChecker(
+$qterestUpdateChecker = Puc_v4_Factory::buildUpdateChecker(
 	'https://github.com/qteab/qterest/',
 	__FILE__,
 	'qterest'
