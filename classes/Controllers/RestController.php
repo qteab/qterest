@@ -159,7 +159,6 @@ class RestController extends \WP_REST_Controller {
 		 * Applys a filter to change the messages from for example a theme
 		 */
 		$messages = apply_filters( 'qterest_contact_messages', $messages, $params );
-		
 
 		/**
 		 * Checks that email isn't empty
