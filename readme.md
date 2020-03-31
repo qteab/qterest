@@ -175,6 +175,8 @@ The following messages can be changed
 * mail_body
 * mail_to
 
+Form submission data can be accessed through the `$params` parameter
+
 #### Formatting keys (ADMIN)
 When looking at a contact request you can see that the name of the field identifies the value. This can be changed by adding a filter to display a better name for the customer. The filter name looks like this `qterest_format_key_${key}`.
 ```php
