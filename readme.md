@@ -155,14 +155,14 @@ There is a few filters and actions available for you to customize som things
 #### Messages
 Example for customizing messages
 ```php
-function theme_custom_qterest_messages($messages) {
+function theme_custom_qterest_messages($messages, $params) {
 	
 	$messages['success'] = __("Thank you! We will contact you as soon as possible!", 'text_domain');
 
 	return $messages;
 
 }
-add_filter('qterest_contact_messages', 'theme_custom_qterest_messages');
+add_filter('qterest_contact_messages', 'theme_custom_qterest_messages', 10, 2);
 ```
 
 The following messages can be changed
@@ -173,6 +173,7 @@ The following messages can be changed
 * success
 * mail_subject
 * mail_body
+* mail_to
 
 #### Formatting keys (ADMIN)
 When looking at a contact request you can see that the name of the field identifies the value. This can be changed by adding a filter to display a better name for the customer. The filter name looks like this `qterest_format_key_${key}`.
