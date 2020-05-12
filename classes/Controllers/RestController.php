@@ -154,7 +154,7 @@ class RestController extends \WP_REST_Controller {
 			'mail_to'       => maybe_get_notification_email(),
 		);
 
-		$params = $request->get_params(); // Get contact request params
+		$params = $request->get_body_params(); // Get contact request params
 
 		/**
 		 * Applys a filter to change the messages from for example a theme

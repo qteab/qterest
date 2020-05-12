@@ -6,6 +6,9 @@
 
 namespace QTEREST\CPTS\EditPage;
 
+use QTEREST\Uploads\FileHandler;
+use function QTEREST\Helpers\get_contact_request_attachments;
+
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
@@ -62,6 +65,20 @@ function contact_custom_box_html( $post ) {
 				echo '<tr><th>' . $formatted_key . '</th><td>' . ( $is_link ? "<a href=\"$value\">$formatted_value</a>" : $formatted_value ) . '</td></tr>';
 			}
 			?>
+            <?php if( $attachments = get_contact_request_attachments( $post->ID ) ): ?>
+                <tr>
+                    <th><?php _e( 'Attached files', 'qterest' ); ?></th>
+                    <td>
+                        <?php echo implode( '<br>', array_map( function ( $attachment ) {
+                            return sprintf(
+                                '<a href="%s">%s</a>',
+                                FileHandler::getDownloadUrl( $attachment->ID ),
+                                $attachment->post_title
+                            );
+                        }, $attachments ) ) ?>
+                    </td>
+                </tr>
+            <?php endif; ?>
 		</tbody>
 	</table>
 	<style>

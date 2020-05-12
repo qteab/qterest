@@ -24,6 +24,8 @@ class FileHandler
     }
 
     public static function registerHooks() {
+        add_action( 'wp_ajax_download_qte_rest_file', array( static::class, 'downloadFile' ) );
+
         add_filter( 'ajax_query_attachments_args', array( static::class, 'appendAjaxQueryAttachmentArgs' ) );
     }
 
@@ -33,9 +35,12 @@ class FileHandler
 
     public function handleAllFiles(): array {
         $attachmentIds = [];
+
         foreach ( $_FILES as $fileId => $file ) {
             $attachmentIds[] = $this->handleFile( $fileId );
         }
+
+        return $attachmentIds;
     }
 
     public function handleFile( string $fileId ) {
@@ -82,4 +87,33 @@ class FileHandler
         @file_put_contents( trailingslashit( $protected_folder ) . '.htaccess', $rules );
     }
 
+    public static function getDownloadUrl( $attachmentId ): string {
+        return admin_url('admin-ajax.php?action=download_qte_rest_file&file_id=' . $attachmentId);
+    }
+
+    public static function downloadFile() {
+        if ( ! isset( $_GET['file_id'] ) ) {
+            return;
+        }
+
+        $file = get_attached_file( $_GET['file_id'] );
+
+        if ( ! $file ) {
+            return;
+        }
+
+        header( 'Content-Description: File Transfer' );
+        header( 'Content-Type: application/octet-stream' );
+        header( 'Content-Disposition: attachment; filename=' . basename( $file ) );
+        header( 'Content-Transfer-Encoding: binary' );
+        header( 'Expires: 0' );
+        header( 'Cache-Control: must-revalidate, post-check=0, pre-check=0' );
+        header( 'Pragma: public' );
+        header( 'Content-Length: ' . filesize( $file ) );
+
+        ob_clean();
+        flush();
+        readfile( $file );
+        exit();
+    }
 }
