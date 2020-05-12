@@ -99,7 +99,7 @@ function render_field( $args, $echo = false ) {
 		case 'text':
 		case 'email':
 		case 'hidden':
-        case 'file':
+		case 'file':
 			if ( isset( $args['label'] ) && ! empty( $args['label'] ) ) {
 				$field .= render_label( $for, $args['label'] );
 			}

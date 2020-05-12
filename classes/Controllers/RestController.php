@@ -207,23 +207,29 @@ class RestController extends \WP_REST_Controller {
 		}
 
 		if ( $_FILES ) {
-            $attachment_ids = FileHandler::make( $post_id )->handleAllFiles();
+			$attachment_ids = FileHandler::make( $post_id )->handleAllFiles();
 
-            $errors = array_filter( $attachment_ids, function ( $attachment_id ) {
-               return is_wp_error( $attachment_id );
-            } );
+			$errors = array_filter(
+				$attachment_ids,
+				function ( $attachment_id ) {
+					return is_wp_error( $attachment_id );
+				}
+			);
 
-            if ( $errors ) {
-                return array(
-                    'success'     => false,
-                    'error_msg' => $messages['failed'],
-                    'error_data' => array_map( function( $error ) {
-                        /** @var \WP_Error $error */
-                        return $error->get_error_messages();
-                    }, $errors )
-                );
-            }
-        }
+			if ( $errors ) {
+				return array(
+					'success'    => false,
+					'error_msg'  => $messages['failed'],
+					'error_data' => array_map(
+						function( $error ) {
+							/** @var \WP_Error $error */
+							return $error->get_error_messages();
+						},
+						$errors
+					),
+				);
+			}
+		}
 
 		/**
 		 * This hook can be used to change the post that was just inserted
