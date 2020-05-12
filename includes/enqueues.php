@@ -17,7 +17,7 @@ global $qterest_settings;
  */
 if ( $qterest_settings['contact'] ) {
 	function load_contact_scripts( $hook ) {
-		wp_enqueue_script( 'qterest-form', QTEREST_PLUGIN_DIR . '/assets/js/form.js', array( 'jquery', 'wp-api' ), '1.1.0', true );
+		wp_enqueue_script( 'qterest-form', QTEREST_PLUGIN_DIR . '/assets/js/form.js', array( 'jquery', 'wp-api' ), '1.2.0', true );
 	}
 	add_action( 'wp_enqueue_scripts', __NAMESPACE__ . '\\load_contact_scripts' );
 }

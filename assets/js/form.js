@@ -7,7 +7,7 @@ jQuery(document).ready(function ($) {
         let errorMessages = $(form).find('.qterest-error-messages');
         let successMessages = $(form).find('.qterest-success-messages');
         let fieldsContainer = $(form).find('.qterest-form-fields');
-        var formData = $(form).serialize();
+        var formData = new FormData(form);
 
         $(form).addClass('loading');
 
@@ -17,6 +17,8 @@ jQuery(document).ready(function ($) {
         $.ajax({
             url: wpApiSettings.root + 'qte/v1/contact',
             method: 'POST',
+            processData: false,
+            contentType: false,
             data: formData
         })
         .done(function (data) {

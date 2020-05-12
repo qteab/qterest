@@ -23,6 +23,8 @@ $restController->hook_rest_server();
 
 new \QTEREST\Admin\ExportPage();
 
+\QTEREST\Uploads\FileHandler::registerHooks();
+
 // Setting up update
 $qterestUpdateChecker = Puc_v4_Factory::buildUpdateChecker(
 	'https://github.com/qteab/qterest/',

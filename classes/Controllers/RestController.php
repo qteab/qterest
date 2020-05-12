@@ -6,6 +6,7 @@
 
 namespace QTEREST\Controllers;
 
+use QTEREST\Uploads\FileHandler;
 use QTEREST\Utils\SanitizeParams;
 use function QTEREST\Helpers\validate_email;
 use function QTEREST\Helpers\get_client_ip;
@@ -153,7 +154,7 @@ class RestController extends \WP_REST_Controller {
 			'mail_to'       => maybe_get_notification_email(),
 		);
 
-		$params = $request->get_params(); // Get contact request params
+		$params = $request->get_body_params(); // Get contact request params
 
 		/**
 		 * Applys a filter to change the messages from for example a theme
@@ -203,6 +204,31 @@ class RestController extends \WP_REST_Controller {
 				'success'   => false,
 				'error_msg' => $messages['failed'],
 			);
+		}
+
+		if ( $_FILES ) {
+			$attachment_ids = FileHandler::make( $post_id )->handleAllFiles();
+
+			$errors = array_filter(
+				$attachment_ids,
+				function ( $attachment_id ) {
+					return is_wp_error( $attachment_id );
+				}
+			);
+
+			if ( $errors ) {
+				return array(
+					'success'    => false,
+					'error_msg'  => $messages['failed'],
+					'error_data' => array_map(
+						function( $error ) {
+							/** @var \WP_Error $error */
+							return $error->get_error_messages();
+						},
+						$errors
+					),
+				);
+			}
 		}
 
 		/**

@@ -124,3 +124,13 @@ function get_translated_string( string $string ) {
 
 	return __( $string, 'qterest' );
 }
+
+function get_contact_request_attachments( int $post_id ) {
+	$args = array(
+		'post_type'      => 'attachment',
+		'posts_per_page' => -1,
+		'post_parent'    => $post_id,
+	);
+
+	return get_posts( $args );
+}
