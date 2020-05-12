@@ -52,7 +52,7 @@ The following fields are accepted
 ```php
 $fields = [
     [
-        'type' => 'text', // REQUIRED (string) Possible values are text, email, tel, hidden and textarea
+        'type' => 'text', // REQUIRED (string) Possible values are text, email, file, tel, hidden and textarea
         'name' => 'my_text_field', // REQUIRED (string) HTML Attribute name
         'placeholder' => 'Text', // (string) HTML Attribute placeholder
         'value' => 'some_value', // (string) HTML Attribute value
