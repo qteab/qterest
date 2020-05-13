@@ -36,7 +36,9 @@ class FileHandler {
 		$attachmentIds = array();
 
 		foreach ( $_FILES as $fileId => $file ) {
-			$attachmentIds[] = $this->handleFile( $fileId );
+		    if ( $file['size'] ) {
+                $attachmentIds[$fileId] = $this->handleFile( $fileId );
+            }
 		}
 
 		return $attachmentIds;
