@@ -158,7 +158,11 @@ function qterest_render_mailchimp_form( string $input_label, string $submit_labe
 
 	$form .= '</div>';
 
-	$form .= "<div class=\"qterest-form-row\"><input class=\"button submit\" type=\"submit\" value=\"$submit_label\"></div>";
+	$form .= '<div class="qterest-form-row">';
+
+	$form .= apply_filters( 'qterest_mailchimp_submit_button', "<input class=\"button submit\" type=\"submit\" value=\"$submit_label\">", $submit_label );
+
+	$form .= '</div>';
 
 	$form .= '</div>';
 
