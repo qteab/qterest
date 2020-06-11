@@ -360,11 +360,6 @@ class RestController extends \WP_REST_Controller {
 		}
 
 		/**
-		 * Hook to do stuff when a new subscriber is added.
-		 */
-		do_action( 'qterest_mailchimp_subscriber_added', $params['email'], $member_exists );
-
-		/**
 		 * Check if user added or updated
 		 */
 		if ( ! isset( $repsonse['id'] ) ) {
@@ -373,6 +368,11 @@ class RestController extends \WP_REST_Controller {
 				'error_msg' => $messages['failed'],
 			);
 		}
+
+		/**
+		 * Hook to do stuff when a new subscriber is added.
+		 */
+		do_action( 'qterest_mailchimp_subscriber_added', $params['email'], $member_exists );
 
 		return array(
 			'success'     => true,
