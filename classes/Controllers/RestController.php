@@ -350,7 +350,7 @@ class RestController extends \WP_REST_Controller {
 		/**
 		 * Check if already subscribed and if subscribed make sure that the status is subscribed
 		 */
-		if ( $repsonse['title'] == 'Member Exists' ) {
+		if ( $member_exists = $repsonse['title'] == 'Member Exists' ) {
 			$repsonse = $MailChimp->put(
 				"/lists/$options[qterest_field_mailchimp_mail_list]/members/" . $MailChimp->subscriberHash( $params['email'] ),
 				array(
@@ -358,6 +358,11 @@ class RestController extends \WP_REST_Controller {
 				)
 			);
 		}
+
+		/**
+		 * Hook to do stuff when a new subscriber is added.
+		 */
+		do_action( 'qterest_mailchimp_subscriber_added', $params['email'], $member_exists );
 
 		/**
 		 * Check if user added or updated
