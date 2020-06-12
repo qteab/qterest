@@ -279,12 +279,12 @@ class RestController extends \WP_REST_Controller {
 		}
 
 		$messages = array(
-			'invalid_api_key' => get_translated_string( 'Invalid MailChimp API key!', 'qterest' ),
-			'email_empty'     => get_translated_string( 'Email cannot be empty!', 'qterest' ),
-			'email_invalid'   => get_translated_string( 'Email is not valid!', 'qterest' ),
+			'invalid_api_key'   => get_translated_string( 'Invalid MailChimp API key!', 'qterest' ),
+			'email_empty'       => get_translated_string( 'Email cannot be empty!', 'qterest' ),
+			'email_invalid'     => get_translated_string( 'Email is not valid!', 'qterest' ),
 			'invalid_recaptcha' => get_translated_string( 'Invalid reCAPTCHA!', 'qterest' ),
-			'failed'          => get_translated_string( 'Something went wrong. Please try again later!', 'qterest' ),
-			'success'         => get_translated_string( 'Thank you for subscribing to our newsletter!', 'qterest' ),
+			'failed'            => get_translated_string( 'Something went wrong. Please try again later!', 'qterest' ),
+			'success'           => get_translated_string( 'Thank you for subscribing to our newsletter!', 'qterest' ),
 		);
 
 		/**
@@ -330,13 +330,13 @@ class RestController extends \WP_REST_Controller {
 		$options = get_option( 'qterest_options' );
 
 		if ( is_recaptcha_enabled() && isset( $params['recaptcha_response'] ) ) {
-		    if ( ! Recaptcha::make( $options[Options::RECAPTCHA_SECRET_KEY], new Client() )->validateResponse( $params['recaptcha_response'] ) ) {
-                return array(
-                    'success'    => false,
-                    'error_msg' => $messages['invalid_recaptcha'],
-                );
-            }
-        }
+			if ( ! Recaptcha::make( $options[ Options::RECAPTCHA_SECRET_KEY ], new Client() )->validateResponse( $params['recaptcha_response'] ) ) {
+				return array(
+					'success'   => false,
+					'error_msg' => $messages['invalid_recaptcha'],
+				);
+			}
+		}
 
 		/**
 		 * Try catch in case it throws exceptions
@@ -345,7 +345,7 @@ class RestController extends \WP_REST_Controller {
 			$MailChimp = new MailChimp( $options['qterest_field_mailchimp_api_key'] );
 		} catch ( \Exception $e ) {
 			return array(
-				'success'    => false,
+				'success'   => false,
 				'error_msg' => $e->getMessage(),
 			);
 		}

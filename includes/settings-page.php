@@ -102,35 +102,35 @@ if ( $qterest_settings['mailchimp'] || $qterest_settings['contact'] ) {
 
 	function settings_recaptcha() {
 
-	    add_settings_section(
-            'qterest_recaptcha_section',
-            __( 'reCaptcha', 'qterest' ),
-            __NAMESPACE__ . '\\qterest_recaptcha_section_cb',
-            'qterest'
-        );
+		add_settings_section(
+			'qterest_recaptcha_section',
+			__( 'reCaptcha', 'qterest' ),
+			__NAMESPACE__ . '\\qterest_recaptcha_section_cb',
+			'qterest'
+		);
 
-	    add_settings_field(
-            Options::RECAPTCHA_SITE_KEY,
-            __( 'Site Key', 'qterest' ),
-            __NAMESPACE__ . '\\qterest_field_recaptcha_site_key_cb',
-            'qterest',
-            'qterest_recaptcha_section',
-            array(
-                'label_for' => 'qterest_field_recaptcha_site_key'
-            )
-        );
+		add_settings_field(
+			Options::RECAPTCHA_SITE_KEY,
+			__( 'Site Key', 'qterest' ),
+			__NAMESPACE__ . '\\qterest_field_recaptcha_site_key_cb',
+			'qterest',
+			'qterest_recaptcha_section',
+			array(
+				'label_for' => 'qterest_field_recaptcha_site_key',
+			)
+		);
 
-        add_settings_field(
-            Options::RECAPTCHA_SECRET_KEY,
-            __( 'Secret Key', 'qterest' ),
-            __NAMESPACE__ . '\\qterest_field_recaptcha_secret_key_cb',
-            'qterest',
-            'qterest_recaptcha_section',
-            array(
-                'label_for' => 'qterest_field_recaptcha_secret_key'
-            )
-        );
-    }
+		add_settings_field(
+			Options::RECAPTCHA_SECRET_KEY,
+			__( 'Secret Key', 'qterest' ),
+			__NAMESPACE__ . '\\qterest_field_recaptcha_secret_key_cb',
+			'qterest',
+			'qterest_recaptcha_section',
+			array(
+				'label_for' => 'qterest_field_recaptcha_secret_key',
+			)
+		);
+	}
 
 	/**
 	 * Global settings init
@@ -151,10 +151,10 @@ if ( $qterest_settings['mailchimp'] || $qterest_settings['contact'] ) {
 		add_action( 'admin_init', __NAMESPACE__ . '\\settings_contact' );
 	}
 
-    /**
-     * Register reCaptcha settings
-     */
-    add_action( 'admin_init', __NAMESPACE__ . '\\settings_recaptcha' );
+	/**
+	 * Register reCaptcha settings
+	 */
+	add_action( 'admin_init', __NAMESPACE__ . '\\settings_recaptcha' );
 
 	/**
 	 * Callback for title to the mailchimp section
@@ -174,17 +174,17 @@ if ( $qterest_settings['mailchimp'] || $qterest_settings['contact'] ) {
 		<?php
 	}
 
-    /**
-     * Callback for title to the reCaptcha section
-     */
-    function qterest_recaptcha_section_cb( $args ) {
-        ?>
-        <p id="<?php echo esc_attr( $args['id'] ); ?>"><?php esc_html_e( 'Settings for reCaptcha', 'qterest' ); ?></p>
-        <?php
-    }
+	/**
+	 * Callback for title to the reCaptcha section
+	 */
+	function qterest_recaptcha_section_cb( $args ) {
+		?>
+		<p id="<?php echo esc_attr( $args['id'] ); ?>"><?php esc_html_e( 'Settings for reCaptcha', 'qterest' ); ?></p>
+		<?php
+	}
 
 
-    /**
+	/**
 	 * Callback for MailChimp API key field
 	 */
 	function qterest_field_mailchimp_api_key_cb( $args ) {
@@ -239,27 +239,27 @@ if ( $qterest_settings['mailchimp'] || $qterest_settings['contact'] ) {
 		<?php
 	}
 
-    /**
-     * Callback for reCaptcha Site key field
-     */
-    function qterest_field_recaptcha_site_key_cb( $args ) {
-        $options = get_option( 'qterest_options' );
-        ?>
-        <input type="text" value="<?php echo isset( $options[ $args['label_for'] ] ) ? $options[ $args['label_for'] ] : null; ?>" id="<?php echo esc_attr( $args['label_for'] ); ?>" data-custom="<?php echo esc_attr( $args['qterest_custom_data'] ); ?>" name="qterest_options[<?php echo esc_attr( $args['label_for'] ); ?>]" size="50">
-        <p class="description"><?php esc_html_e( 'Enter your site key ', 'qterest' ); ?></p>
-        <?php
-    }
+	/**
+	 * Callback for reCaptcha Site key field
+	 */
+	function qterest_field_recaptcha_site_key_cb( $args ) {
+		$options = get_option( 'qterest_options' );
+		?>
+		<input type="text" value="<?php echo isset( $options[ $args['label_for'] ] ) ? $options[ $args['label_for'] ] : null; ?>" id="<?php echo esc_attr( $args['label_for'] ); ?>" data-custom="<?php echo esc_attr( $args['qterest_custom_data'] ); ?>" name="qterest_options[<?php echo esc_attr( $args['label_for'] ); ?>]" size="50">
+		<p class="description"><?php esc_html_e( 'Enter your site key ', 'qterest' ); ?></p>
+		<?php
+	}
 
-    /**
-     * Callback for reCaptcha Secret key field
-     */
-    function qterest_field_recaptcha_secret_key_cb( $args ) {
-        $options = get_option( 'qterest_options' );
-        ?>
-        <input type="text" value="<?php echo isset( $options[ $args['label_for'] ] ) ? $options[ $args['label_for'] ] : null; ?>" id="<?php echo esc_attr( $args['label_for'] ); ?>" data-custom="<?php echo esc_attr( $args['qterest_custom_data'] ); ?>" name="qterest_options[<?php echo esc_attr( $args['label_for'] ); ?>]" size="50">
-        <p class="description"><?php esc_html_e( 'Enter your secret key ', 'qterest' ); ?></p>
-        <?php
-    }
+	/**
+	 * Callback for reCaptcha Secret key field
+	 */
+	function qterest_field_recaptcha_secret_key_cb( $args ) {
+		$options = get_option( 'qterest_options' );
+		?>
+		<input type="text" value="<?php echo isset( $options[ $args['label_for'] ] ) ? $options[ $args['label_for'] ] : null; ?>" id="<?php echo esc_attr( $args['label_for'] ); ?>" data-custom="<?php echo esc_attr( $args['qterest_custom_data'] ); ?>" name="qterest_options[<?php echo esc_attr( $args['label_for'] ); ?>]" size="50">
+		<p class="description"><?php esc_html_e( 'Enter your secret key ', 'qterest' ); ?></p>
+		<?php
+	}
 
 	/**
 	 * Callback to register settings page
