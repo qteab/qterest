@@ -140,9 +140,24 @@ function qterest_render_mailchimp_form( string $input_label, string $submit_labe
 		)
 	);
 
+	$id = uniqid('mailchimp_form_');
+
+	$options = get_option('qterest_options' );
+
+	$script = sprintf('<script>function submit_%1$s( token ) { jQuery("#%s").submit(); }</script>', $id );
+
+	$submit_button = \QTEREST\Helpers\is_recaptcha_enabled() ? sprintf(
+            '%s<button class="g-recaptcha button submit" data-sitekey="%s" data-callback="submit_%s">%s</button>',
+            $script,
+            $options[ \QTEREST\Utils\Options::RECAPTCHA_SITE_KEY ],
+            $id,
+            $submit_label
+        )
+        : "<input class=\"button submit\" type=\"submit\" value=\"$submit_label\">";
+
 	$form = '<div class="qterest-form-container">';
 
-	$form .= '<form class="qterest-mailchimp-signup">';
+	$form .= sprintf('<form id="%s" class="qterest-mailchimp-signup">', $id );
 
 	$form .= '<div class="qterest-spinner-overlay"><div class="qterest-spinner"></div></div>';
 
@@ -160,7 +175,7 @@ function qterest_render_mailchimp_form( string $input_label, string $submit_labe
 
 	$form .= '<div class="qterest-form-row">';
 
-	$form .= apply_filters( 'qterest_mailchimp_submit_button', "<input class=\"button submit\" type=\"submit\" value=\"$submit_label\">", $submit_label );
+	$form .= apply_filters( 'qterest_mailchimp_submit_button', $submit_button, $submit_label, $options[ \QTEREST\Utils\Options::RECAPTCHA_SITE_KEY ] );
 
 	$form .= '</div>';
 

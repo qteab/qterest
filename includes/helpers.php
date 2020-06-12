@@ -7,6 +7,7 @@
 namespace QTEREST\Helpers;
 
 use DrewM\MailChimp\MailChimp;
+use QTEREST\Utils\Options;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
@@ -133,4 +134,10 @@ function get_contact_request_attachments( int $post_id ) {
 	);
 
 	return get_posts( $args );
+}
+
+function is_recaptcha_enabled() {
+	$options = get_option( 'qterest_options' );
+
+	return isset( $options[ Options::RECAPTCHA_SITE_KEY ], $options[ Options::RECAPTCHA_SECRET_KEY ] ) && $options[ Options::RECAPTCHA_SITE_KEY ] && $options[ Options::RECAPTCHA_SECRET_KEY ];
 }

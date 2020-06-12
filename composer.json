@@ -4,7 +4,8 @@
     "require": {
         "drewm/mailchimp-api": "^2.5",
         "yahnis-elsts/plugin-update-checker": "^4.8",
-        "phpoffice/phpspreadsheet": "^1.10"
+        "phpoffice/phpspreadsheet": "^1.10",
+        "guzzlehttp/guzzle": "~6.0"
     },
     "require-dev": {
         "wp-coding-standards/wpcs": "^2.2",
