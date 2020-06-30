@@ -35,91 +35,32 @@ class RestController extends \WP_REST_Controller {
 
 		$namespace = $this->qterest_namespace . $this->qterest_version;
 
-			$base = 'search';
-			register_rest_route(
-				$namespace,
-				'/' . $base,
+		register_rest_route(
+			$namespace,
+			'/contact',
+			array(
 				array(
-					array(
-						'methods'  => 'GET',
-						'callback' => array( $this, 'handle_search' ),
-					),
-				)
-			);
+					'methods'  => 'POST',
+					'callback' => array( $this, 'handle_contact' ),
+				),
+			)
+		);
 
-			$base = 'contact';
-			register_rest_route(
-				$namespace,
-				'/' . $base,
+		register_rest_route(
+			$namespace,
+			'/mailchimp/add-subscriber',
+			array(
 				array(
-					array(
-						'methods'  => 'POST',
-						'callback' => array( $this, 'handle_contact' ),
-					),
-				)
-			);
-
-			$base = 'mailchimp/add-subscriber';
-			register_rest_route(
-				$namespace,
-				'/' . $base,
-				array(
-					array(
-						'methods'  => 'POST',
-						'callback' => array( $this, 'handle_mailchimp_add_subscriber' ),
-					),
-				)
-			);
+					'methods'  => 'POST',
+					'callback' => array( $this, 'handle_mailchimp_add_subscriber' ),
+				),
+			)
+		);
 	}
 
 	// Register our REST Server
 	public function hook_rest_server() {
 		add_action( 'rest_api_init', array( $this, 'register_routes' ) );
-	}
-
-	public function handle_search( \WP_REST_Request $request ) {
-
-		$params = $request->get_params(); // Get search params
-
-		$args = array(
-			'post_type'      => 'post',
-			'posts_per_page' => -1,
-			'order_by'       => 'date',
-			'order'          => 'DESC',
-		);
-
-		/**
-		 * This hook can be used to change the $args array to change the query.
-		 * The $params variable can be used to access query variables.
-		 */
-		$args = apply_filters( 'qterest_before_query', $args, $params );
-
-		$the_query = new \WP_Query( $args );
-
-		ob_start();
-
-		/**
-		 * This hook is used to add code before the post loop
-		 */
-		do_action( 'qterest_before_search_content' );
-
-		while ( $the_query->have_posts() ) {
-			$the_query->the_post();
-
-			/**
-			 * This hook is used to add code for the single posts
-			 */
-			do_action( 'qterest_search_content' );
-		}
-		wp_reset_query();
-
-		do_action( 'qterest_after_search_content' );
-
-		return array(
-			'success'     => true,
-			'data'        => ob_get_clean(),
-			'total_items' => $the_query->found_posts,
-		);
 	}
 
 	public function handle_contact( \WP_REST_Request $request ) {
