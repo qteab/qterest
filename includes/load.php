@@ -8,8 +8,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-require_once QTEREST_PLUGIN_PATH . 'settings.php';
-
 require_once QTEREST_PLUGIN_PATH . 'includes/hooks.php';
 require_once QTEREST_PLUGIN_PATH . 'includes/enqueues.php';
 require_once QTEREST_PLUGIN_PATH . 'includes/cpts.php';
