@@ -11,14 +11,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 function handle_qterest_form_shortcode( $atts, $content ) {
-	global $qterest_settings;
-
-	if ( ! $qterest_settings['contact'] ) {
-		if ( current_user_can( 'manage_options' ) ) {
-			return '<p class="qterest-error">' . __( 'Contact is disabled on this site!', 'qterest' ) . '</p>';
-		}
-		return;
-	}
 
 	$field_defaults = array(
 		'type'        => 'text',

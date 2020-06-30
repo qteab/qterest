@@ -13,16 +13,6 @@ Follow these steps to install the  plugin.
 
 The plugin is now installed.
 
-## Settings
-This plugin needs to be configured before uploaded to wordpress. There's a file called `settings.php` where you can configure which parts of the plugin you want to use. 
-```php
-$qterest_settings = array(
-    'search' => false, // (boolean) Adds a search endpoint
-    'contact' => true, // (boolean) Adds a contact endpoint for forms
-    'mailchimp' => false, // (boolean) Adds a signup endpoint for mailchimp
-);
-```
-
 ## Contact
 This part of the plugin handles the forms. 
 

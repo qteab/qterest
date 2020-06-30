@@ -32,11 +32,9 @@ class RestController extends \WP_REST_Controller {
 	public $qterest_version   = '1';
 
 	public function register_routes() {
-		global $qterest_settings;
 
 		$namespace = $this->qterest_namespace . $this->qterest_version;
 
-		if ( $qterest_settings['search'] ) {
 			$base = 'search';
 			register_rest_route(
 				$namespace,
@@ -48,9 +46,7 @@ class RestController extends \WP_REST_Controller {
 					),
 				)
 			);
-		}
 
-		if ( $qterest_settings['contact'] ) {
 			$base = 'contact';
 			register_rest_route(
 				$namespace,
@@ -62,9 +58,7 @@ class RestController extends \WP_REST_Controller {
 					),
 				)
 			);
-		}
 
-		if ( $qterest_settings['mailchimp'] ) {
 			$base = 'mailchimp/add-subscriber';
 			register_rest_route(
 				$namespace,
@@ -76,7 +70,6 @@ class RestController extends \WP_REST_Controller {
 					),
 				)
 			);
-		}
 	}
 
 	// Register our REST Server
@@ -85,14 +78,6 @@ class RestController extends \WP_REST_Controller {
 	}
 
 	public function handle_search( \WP_REST_Request $request ) {
-		global $qterest_settings;
-
-		if ( ! $qterest_settings['search'] ) {
-			return array(
-				'success'   => false,
-				'error_msg' => get_translated_string( 'Search is not enabled for this site', 'qterest' ),
-			);
-		}
 
 		$params = $request->get_params(); // Get search params
 
@@ -138,14 +123,6 @@ class RestController extends \WP_REST_Controller {
 	}
 
 	public function handle_contact( \WP_REST_Request $request ) {
-		global $qterest_settings;
-
-		if ( ! $qterest_settings['contact'] ) {
-			return array(
-				'success'   => false,
-				'error_msg' => get_translated_string( 'Contact is not enabled for this site', 'qterest' ),
-			);
-		}
 
 		$messages = array(
 			'name_empty'    => get_translated_string( 'Name cannot be empty!', 'qterest' ),
@@ -269,14 +246,6 @@ class RestController extends \WP_REST_Controller {
 	}
 
 	public function handle_mailchimp_add_subscriber( \WP_REST_Request $request ) {
-		global $qterest_settings;
-
-		if ( ! $qterest_settings['mailchimp'] ) {
-			return array(
-				'success'   => false,
-				'error_msg' => get_translated_string( 'Mailchimp is not enabled for this site', 'qterest' ),
-			);
-		}
 
 		$messages = array(
 			'invalid_api_key'   => get_translated_string( 'Invalid MailChimp API key!', 'qterest' ),
