@@ -15,7 +15,7 @@
     "scripts": {
         "cs": "vendor/bin/phpcs --standard=WordPress --report=diff --colors --extensions=php --ignore=./vendor/* .",
         "cs-fix": "vendor/bin/phpcbf --standard=WordPress --extensions=php --ignore=./vendor/* .",
-        "build": "rm -rf build && mkdir build && zip -r build/qterest.zip ./ -x \".git/*\" \".github/*\" \".idea/*\" \"prepros-6.config\" \".gitignore\"",
+        "build": "bash ./build.sh",
         "test": "vendor/bin/phpunit --verbose --debug"
     },
     "autoload": {
