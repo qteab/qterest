@@ -4,6 +4,8 @@
  * This file contains all the enqueues for qterest.
  */
 
+use function QTEREST\Helpers\is_recaptcha_enabled;
+
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
