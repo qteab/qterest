@@ -165,9 +165,9 @@ class RestController extends \WP_REST_Controller {
 
 		$link = site_url( "wp-admin/post.php?post=$post_id&action=edit" );
 
-		$to      = $messages['mail_to'];
-		$subject = $messages['mail_subject'];
-		$body    = $messages['mail_body'];
+		$to      = apply_filters( 'qterest_contact_mail_to', $messages['mail_to'], $params, $post_id );
+		$subject = apply_filters( 'qterest_contact_mail_subject', $messages['mail_subject'], $params, $post_id );
+		$body    = apply_filters( 'qterest_contact_mail_body', $messages['mail_body'], $params );
 		$body    = \preg_replace( '#{LINK}#', "<a href=\"$link\">$link</a>", $body );
 		$headers = array( 'Content-Type: text/html; charset=UTF-8' );
 
@@ -176,8 +176,8 @@ class RestController extends \WP_REST_Controller {
 		 */
 		do_action( 'qterest_contact_before_send_mail', $to, $subject, $body, $headers );
 
-		if ( $messages['mail_to'] != null ) {
-			wp_mail( $to, $subject, apply_filters( 'qterest_contact_mail_body', $body, $params ), $headers );
+		if ( $to != null ) {
+			wp_mail( $to, $subject, $body, $headers );
 		}
 
 		return array(
