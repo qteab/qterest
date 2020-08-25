@@ -169,7 +169,7 @@ class RestController extends \WP_REST_Controller {
 		$subject = apply_filters( 'qterest_contact_mail_subject', $messages['mail_subject'], $params, $post_id );
 		$body    = apply_filters( 'qterest_contact_mail_body', $messages['mail_body'], $params );
 		$body    = \preg_replace( '#{LINK}#', "<a href=\"$link\">$link</a>", $body );
-		$headers = array( 'Content-Type: text/html; charset=UTF-8' );
+		$headers = apply_filters( 'qterest_contact_mail_headers', array( 'Content-Type: text/html; charset=UTF-8' ), $params, $post_id );
 
 		/**
 		 * This hook can be used to manipulate the mail
