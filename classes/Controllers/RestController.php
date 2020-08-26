@@ -170,7 +170,7 @@ class RestController extends \WP_REST_Controller {
 		$body        = apply_filters( 'qterest_contact_mail_body', $messages['mail_body'], $params );
 		$body        = \preg_replace( '#{LINK}#', "<a href=\"$link\">$link</a>", $body );
 		$headers     = apply_filters( 'qterest_contact_mail_headers', array( 'Content-Type: text/html; charset=UTF-8' ), $params, $post_id );
-		$attachments = apply_filters( 'qterest_contact_mail_attachments', array(), $attachment_ids ?? [], $post_id );
+		$attachments = apply_filters( 'qterest_contact_mail_attachments', array(), $attachment_ids ?? array(), $post_id );
 
 		/**
 		 * This hook can be used to manipulate the mail
