@@ -178,7 +178,7 @@ class RestController extends \WP_REST_Controller {
 		do_action( 'qterest_contact_before_send_mail', $to, $subject, $body, $headers, $attachments );
 
 		if ( $to != null ) {
-			wp_mail( $to, $subject, $body, $headers );
+			wp_mail( $to, $subject, $body, $headers, $attachments );
 		}
 
 		return array(
