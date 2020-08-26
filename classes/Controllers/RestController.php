@@ -165,16 +165,17 @@ class RestController extends \WP_REST_Controller {
 
 		$link = site_url( "wp-admin/post.php?post=$post_id&action=edit" );
 
-		$to      = apply_filters( 'qterest_contact_mail_to', $messages['mail_to'], $params, $post_id );
-		$subject = apply_filters( 'qterest_contact_mail_subject', $messages['mail_subject'], $params, $post_id );
-		$body    = apply_filters( 'qterest_contact_mail_body', $messages['mail_body'], $params );
-		$body    = \preg_replace( '#{LINK}#', "<a href=\"$link\">$link</a>", $body );
-		$headers = apply_filters( 'qterest_contact_mail_headers', array( 'Content-Type: text/html; charset=UTF-8' ), $params, $post_id );
+		$to          = apply_filters( 'qterest_contact_mail_to', $messages['mail_to'], $params, $post_id );
+		$subject     = apply_filters( 'qterest_contact_mail_subject', $messages['mail_subject'], $params, $post_id );
+		$body        = apply_filters( 'qterest_contact_mail_body', $messages['mail_body'], $params );
+		$body        = \preg_replace( '#{LINK}#', "<a href=\"$link\">$link</a>", $body );
+		$headers     = apply_filters( 'qterest_contact_mail_headers', array( 'Content-Type: text/html; charset=UTF-8' ), $params, $post_id );
+		$attachments = apply_filters( 'qterest_contact_mail_attachments', array(), $attachment_ids ?? [], $post_id );
 
 		/**
 		 * This hook can be used to manipulate the mail
 		 */
-		do_action( 'qterest_contact_before_send_mail', $to, $subject, $body, $headers );
+		do_action( 'qterest_contact_before_send_mail', $to, $subject, $body, $headers, $attachments );
 
 		if ( $to != null ) {
 			wp_mail( $to, $subject, $body, $headers );
