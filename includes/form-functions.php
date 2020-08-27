@@ -54,7 +54,7 @@ function render_field( $args, $echo = false ) {
 
 	$required = isset( $args['required'] ) && $args['required'] ? 'required' : '';
 
-	if ( $args['required'] ) {
+	if ( $required ) {
 		$args['class'] = isset( $args['class'] ) ? $args['class'] .= ' required' : 'required';
 	};
 
