@@ -76,7 +76,7 @@ function render_field( $args, $echo = false ) {
 
 	switch ( $args['type'] ) {
 		case 'select':
-			if ( $label) {
+			if ( $label ) {
 				$field .= render_label( $for, $label );
 			}
 
