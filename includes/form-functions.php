@@ -68,10 +68,16 @@ function render_field( $args, $echo = false ) {
 
 	$rows = isset( $args['rows'] ) && $args['rows'] ? $args['rows'] : 4;
 
+	$value = isset( $args['value'] ) ? $args['value'] : '';
+
+	$label = isset( $args['label'] ) ? $args['label'] : '';
+
+	$placeholder = isset( $args['placeholder'] ) ? $args['placeholder'] : '';
+
 	switch ( $args['type'] ) {
 		case 'select':
-			if ( isset( $args['label'] ) && ! empty( $args['label'] ) ) {
-				$field .= render_label( $for, $args['label'] );
+			if ( $label) {
+				$field .= render_label( $for, $label );
 			}
 
 			$field .= "<select id=\"$id\" $class name=\"$args[name]\" $required ><option>$args[placeholder]</option>";
@@ -87,11 +93,11 @@ function render_field( $args, $echo = false ) {
 			break;
 
 		case 'textarea':
-			if ( isset( $args['label'] ) && ! empty( $args['label'] ) ) {
-				$field .= render_label( $id, $args['label'] );
+			if ( $label ) {
+				$field .= render_label( $id, $label );
 			}
 
-			$field .= "<textarea id=\"$id\" $class name=\"$args[name]\" rows=\"$rows\" placeholder=\"" . ( isset( $args['placeholder'] ) ? $args['placeholder'] : '' ) . "\" $required ></textarea>";
+			$field .= "<textarea id=\"$id\" $class name=\"$args[name]\" rows=\"$rows\" placeholder=\"$placeholder\" $required >$value</textarea>";
 
 			break;
 
@@ -100,17 +106,17 @@ function render_field( $args, $echo = false ) {
 		case 'email':
 		case 'hidden':
 		case 'file':
-			if ( isset( $args['label'] ) && ! empty( $args['label'] ) ) {
-				$field .= render_label( $for, $args['label'] );
+			if ( $label ) {
+				$field .= render_label( $for, $label );
 			}
 
-			$field .= "<input id=\"$id\" $class type=\"$args[type]\" name=\"$args[name]\" placeholder=\"" . ( isset( $args['placeholder'] ) ? $args['placeholder'] : '' ) . '" value="' . ( isset( $args['value'] ) ? $args['value'] : '' ) . "\" $required/>";
+			$field .= "<input id=\"$id\" $class type=\"$args[type]\" name=\"$args[name]\" placeholder=\"$placeholder\" value=\"$value\" $required/>";
 
 			break;
 
 		case 'checkbox':
 		case 'radio':
-			$field .= "<label for=\"$for\" class=\"qterest-$args[type] $args[class]\"><input id=\"$id\" class=\"$toggles $required\" type=\"$args[type]\" name=\"$args[name]\" value=\"$args[value]\"$required />$args[label]</label>";
+			$field .= "<label for=\"$for\" class=\"qterest-$args[type] $args[class]\"><input id=\"$id\" class=\"$toggles $required\" type=\"$args[type]\" name=\"$args[name]\" value=\"$value\"$required />$args[label]</label>";
 
 	}
 	/**
