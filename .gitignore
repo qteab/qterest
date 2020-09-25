@@ -1,5 +1,5 @@
 .idea
-#vendor Remove this comment when the time is right
+vendor
 build
 
 prepros.cfg
