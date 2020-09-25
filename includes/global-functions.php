@@ -57,11 +57,15 @@ function qterest_render_form( array $args, bool $echo = true ) {
 		'submit_class'           => 'button submit',
 	);
 
+	$id = uniqid( 'qterest_form_' );
+
+	$options = get_option( 'qterest_options' );
+
 	$args = wp_parse_args( $args, $defaults );
 
 	$form = "<div class=\"$args[wrapper_class]\">";
 
-	$form .= "<form class=\"$args[form_class]\">";
+	$form .= "<form id=\"$id\" class=\"$args[form_class]\">";
 
 	if ( isset( $args['form_title'] ) && $args['form_title'] ) {
 		$form .= "<h3>$args[form_title]</h3>";
@@ -106,7 +110,19 @@ function qterest_render_form( array $args, bool $echo = true ) {
 		}
 	}
 
-	$form .= "<div class=\"$args[form_row_class]\"><input class=\"$args[submit_class]\" type=\"submit\" value=\"$args[submit_label]\"></div>";
+	$script = sprintf( '<script>function submit_%1$s( token ) { jQuery("#%s").submit(); }</script>', $id );
+
+	$submit_button = \QTEREST\Helpers\is_recaptcha_enabled() ? sprintf(
+		'%s<button class="g-recaptcha %s" data-sitekey="%s" data-callback="submit_%s">%s</button>',
+		$script,
+		$args['submit_class'],
+		$options[ \QTEREST\Utils\Options::RECAPTCHA_SITE_KEY ],
+		$id,
+		$args['submit_label']
+	)
+		: "<input class=\"$args[submit_class]\" type=\"submit\" value=\"$args[submit_label]\">";
+
+	$form .= "<div class=\"$args[form_row_class]\">$submit_button</div>";
 
 	$form .= '</div>';
 

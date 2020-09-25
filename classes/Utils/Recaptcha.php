@@ -38,15 +38,18 @@ class Recaptcha {
 	}
 
 	/**
-	 * @param string $response
+	 * @param  string $response
+	 * @param  float  $threshold
+	 *
 	 * @return bool
+	 * @throws \GuzzleHttp\Exception\GuzzleException
 	 */
 	public function validateResponse( string $response ) {
 		$response = $this->guzzle->request(
 			'POST',
 			'https://www.google.com/recaptcha/api/siteverify',
 			array(
-				'json'       => array(
+				'query'      => array(
 					'secret'   => $this->secret,
 					'response' => $response,
 				),
