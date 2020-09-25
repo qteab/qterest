@@ -40,8 +40,9 @@ class RestController extends \WP_REST_Controller {
 			'/contact',
 			array(
 				array(
-					'methods'  => 'POST',
-					'callback' => array( $this, 'handle_contact' ),
+					'methods'             => 'POST',
+					'callback'            => array( $this, 'handle_contact' ),
+					'permission_callback' => '__return_true',
 				),
 			)
 		);
@@ -51,8 +52,9 @@ class RestController extends \WP_REST_Controller {
 			'/mailchimp/add-subscriber',
 			array(
 				array(
-					'methods'  => 'POST',
-					'callback' => array( $this, 'handle_mailchimp_add_subscriber' ),
+					'methods'             => 'POST',
+					'callback'            => array( $this, 'handle_mailchimp_add_subscriber' ),
+					'permission_callback' => '__return_true',
 				),
 			)
 		);
@@ -66,22 +68,41 @@ class RestController extends \WP_REST_Controller {
 	public function handle_contact( \WP_REST_Request $request ) {
 
 		$messages = array(
-			'name_empty'    => get_translated_string( 'Name cannot be empty!', 'qterest' ),
-			'email_empty'   => get_translated_string( 'Email cannot be empty!', 'qterest' ),
-			'email_invalid' => get_translated_string( 'Email is not valid!', 'qterest' ),
-			'failed'        => get_translated_string( 'Something went wrong. Please try again later!', 'qterest' ),
-			'success'       => get_translated_string( 'Thank you! We will contact you as fast as we can!', 'qterest' ),
-			'mail_subject'  => get_translated_string( 'New contact request!', 'qterest' ),
-			'mail_body'     => get_translated_string( '<p>New contact request is available. Click the link below to acces it</p><br>{LINK}', 'qterest' ),
-			'mail_to'       => maybe_get_notification_email(),
+			'name_empty'        => get_translated_string( 'Name cannot be empty!' ),
+			'email_empty'       => get_translated_string( 'Email cannot be empty!' ),
+			'email_invalid'     => get_translated_string( 'Email is not valid!' ),
+			'invalid_recaptcha' => get_translated_string( 'Invalid reCAPTCHA!' ),
+			'failed'            => get_translated_string( 'Something went wrong. Please try again later!' ),
+			'success'           => get_translated_string( 'Thank you! We will contact you as fast as we can!' ),
+			'mail_subject'      => get_translated_string( 'New contact request!' ),
+			'mail_body'         => get_translated_string( '<p>New contact request is available. Click the link below to acces it</p><br>{LINK}' ),
+			'mail_to'           => maybe_get_notification_email(),
 		);
 
 		$params = $request->get_content_type()['subtype'] === 'json' ? $request->get_json_params() : $request->get_body_params(); // Get contact request params
+		$params = SanitizeParams::sanitizeParams( $params );
 
 		/**
 		 * Applys a filter to change the messages from for example a theme
 		 */
 		$messages = apply_filters( 'qterest_contact_messages', $messages, $params );
+
+		/**
+		 * Get options for qterest
+		 */
+		$options = get_option( 'qterest_options' );
+
+		/**
+		 * Maybe validate reCaptcha
+		 */
+		if ( is_recaptcha_enabled() && isset( $params['g-recaptcha-response'] ) ) {
+			if ( ! Recaptcha::make( $options[ Options::RECAPTCHA_SECRET_KEY ], new Client() )->validateResponse( $params['g-recaptcha-response'] ) ) {
+				return array(
+					'success'   => false,
+					'error_msg' => $messages['invalid_recaptcha'],
+				);
+			}
+		}
 
 		/**
 		 * Checks that email isn't empty
@@ -102,8 +123,6 @@ class RestController extends \WP_REST_Controller {
 				'error_msg' => $messages['email_invalid'],
 			);
 		}
-
-		$params = SanitizeParams::sanitizeParams( $params );
 
 		$post_id = wp_insert_post(
 			array(
@@ -190,12 +209,12 @@ class RestController extends \WP_REST_Controller {
 	public function handle_mailchimp_add_subscriber( \WP_REST_Request $request ) {
 
 		$messages = array(
-			'invalid_api_key'   => get_translated_string( 'Invalid MailChimp API key!', 'qterest' ),
-			'email_empty'       => get_translated_string( 'Email cannot be empty!', 'qterest' ),
-			'email_invalid'     => get_translated_string( 'Email is not valid!', 'qterest' ),
-			'invalid_recaptcha' => get_translated_string( 'Invalid reCAPTCHA!', 'qterest' ),
-			'failed'            => get_translated_string( 'Something went wrong. Please try again later!', 'qterest' ),
-			'success'           => get_translated_string( 'Thank you for subscribing to our newsletter!', 'qterest' ),
+			'invalid_api_key'   => get_translated_string( 'Invalid MailChimp API key!' ),
+			'email_empty'       => get_translated_string( 'Email cannot be empty!' ),
+			'email_invalid'     => get_translated_string( 'Email is not valid!' ),
+			'invalid_recaptcha' => get_translated_string( 'Invalid reCAPTCHA!' ),
+			'failed'            => get_translated_string( 'Something went wrong. Please try again later!' ),
+			'success'           => get_translated_string( 'Thank you for subscribing to our newsletter!' ),
 		);
 
 		/**
@@ -203,7 +222,21 @@ class RestController extends \WP_REST_Controller {
 		 */
 		$messages = apply_filters( 'qterest_mailchimp_messages', $messages );
 
-		$params = $request->get_params(); // Get mailchimp request params
+		$params = $request->get_content_type()['subtype'] === 'json' ? $request->get_json_params() : $request->get_body_params(); // Get mailchimp request params
+
+		/**
+		 * Get options for qterest
+		 */
+		$options = get_option( 'qterest_options' );
+
+		if ( is_recaptcha_enabled() && isset( $params['g-recaptcha-response'] ) ) {
+			if ( ! Recaptcha::make( $options[ Options::RECAPTCHA_SECRET_KEY ], new Client() )->validateResponse( $params['g-recaptcha-response'] ) ) {
+				return array(
+					'success'   => false,
+					'error_msg' => $messages['invalid_recaptcha'],
+				);
+			}
+		}
 
 		/**
 		 *  Check if email is not empty
@@ -233,20 +266,6 @@ class RestController extends \WP_REST_Controller {
 				'success'   => false,
 				'error_msg' => $messages['invalid_api_key'],
 			);
-		}
-
-		/**
-		 * Get options for qterest
-		 */
-		$options = get_option( 'qterest_options' );
-
-		if ( is_recaptcha_enabled() && isset( $params['recaptcha_response'] ) ) {
-			if ( ! Recaptcha::make( $options[ Options::RECAPTCHA_SECRET_KEY ], new Client() )->validateResponse( $params['recaptcha_response'] ) ) {
-				return array(
-					'success'   => false,
-					'error_msg' => $messages['invalid_recaptcha'],
-				);
-			}
 		}
 
 		/**
