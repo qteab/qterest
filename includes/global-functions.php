@@ -65,7 +65,7 @@ function qterest_render_form( array $args, bool $echo = true ) {
 
 	$form = "<div class=\"$args[wrapper_class]\">";
 
-	$form .= "<form id=\"$id\" class=\"$args[form_class]\">";
+	$form .= "<form action=\"#\" method=\"POST\" id=\"$id\" class=\"$args[form_class]\">";
 
 	if ( isset( $args['form_title'] ) && $args['form_title'] ) {
 		$form .= "<h3>$args[form_title]</h3>";
