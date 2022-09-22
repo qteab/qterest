@@ -75,7 +75,7 @@ class RestController extends \WP_REST_Controller {
 			'failed'            => get_translated_string( 'Something went wrong. Please try again later!' ),
 			'success'           => get_translated_string( 'Thank you! We will contact you as fast as we can!' ),
 			'mail_subject'      => get_translated_string( 'New contact request!' ),
-			'mail_body'         => get_translated_string( '<p>New contact request is available. Click the link below to acces it</p><br>{LINK}' ),
+			'mail_body'         => get_translated_string( '<p>New contact request is available. Click the link below to access it</p><br>{LINK}' ),
 			'mail_to'           => maybe_get_notification_email(),
 		);
 
