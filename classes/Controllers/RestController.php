@@ -67,20 +67,25 @@ class RestController extends \WP_REST_Controller {
 
 	public function handle_contact( \WP_REST_Request $request ) {
 
-		$messages = array(
-			'name_empty'        => get_translated_string( 'Name cannot be empty!' ),
-			'email_empty'       => get_translated_string( 'Email cannot be empty!' ),
-			'email_invalid'     => get_translated_string( 'Email is not valid!' ),
-			'invalid_recaptcha' => get_translated_string( 'Invalid reCAPTCHA!' ),
-			'failed'            => get_translated_string( 'Something went wrong. Please try again later!' ),
-			'success'           => get_translated_string( 'Thank you! We will contact you as fast as we can!' ),
-			'mail_subject'      => get_translated_string( 'New contact request!' ),
-			'mail_body'         => get_translated_string( '<p>New contact request is available. Click the link below to access it</p><br>{LINK}' ),
-			'mail_to'           => maybe_get_notification_email(),
-		);
-
 		$params = $request->get_content_type()['subtype'] === 'json' ? $request->get_json_params() : $request->get_body_params(); // Get contact request params
 		$params = SanitizeParams::sanitizeParams( $params );
+
+		if (isset($params['lang']))
+			$lang_code = $params['lang'];
+		else
+			$lang_code = 'sv';
+
+		$messages = array(
+			'name_empty'        => get_translated_string( 'Name cannot be empty!', $lang_code ),
+			'email_empty'       => get_translated_string( 'Email cannot be empty!', $lang_code ),
+			'email_invalid'     => get_translated_string( 'Email is not valid!', $lang_code ),
+			'invalid_recaptcha' => get_translated_string( 'Invalid reCAPTCHA!', $lang_code ),
+			'failed'            => get_translated_string( 'Something went wrong. Please try again later!', $lang_code ),
+			'success'           => get_translated_string( 'Thank you! We will contact you as fast as we can!', $lang_code ),
+			'mail_subject'      => get_translated_string( 'New contact request!', $lang_code ),
+			'mail_body'         => get_translated_string( '<p>New contact request is available. Click the link below to access it</p><br>{LINK}', $lang_code ),
+			'mail_to'           => maybe_get_notification_email(),
+		);
 
 		/**
 		 * Applys a filter to change the messages from for example a theme

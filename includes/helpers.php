@@ -114,7 +114,13 @@ function maybe_fix_name( $params ) {
 /**
  * This function is a temporary fix for polylang
  */
-function get_translated_string( string $string ) {
+function get_translated_string( string $string, string $lang_code='sv' ) {
+
+	// Check if PPL exists, then set the language.
+	if ($lang_code && class_exists('PLL')) {
+		PLL()->curlang = $lang_code;
+	}
+
 	if ( isset( $_COOKIE['pll_language'] ) && function_exists( 'pll_translate_string' ) ) {
 		$pll_lang = $_COOKIE['pll_language'];
 
