@@ -76,6 +76,8 @@ function render_field( $args, $echo = false ) {
 
 	$pattern = isset( $args['pattern'] ) ? "pattern=\"$args[pattern]\"" : null;
 
+	$pattern_format = isset( $args['pattern_format'] ) ? "title=\"$args[pattern_format]\"" : null;
+
 	switch ( $args['type'] ) {
 		case 'select':
 			if ( $label ) {
@@ -108,7 +110,7 @@ function render_field( $args, $echo = false ) {
 				$field .= render_label( $for, $label );
 			}
 
-			$field .= "<input id=\"$id\" $class type=\"$args[type]\" name=\"$args[name]\" placeholder=\"$placeholder\" value=\"$value\" $pattern $required/>";
+			$field .= "<input id=\"$id\" $class type=\"$args[type]\" name=\"$args[name]\" placeholder=\"$placeholder\" value=\"$value\" $pattern $pattern_format $required/>";
 
 			break;
 
