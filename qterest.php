@@ -21,6 +21,8 @@ require_once QTEREST_PLUGIN_PATH . 'includes/load.php';
 $restController = new \QTEREST\Controllers\RestController();
 $restController->hook_rest_server();
 
+$gatsbySource = new \QTEREST\Utils\GatsbySource();
+
 new \QTEREST\Admin\ExportPage();
 
 \QTEREST\Uploads\FileHandler::registerHooks();
