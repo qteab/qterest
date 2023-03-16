@@ -57,8 +57,11 @@ class Exporter {
 		);
 
 		$processedResponses = array();
-		foreach ( $results as $result ) {
+		foreach ( $results as $result ) {	
 			$responseData         = unserialize( maybe_unserialize( $result->response ) );
+			if ( !is_array($responseData)):
+				continue;
+			endif;
 			$processedResponses[] = array_merge(
 				array(
 					'date' => $result->date,
