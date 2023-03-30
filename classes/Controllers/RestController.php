@@ -58,6 +58,18 @@ class RestController extends \WP_REST_Controller {
 				),
 			)
 		);
+
+		register_rest_route(
+			$namespace,
+			'/step-form',
+			array(
+				array(
+					'methods'             => 'POST',
+					'callback'            => array( $this, 'handle_step_form' ),
+					'permission_callback' => '__return_true',
+				),
+			)
+		);
 	}
 
 	// Register our REST Server
@@ -317,6 +329,160 @@ class RestController extends \WP_REST_Controller {
 		 * Hook to do stuff when a new subscriber is added.
 		 */
 		do_action( 'qterest_mailchimp_subscriber_added', $params['email'], $member_exists );
+
+		return array(
+			'success'     => true,
+			'success_msg' => $messages['success'],
+		);
+	}
+
+	public function handle_step_form( \WP_REST_Request $request ) {
+
+		$params = $request->get_content_type()['subtype'] === 'json' ? $request->get_json_params() : $request->get_body_params(); // Get contact request params
+		$params = SanitizeParams::sanitizeParams( $params );
+
+		/**
+		 * Check if form id is set
+		 */
+		if ( ! isset( $params['form_id'] ) ) {
+			return array(
+				'success'   => false,
+				'error_msg' => 'Form ID is missing',
+			);
+		}
+
+		/**
+		 * Check if form is completed
+		 */
+		if (get_post_meta( $params['form_id'], 'completed', true ) === 'true') {
+			return array(
+				'success'   => false,
+				'error_msg' => 'This form is already completed.',
+			);
+		}
+
+		/**
+		 * Get options for qterest
+		 */
+		$options = get_option( 'qterest_options' );
+
+		/**
+		 * Maybe validate reCaptcha
+		 */
+		if ( is_recaptcha_enabled() && isset( $params['g-recaptcha-response'] ) ) {
+			if ( ! Recaptcha::make( $options[ Options::RECAPTCHA_SECRET_KEY ], new Client() )->validateResponse( $params['g-recaptcha-response'] ) ) {
+				return array(
+					'success'   => false,
+					'error_msg' => $messages['invalid_recaptcha'],
+				);
+			}
+		}
+
+		/**
+		 * Insert post if it doesn't exist
+		 */
+		if (FALSE === get_post_status( $params['form_id'] )) {
+
+			$post_id = wp_insert_post(
+				array(
+					'import_id'           => $params['form_id'],
+					'post_title'          => 'Answer ' . ' - ' . date( 'Y-m-d H:m:s' ),
+					'post_type'           => 'contact_requests',
+					'post_status'         => 'publish',
+					'exclude_from_searcg' => true,
+					'show_in_rest'        => false,
+					'meta_input'          => array(
+						'request_content' => serialize( $params ),
+					),
+				)
+			);
+		}
+
+		/**
+		 * Update post if it exists
+		 */
+		else {
+			$post_id = wp_update_post(
+				array(
+					'ID'           => $params['form_id'],
+					'post_type'    => 'contact_requests',
+					'post_status'  => 'publish',
+					'meta_input'   => array(
+						'request_content' => serialize( $params ),
+					),
+				)
+			);
+		}
+
+		/**
+		 * Checks if request got inserted
+		 */
+		if ( is_wp_error( $post_id ) ) {
+			return array(
+				'success'   => false,
+				'error_msg' => $messages['failed'],
+			);
+		}
+
+		/**
+		 * Handle files
+		 */
+		if ( $_FILES ) {
+			$attachment_ids = FileHandler::make( $post_id )->handleAllFiles();
+
+			$errors = array_filter(
+				$attachment_ids,
+				function ( $attachment_id ) {
+					return is_wp_error( $attachment_id );
+				}
+			);
+
+			if ( $errors ) {
+				return array(
+					'success'    => false,
+					'error_msg'  => $messages['failed'],
+					'error_data' => array_map(
+						function( $error ) {
+							/** @var \WP_Error $error */
+							return $error->get_error_messages();
+						},
+						$errors
+					),
+				);
+			}
+		}
+
+		/**
+		 * Gets and inserts the clients ip address
+		 */
+		//update_post_meta( $post_id, 'request_ip_address', get_client_ip() );
+
+		/**
+		 * Set the form as completed if email and completed = true is set. Also send confirmation email.
+		 */
+		if (isset($params['completed']) && $params['completed'] == 'true') {
+			update_post_meta( $post_id, 'completed', $params['completed'] );
+			do_action( 'qterest_step_form_completed', $post_id, $params );
+			wp_update_post(
+				array(
+					'ID'          => $post_id,
+					'post_title' => get_the_title( $post_id ) . ' - COMPLETE',
+				)
+			);
+
+			$link = site_url( "wp-admin/post.php?post=$post_id&action=edit" );
+
+			$to          = maybe_get_notification_email();
+			$subject     = apply_filters( 'qterest_step_mail_subject', 'Multistep formulär har fyllts i.', $params, $post_id );
+			$body        = apply_filters( 'qterest_step_mail_body', 'Ett multi-step formulär har fyllts i. Följ länken nedan för att se den. <br> <br> {LINK}');
+			$body        = \preg_replace( '#{LINK}#', "<a href=\"$link\">$link</a>", $body );
+			$headers     = apply_filters( 'qterest_step_mail_headers', array( 'Content-Type: text/html; charset=UTF-8' ), $params, $post_id );
+			$attachments = apply_filters( 'qterest_step_mail_attachments', array(), $attachment_ids ?? array(), $post_id );
+
+			if ( $to != null ) {
+				wp_mail( $to, $subject, $body, $headers, $attachments );
+			}
+		}
 
 		return array(
 			'success'     => true,

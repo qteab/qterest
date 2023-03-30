@@ -212,7 +212,29 @@ Example usage of the events
 $('.qterest-form').on('qterestSubmitted', function (event, data) {
     $('.somediv').html(`<h1>${data.success_msg}</h1>`) // qterestError contains error_msg instead
 })
-````
+```
+
+## Multi-step forms
+This part of the plugin handles multistep-forms. There is a rest api endpoint at /qte/v1/step-form/ where if you provide the form_id parameter you may send data at will and update the corresponding post with said data. This endpoint may be used to create multi-step forms, where you update the data on each step of the form so that if the user exists at any point you still save the data up until that point.
+
+<br><br>
+
+If you wish to set the form as completed and prevent any further changes, then send "completed='true'" in the body along with "email". Then it sets the status of the form to completed and sends a confirmation email.  
+
+### Filters and Actions
+You may use the following filters and actions.
+```php
+
+// Actions
+add_action('qterest_step_form_completed', 'your_function');
+
+// Filters
+add_filter('qterest_step_mail_subject', 'your_function');
+add_filter('qterest_step_mail_body', 'your_function');
+add_filter('qterest_step_mail_headers', 'your_function');
+add_filter('qterest_step_mail_attachments', 'your_function');
+```
+
 
 ## MailChimp
 MailChimp is very esay to use with this plugin. All you have to do is to add a API key in the settings page and select the list you want the users to be added to.
