@@ -366,9 +366,6 @@ class RestController extends \WP_REST_Controller {
 		 */
 		$options = get_option( 'qterest_options' );
 
-		/* Insert IP adress to params */
-		$params['ip'] = get_client_ip();
-
 		/**
 		 * Maybe validate reCaptcha
 		 */
@@ -458,18 +455,18 @@ class RestController extends \WP_REST_Controller {
 		/**
 		 * Gets and inserts the clients ip address
 		 */
-		update_post_meta( $post_id, 'request_ip_address', get_client_ip() );
+		//update_post_meta( $post_id, 'request_ip_address', get_client_ip() );
 
 		/**
 		 * Set the form as completed if email and completed = true is set. Also send confirmation email.
 		 */
-		if (isset($params['completed']) && $params['completed'] == 'true' && isset($params['email']) && validate_email( $params['email'] )) {
+		if (isset($params['completed']) && $params['completed'] == 'true') {
 			update_post_meta( $post_id, 'completed', $params['completed'] );
 			do_action( 'qterest_step_form_completed', $post_id, $params );
 			wp_update_post(
 				array(
 					'ID'          => $post_id,
-					'post_title' => get_the_title( $post_id ) . ' - COMPLETE - ' . $params['email'],
+					'post_title' => get_the_title( $post_id ) . ' - COMPLETE',
 				)
 			);
 
