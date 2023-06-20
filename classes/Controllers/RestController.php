@@ -201,7 +201,7 @@ class RestController extends \WP_REST_Controller {
 		}
 
 		// Remove attachments after mail
-		if (apply_filters('qterest_contact_remove_attachments_after_request', false) == true) {
+		if (apply_filters('qterest_contact_remove_attachments_after_request', false, $params, $post_id) == true) {
 			foreach ($attachment_ids as $attachment_id) {
 				wp_delete_attachment($attachment_id, true);
 			}
