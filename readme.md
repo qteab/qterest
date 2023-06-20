@@ -167,6 +167,17 @@ The following messages can be changed
 
 Form submission data can be accessed through the `$params` parameter
 
+#### Filter to remove attachments after request
+You can use the following filter to remove attachments after a request
+```php
+function theme_remove_attachment_after_request($remove, $params, $post_id) {
+	// You may access $params or $post_id if you wish to remove attachments conditionally
+    $remove = true;
+	return $remove;
+}
+add_filter('qterest_contact_remove_attachments_after_request', 'theme_remove_attachment_after_request', 10, 3);
+```
+
 #### Formatting keys (ADMIN)
 When looking at a contact request you can see that the name of the field identifies the value. This can be changed by adding a filter to display a better name for the customer. The filter name looks like this `qterest_format_key_${key}`.
 ```php
