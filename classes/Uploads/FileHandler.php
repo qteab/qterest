@@ -56,6 +56,23 @@ class FileHandler {
 		);
 	}
 
+	public function handleFileTemp(string $fileId) {
+		$file = wp_handle_upload($_FILES[$fileId], array('test_form' => FALSE));
+		return $file['file'];
+	}
+
+	public function handleAllFilesTemp(): array {
+		$attachmentUrls = array();
+
+		foreach ($_FILES as $fileId => $file) {
+			if ($file['size']) {
+				$attachmentUrls[$fileId] = $this->handleFileTemp($fileId);
+			}
+		}
+
+		return $attachmentUrls;
+	}
+
 	public static function appendAjaxQueryAttachmentArgs( $query ) {
 		$query['meta_query'] = array(
 			array(
