@@ -56,6 +56,24 @@ class FileHandler {
 		);
 	}
 
+	public function handleFileTemp(string $fileId) {
+		$file = wp_handle_upload($_FILES[$fileId], array('test_form' => FALSE));
+		return $file;
+	}
+
+	public function handleAllFilesTemp(): array {
+		$attachmentUrls = array();
+		foreach ($_FILES as $fileId => $file) {
+			if ($file['size']) {
+				$uploaded_temp_file = $this->handleFileTemp($fileId);
+				$uploaded_temp_file_mime = wp_check_filetype($uploaded_temp_file['file']);
+				$uploaded_temp_file_mime_type = $uploaded_temp_file_mime['ext'];
+				$attachmentUrls[$fileId . '.' . $uploaded_temp_file_mime_type] = $uploaded_temp_file['file'];
+			}
+		}
+		return $attachmentUrls;
+	}
+
 	public static function appendAjaxQueryAttachmentArgs( $query ) {
 		$query['meta_query'] = array(
 			array(

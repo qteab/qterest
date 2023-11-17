@@ -152,10 +152,14 @@ class RestController extends \WP_REST_Controller
 		}
 
 		if ($_FILES) {
-			$attachment_ids = FileHandler::make($post_id)->handleAllFiles();
+
+			if (apply_filters('qterest_contact_remove_attachments_after_request', false, $params, $post_id) == true)
+				$attachment_array = FileHandler::make($post_id)->handleAllFilesTemp();
+			else
+				$attachment_array = FileHandler::make($post_id)->handleAllFiles();
 
 			$errors = array_filter(
-				$attachment_ids,
+				$attachment_array,
 				function ($attachment_id) {
 					return is_wp_error($attachment_id);
 				}
@@ -193,7 +197,7 @@ class RestController extends \WP_REST_Controller
 		$body        = apply_filters('qterest_contact_mail_body', $messages['mail_body'], $params);
 		$body        = \preg_replace('#{LINK}#', "<a href=\"$link\">$link</a>", $body);
 		$headers     = apply_filters('qterest_contact_mail_headers', array('Content-Type: text/html; charset=UTF-8'), $params, $post_id);
-		$attachments = apply_filters('qterest_contact_mail_attachments', array(), $attachment_ids ?? array(), $post_id);
+		$attachments = apply_filters('qterest_contact_mail_attachments', $attachment_array ?? array(), $post_id);
 
 		/**
 		 * This hook can be used to manipulate the mail
@@ -204,17 +208,10 @@ class RestController extends \WP_REST_Controller
 			wp_mail($to, $subject, $body, $headers, $attachments);
 		}
 
-		// Remove attachments after mail
+		// Remove attachments after mail.
 		if (apply_filters('qterest_contact_remove_attachments_after_request', false, $params, $post_id) == true) {
-			foreach ($attachment_ids as $attachment_id) {
-				wp_delete_attachment($attachment_id, true);
-			}
-		}
-
-		// Remove attachments after mail
-		if (apply_filters('qterest_contact_remove_attachments_after_request', false, $params, $post_id) == true) {
-			foreach ($attachment_ids as $attachment_id) {
-				wp_delete_attachment($attachment_id, true);
+			foreach ($attachment_array as $attachment_url) {
+				wp_delete_file($attachment_url);
 			}
 		}
 
