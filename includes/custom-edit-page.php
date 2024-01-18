@@ -60,6 +60,14 @@ function contact_custom_box_html( $post ) {
 					$formatted_value = apply_filters( 'qterest_format_value', $value );
 				}
 
+				if ( is_array( $formatted_value ) ) {
+					$formatted_value = implode( ', ', $formatted_value );
+				}
+
+				if ( is_array( $value ) ) {
+					$value = implode( ', ', $value );
+				}
+
 				$is_link = substr( $value, 0, 4 ) == 'http';
 
 				echo '<tr><th>' . $formatted_key . '</th><td>' . ( $is_link ? "<a href=\"$value\">$formatted_value</a>" : $formatted_value ) . '</td></tr>';
