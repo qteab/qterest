@@ -6,7 +6,8 @@
         "drewm/mailchimp-api": "^2.5",
         "yahnis-elsts/plugin-update-checker": "^4.8",
         "phpoffice/phpspreadsheet": "^1.10",
-        "guzzlehttp/guzzle": "~6.0"
+        "guzzlehttp/guzzle": "~6.0",
+        "typisttech/imposter-plugin": "^0.6.2"
     },
     "require-dev": {
         "wp-coding-standards/wpcs": "^2.2",
@@ -27,6 +28,17 @@
     "autoload-dev": {
         "psr-4": {
             "Tests\\": "tests/"
+        }
+    },
+    "config": {
+        "allow-plugins": {
+            "dealerdirect/phpcodesniffer-composer-installer": true,
+            "typisttech/imposter-plugin": true
+        }
+    },
+    "extra": {
+        "imposter": {
+            "namespace": "QTEREST\\Vendor"
         }
     }
 }

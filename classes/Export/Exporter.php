@@ -3,8 +3,8 @@
 
 namespace QTEREST\Export;
 
-use PhpOffice\PhpSpreadsheet\Spreadsheet;
-use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
+use QTEREST\Vendor\PhpOffice\PhpSpreadsheet\Spreadsheet;
+use QTEREST\Vendor\PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 use wpdb;
 
 class Exporter {

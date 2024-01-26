@@ -3,11 +3,11 @@
 
 namespace Tests;
 
-use GuzzleHttp\Client;
-use GuzzleHttp\ClientInterface;
-use GuzzleHttp\Handler\MockHandler;
-use GuzzleHttp\HandlerStack;
-use PHPUnit\Framework\TestCase;
+use QTEREST\Vendor\GuzzleHttp\Client;
+use QTEREST\Vendor\GuzzleHttp\ClientInterface;
+use QTEREST\Vendor\GuzzleHttp\Handler\MockHandler;
+use QTEREST\Vendor\GuzzleHttp\HandlerStack;
+use QTEREST\Vendor\PHPUnit\Framework\TestCase;
 
 abstract class GuzzleTestCase extends TestCase {
 

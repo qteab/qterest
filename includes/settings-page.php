@@ -5,7 +5,7 @@
 
 namespace QTEREST\SettingsPage;
 
-use DrewM\MailChimp\MailChimp;
+use QTEREST\Vendor\DrewM\MailChimp\MailChimp;
 use QTEREST\Utils\Options;
 use function QTEREST\Helpers\mailchimp_api_key_is_valid;
 

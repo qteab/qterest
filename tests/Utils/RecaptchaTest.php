@@ -3,7 +3,7 @@
 
 namespace Tests\Utils;
 
-use GuzzleHttp\Psr7\Response;
+use QTEREST\Vendor\GuzzleHttp\Psr7\Response;
 use QTEREST\Utils\Recaptcha;
 use Tests\GuzzleTestCase;
 

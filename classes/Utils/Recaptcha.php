@@ -3,7 +3,7 @@
 
 namespace QTEREST\Utils;
 
-use GuzzleHttp\ClientInterface;
+use QTEREST\Vendor\GuzzleHttp\ClientInterface;
 
 class Recaptcha {
 

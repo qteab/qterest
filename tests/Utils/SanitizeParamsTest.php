@@ -3,7 +3,7 @@
 
 namespace Tests\Utils;
 
-use PHPUnit\Framework\TestCase;
+use QTEREST\Vendor\PHPUnit\Framework\TestCase;
 use QTEREST\Utils\SanitizeParams;
 
 class SanitizeParamsTest extends TestCase {

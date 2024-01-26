@@ -52,6 +52,10 @@ function render_label( $for, $text, $echo = false ) {
 function render_field( $args, $echo = false ) {
 	$field = '';
 
+	if ( !isset( $args['class'] ) ) {
+		$args['class'] = '';
+	}
+
 	$required = isset( $args['required'] ) && $args['required'] ? 'required' : '';
 
 	if ( $required ) {

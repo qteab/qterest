@@ -6,7 +6,7 @@
 
 namespace QTEREST\Helpers;
 
-use DrewM\MailChimp\MailChimp;
+use QTEREST\Vendor\DrewM\MailChimp\MailChimp;
 use QTEREST\Utils\Options;
 
 if ( ! defined( 'ABSPATH' ) ) {

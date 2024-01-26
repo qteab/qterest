@@ -6,7 +6,7 @@
 
 namespace QTEREST\Controllers;
 
-use GuzzleHttp\Client;
+use QTEREST\Vendor\GuzzleHttp\Client;
 use QTEREST\Uploads\FileHandler;
 use QTEREST\Utils\Options;
 use QTEREST\Utils\Recaptcha;
@@ -18,7 +18,7 @@ use function QTEREST\Helpers\mailchimp_api_key_is_valid;
 use function QTEREST\Helpers\maybe_get_notification_email;
 use function QTEREST\Helpers\get_translated_string;
 
-use DrewM\MailChimp\MailChimp;
+use QTEREST\Vendor\DrewM\MailChimp\MailChimp;
 
 if (!defined('ABSPATH')) {
 	exit;
