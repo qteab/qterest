@@ -70,7 +70,7 @@ class Exporter {
 			);
 		}
 
-		return $processedResponses;
+		return apply_filters( 'qterest_export_get_form_responses', $processedResponses );
 	}
 
 	/**
@@ -102,7 +102,13 @@ class Exporter {
 		foreach ( $responses as $response ) {
 			$row = array();
 			foreach ( $columns as $column ) {
-				$row[] = $response[ $column ] ?? '';
+				$value = $response[ $column ] ?? '';
+
+				if ( is_array( $value ) ) {
+					$value = implode( ', ', $value );
+				}
+
+				$row[] = apply_filters("qterest_export_format_value_{$column}", $value, $response);
 			}
 			$data[] = $row;
 		}
